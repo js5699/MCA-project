@@ -60,7 +60,7 @@
 				<div class="list-group">
 					<a href="#" class="list-group-item">국내 도서</a>
 					<a href="#"	class="list-group-item">해외 도서</a>
-					<a href="#"	class="list-group-item">Category 3</a>
+					<a href="#"	class="list-group-item">음반</a>
 				</div>
 
 			</div>
