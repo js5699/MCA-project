@@ -109,7 +109,7 @@
 								src="http://placehold.it/700x400" alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="#">Item One</a>
+									<a href="#">도서1</a>
 								</h4>
 								<h5>$24.99</h5>
 								<p class="card-text">Lorem ipsum dolor sit amet, consectetur
