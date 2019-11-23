@@ -8,12 +8,7 @@
 
 			<div class="col-lg-3">
 
-				<h1 class="my-4">Shop Name</h1>
-				<div class="list-group">
-					<a href="#" class="list-group-item">국내 도서</a>
-					<a href="#"	class="list-group-item">해외 도서</a>
-					<a href="#"	class="list-group-item">음반</a>
-				</div>
+				<c:import url="includes/sideMenu.jsp"/>
 
 			</div>
 			<!-- /.col-lg-3 -->
