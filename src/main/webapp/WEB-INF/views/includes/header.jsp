@@ -43,13 +43,14 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">Contact</a>
 					</li>
+					<li class="nav-item"><a class="nav-link" href="NoticeBoard/list">고객센터</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	
 
-	<!-- Page Content -->
+<%-- 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
 
@@ -58,4 +59,4 @@
 				<c:import url="includes/sideMenu.jsp"/>
 
 			</div>
-			<!-- /.col-lg-3 -->
+			<!-- /.col-lg-3 --> --%>
