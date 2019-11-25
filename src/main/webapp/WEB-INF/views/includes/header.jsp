@@ -44,7 +44,7 @@
 					<li class="nav-item"><a class="nav-link" href="#">Contact</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="NoticeBoard/list">고객센터</a></li>
-					<li class="nav-item"><a class="nav-link" href="NoticeBoard/list">회원가입</a></li>
+					<li class="nav-item"><a class="nav-link" href="account/join">회원가입</a></li>
 				</ul>
 			</div>
 		</div>
