@@ -44,19 +44,20 @@
 					<li class="nav-item"><a class="nav-link" href="#">Contact</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="NoticeBoard/list">고객센터</a></li>
+					<li class="nav-item"><a class="nav-link" href="NoticeBoard/list">회원가입</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	
 
-<%-- 	<!-- Page Content -->
+	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
 
 			<div class="col-lg-3">
-
-				<c:import url="includes/sideMenu.jsp"/>
-
+				<%@ include file="sideMenu.jsp" %>
 			</div>
-			<!-- /.col-lg-3 --> --%>
+			<!-- /.col-lg-3 -->
+
+			<div class="col-lg-9">

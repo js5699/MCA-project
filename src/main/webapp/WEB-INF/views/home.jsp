@@ -1,19 +1,9 @@
+<%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:import url="includes/header.jsp"/>
-
-		<div class="row">
-
-			<div class="col-lg-3">
-
-				<c:import url="includes/sideMenu.jsp"/>
-
-			</div>
-			<!-- /.col-lg-3 -->
-
-			<div class="col-lg-9">
+<%@ include file="includes/header.jsp" %>
 
 				<div id="carouselExampleIndicators" class="carousel slide my-4"
 					data-ride="carousel">
@@ -177,6 +167,5 @@
 
 	</div>
 	
-	<c:import url="includes/footer.jsp"/>
-
+	<%@ include file="includes/footer.jsp" %>
 
