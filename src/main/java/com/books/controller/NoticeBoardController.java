@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.books.domain.Criteria;
 import com.books.service.NoticeBoardService;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +20,9 @@ public class NoticeBoardController {
 	private NoticeBoardService NBservice;
 	
 	@GetMapping("/list")
-	public void list(Model model) {
+	public void list(Criteria cri, Model model) {
 		//model.addAttribute("list", NBservice.getList());
+		
 	}
+	
 }
