@@ -1,3 +1,6 @@
+				</div>
+		</div>
+	</div>
 	<!-- /.container -->
 
 	<footer class="py-5 bg-dark">
