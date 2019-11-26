@@ -4,10 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.books.domain.PasswordDTO;
 import com.books.domain.UserVO;
 import com.books.service.AccountService;
 
@@ -58,24 +60,24 @@ public class AccountController {
 	
 	}
 	
+	//스프링 시큐리티 처리 필요
 	//비밀번호 확인 처리
 	@PostMapping("/pwConfirm")
-	public String passwordConfirm(
-			@RequestParam("userid") String userid, 
-			@RequestParam("userpw") String userpw,
+	public String passwordConfirm(String userid, String userpw,
 			Model model,
 			RedirectAttributes rttr) {
 		
 		String redirectUrl = "redirect:/account/pwConfirm";
 		
-		String getPw = service.getUserpw(userid);
+		log.info("userid : " + userid + "//userpw : " + userpw);
+		
+		String getPw = service.getUserpw(userpw);
 		
 		if ( userpw.equals(getPw) ) {
 			redirectUrl = "redirect:/myInfoMod";
 			log.info("비밀번호 일치함");
 		} else {
 			log.info("비밀번호 일치하지 않음");
-			log.info("userid : " + userid + "//userpw : " + userpw);
 			model.addAttribute("msg", "비밀번호가 틀립니다.");
 		}
 		

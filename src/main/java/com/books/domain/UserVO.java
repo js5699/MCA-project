@@ -1,5 +1,7 @@
 package com.books.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -13,4 +15,6 @@ public class UserVO {
 	private String zipcode;
 	private String address1;
 	private String address2;
+	
+	private List<AuthVO> authList;
 }
