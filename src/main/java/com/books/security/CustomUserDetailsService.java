@@ -11,7 +11,7 @@ import com.books.security.domain.CustomUser;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-
+ 
 @Log4j
 public class CustomUserDetailsService implements UserDetailsService{
 

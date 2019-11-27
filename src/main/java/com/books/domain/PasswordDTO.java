@@ -1,5 +1,5 @@
 package com.books.domain;
-
+ 
 import lombok.Getter;
 
 @Getter

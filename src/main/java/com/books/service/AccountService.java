@@ -1,7 +1,7 @@
 package com.books.service;
 
 import com.books.domain.UserVO;
-
+ 
 public interface AccountService {
 	
 	public void register(UserVO user);

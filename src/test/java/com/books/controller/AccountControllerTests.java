@@ -14,7 +14,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-
+ 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({
@@ -32,6 +32,26 @@ public class AccountControllerTests {
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
+	
+	
+	// 회원 가입 테스트 -- id 중복 주의
+	@Test
+	public void testRegister() throws Exception {	//done
+		
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/account/join")
+				.param("userid", "yourid")
+				.param("userpw", "1234")
+				.param("name", "관리자")
+				.param("email", "test@test.com")
+				.param("phone", "010-0000-0000")
+				.param("zipcode", "12345")
+				.param("address1", "1")
+				.param("address2", "2")).andReturn().getModelAndView().getViewName();
+		
+		log.info(resultPage);
+		
+	}
+	
 	
 	/*
 	@Test
@@ -54,20 +74,5 @@ public class AccountControllerTests {
 	*/
 	
 
-	@Test
-	public void testRegister() throws Exception {	//done
-		
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/account/join")
-				.param("userid", "admin")
-				.param("userpw", "1234")
-				.param("name", "관리자")
-				.param("email", "test@test.com")
-				.param("phone", "010-0000-0000")
-				.param("zipcode", "12345")
-				.param("address1", "1")
-				.param("address2", "2")).andReturn().getModelAndView().getViewName();
-		
-		log.info(resultPage);
-		
-	}
+	
 }

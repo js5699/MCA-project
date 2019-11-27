@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import com.books.domain.UserVO;
 
 import lombok.Getter;
-
+ 
 @Getter
 public class CustomUser extends User{
 
