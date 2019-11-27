@@ -84,5 +84,10 @@ public class NoticeBoardController {
 		
 		return "redirect:/NoticeBoard/noticeList";
 	}
+	
+	@GetMapping("/noticeRegister")
+	public void register() {
+		
+	}
 }
  

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../includes/header.jsp"%>
-<link href="/resources/css/table.css" rel="stylesheet" type = "text/css">
+
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">공지사항</h1>
@@ -15,7 +15,7 @@
 				<div class="panel panel-default">
 					<div class = "panel-heading">
 						Notice Board
-						<button id = "regBtn" type = "button" class = "btn btn-xs pull-right">Register New NoticeBoard</button>
+						<button id = "regbtn" type = "button" class = "btn btn-xs pull-right">글쓰기</button>
 					</div>
 					<div class="panel-body">
 						<table class="table table-striped table-bordered table-hover">
@@ -29,7 +29,7 @@
 							<c:forEach items = "${list}" var = "Nboard">
 								<tr>
 									<td>${Nboard.bno}</td>
-									<td>${Nboard.title}</td>
+									<td><a class = "move" href = "${Nboard.bno}">${Nboard.title}</a></td>
 									<td>${Nboard.writer}</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${Nboard.regdate}" /></td>
@@ -60,7 +60,8 @@
 		</div>
 <%@ include file="../includes/footer.jsp"%>
 <script type = "text/javascript">
-var actionForm = $("#actionForm");
+$(document).ready(function(){
+	var actionForm = $("#actionForm");
 	
 	$(".paginate_button a").on("click", function(e){
 		e.preventDefault();
@@ -70,4 +71,16 @@ var actionForm = $("#actionForm");
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		actionForm.submit();
 	});
+	
+	$("#regbtn").on("click", function(){
+		self.location = "/NoticeBoard/noticeRegister";
+	});
+	
+	$(".move").on("click", function(e){
+		e.preventDefault();
+		actionForm.append("<input type = 'hidden' name = 'bno' value = '" + $(this).attr("href") + "'>");
+		actionForm.attr("action", "/NoticeBoard/noticeGet");
+		actionForm.submit();
+	});
+});
 </script>

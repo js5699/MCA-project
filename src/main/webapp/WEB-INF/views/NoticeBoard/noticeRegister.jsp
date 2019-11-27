@@ -18,7 +18,7 @@
 			<div class = "panel-heading">Board Register</div>
 			<!-- /.panel-heading -->
 			<div class = "panel-body">
-				<form role = "form" action = "/board/register" method = "post">
+				<form role = "form" action = "/NoticeBoard/noticeRegister" method = "post">
 					<div class = "form-group">
 						<label>Title</label> <input class = "form-control" name = "title">
 					</div>
@@ -30,8 +30,9 @@
 						<label>Writer</label>
 						<input class = "form-control" name = "writer">
 					</div>
-					<button type = "submit" class = "btn btn-default">Submit Button</button>
-					<button type="reset" class = "btn btn-default">Reset Button</button>
+					<button type = "submit" class = "btns btn-default">Submit Button</button>
+					<button type="reset" class = "btns btn-default">Reset Button</button>
+					<br><br>
 				</form>
 			</div>
 			<!-- end panel-body -->
