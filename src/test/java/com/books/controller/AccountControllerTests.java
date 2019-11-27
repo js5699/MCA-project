@@ -33,7 +33,7 @@ public class AccountControllerTests {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 	
-	
+	/*
 	@Test
 	public void testpwConfirm() throws Exception {
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/account/pwConfirm")
@@ -43,7 +43,7 @@ public class AccountControllerTests {
 		
 				log.info(resultPage);
 	}
-	
+	*/
 	/*
 	@Test
 	public void testMyPage() throws Exception {		//done
@@ -53,14 +53,14 @@ public class AccountControllerTests {
 	}
 	*/
 	
-	/*
+
 	@Test
 	public void testRegister() throws Exception {	//done
 		
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/account/join")
-				.param("userid", "controllertest")
+				.param("userid", "admin")
 				.param("userpw", "1234")
-				.param("name", "테스트")
+				.param("name", "관리자")
 				.param("email", "test@test.com")
 				.param("phone", "010-0000-0000")
 				.param("zipcode", "12345")
@@ -70,5 +70,4 @@ public class AccountControllerTests {
 		log.info(resultPage);
 		
 	}
-	*/
 }

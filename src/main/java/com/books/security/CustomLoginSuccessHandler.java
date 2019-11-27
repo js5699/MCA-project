@@ -1,4 +1,4 @@
-package org.zerock.security;
+package com.books.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,13 +30,15 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		log.warn("ROLE NAMES:" + roleNames);
 		
+		//관리자 로그인시 이동페이지
 		if( roleNames.contains("ROLE_ADMIN") ) {
-			response.sendRedirect("/sample/admin");
+			response.sendRedirect("/");
 			return;
 		}
 		
-		if( roleNames.contains("ROLE_MEMBER") ) {
-			response.sendRedirect("/sample/member");
+		//일반 유저 로그인시 이동페이지
+		if( roleNames.contains("ROLE_USER") ) {
+			response.sendRedirect("/");
 			return;
 		}
 		

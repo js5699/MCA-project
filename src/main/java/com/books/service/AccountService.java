@@ -14,4 +14,6 @@ public interface AccountService {
 	
 	public String getUserpw(String userid);
 	
+	public void userAuth(String userid);
+	
 }

@@ -53,4 +53,11 @@ public class AccountServiceImpl implements AccountService {
 		return mapper.getUserpw(userid).toString();
 	}
 
+	@Override
+	public void userAuth(String userid) {
+		log.info("serice - insert User Auth");
+		
+		mapper.insertAuth(userid);
+	}
+
 }

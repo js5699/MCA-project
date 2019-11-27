@@ -33,6 +33,9 @@
                 </div>
             </div>
         </div>
+        <div>
+        	<p class="bg-warning"> 아이디 혹은 비밀 번호가 일치하지 않습니다.</p>
+        </div>
         <script src="/resources/vendor/jquery/jquery.min.js"></script>
         <script>
     	

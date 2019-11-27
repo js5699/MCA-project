@@ -37,16 +37,8 @@ public class CommonController {
 		}
 	}
 	
-	// 로그아웃페이지
-	@GetMapping("/customLogout")
-	public void logoutGET() {
-		
-		log.info("custom logout");
-		
-	}
-	
 	// 로그아웃 post 요청
-	@PostMapping("/customLogout")
+	@PostMapping("/logout")
 	public void logoutPost() {
 		log.info("post custom logout");
 	}

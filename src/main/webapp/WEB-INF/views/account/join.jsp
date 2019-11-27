@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ include file="../includes/header.jsp"%>
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <form class="form-horizontal" role="form">
 	<div class="row">
-
+		
+		${principal.username}
+		
+		<input type="text" class="form-control col-md-10" value="<sec:authentication property="principal.username"/>">
+		
+				
 		<div class="form-group">
 			<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
 			<div class="col-sm-10">

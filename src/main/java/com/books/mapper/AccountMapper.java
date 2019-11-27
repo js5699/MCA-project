@@ -21,4 +21,6 @@ public interface AccountMapper {
 	
 	public String getUserpw(String userid);
 	
+	public void insertAuth(String userid);
+	
 }

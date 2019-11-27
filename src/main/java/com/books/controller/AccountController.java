@@ -1,15 +1,15 @@
 package com.books.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.books.domain.PasswordDTO;
 import com.books.domain.UserVO;
 import com.books.service.AccountService;
 
@@ -36,7 +36,13 @@ public class AccountController {
 		
 		log.info("회원가입 : " + user);
 		
+		//패스워드암호화
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		user.setUserpw(passwordEncoder.encode(user.getUserpw()));
+		
+		//insert
 		service.register(user);
+		service.userAuth(user.getUserid());
 		
 		rttr.addFlashAttribute("result", user.getUserid());
 		
