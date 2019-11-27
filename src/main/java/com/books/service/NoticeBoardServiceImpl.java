@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+
 import com.books.domain.Criteria;
 import com.books.domain.NoticeBoardVO;
 import com.books.mapper.NoticeBoardMapper;
@@ -52,6 +53,7 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 	public int getTotal(Criteria cri) {
 		log.info("get total count");
 		return NBmapper.getTotalCount(cri);
+
 	}
 
 }

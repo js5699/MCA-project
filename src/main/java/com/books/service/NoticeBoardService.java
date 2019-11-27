@@ -18,4 +18,5 @@ public interface NoticeBoardService {
 	public boolean remove(Long bno);
 	
 	public int getTotal(Criteria cri);
+
 }

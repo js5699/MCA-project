@@ -7,7 +7,7 @@ import com.books.mapper.AccountMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-
+ 
 @Log4j
 @Service
 @AllArgsConstructor
@@ -51,6 +51,13 @@ public class AccountServiceImpl implements AccountService {
 		log.info("service - getUserpw 회원 정보 수정의 비밀번호 확인 요청 : + userid");
 		
 		return mapper.getUserpw(userid).toString();
+	}
+
+	@Override
+	public void userAuth(String userid) {
+		log.info("serice - insert User Auth");
+		
+		mapper.insertAuth(userid);
 	}
 
 }

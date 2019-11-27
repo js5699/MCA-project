@@ -6,5 +6,5 @@
 
 <!-- content -->
 회원정보 수정폼 
-
+msg
 <%@ include file="../includes/footer.jsp"%>

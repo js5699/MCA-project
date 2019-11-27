@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.books.mapper.AccountMapper">
-
+ 
 	<insert id="insert">
-		INSERT INTO tbl_user(userid,userpw,name,  phone,email,zipcode, address1, address2)
+		INSERT INTO tbl_user(userid, userpw, name,  phone, email, zipcode, address1, address2)
 		VALUES(#{userid}, #{userpw}, #{name}, #{phone}, #{email}, #{zipcode}, #{address1}, #{address2})
 	</insert>
 	
@@ -30,5 +30,8 @@
 	<select id="getUserpw" resultType="String">
 		SELECT userpw FROM tbl_user WHERE userid = #{userid}
 	</select>
-	
+		
+	<insert id="insertAuth">
+		INSERT INTO tbl_user_auth(userid, auth) VALUES(#{userid}, 'ROLE_USER') 
+	</insert>
 </mapper>

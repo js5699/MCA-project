@@ -1,5 +1,7 @@
 package com.books.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,7 @@ import com.books.service.AccountService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-
+ 
 @Controller
 @Log4j
 @RequestMapping("/account/*")
@@ -34,7 +36,13 @@ public class AccountController {
 		
 		log.info("회원가입 : " + user);
 		
+		//패스워드암호화
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		user.setUserpw(passwordEncoder.encode(user.getUserpw()));
+		
+		//insert
 		service.register(user);
+		service.userAuth(user.getUserid());
 		
 		rttr.addFlashAttribute("result", user.getUserid());
 		
@@ -58,24 +66,24 @@ public class AccountController {
 	
 	}
 	
+	//스프링 시큐리티 처리 필요
 	//비밀번호 확인 처리
 	@PostMapping("/pwConfirm")
-	public String passwordConfirm(
-			@RequestParam("userid") String userid, 
-			@RequestParam("userpw") String userpw,
+	public String passwordConfirm(String userid, String userpw,
 			Model model,
 			RedirectAttributes rttr) {
 		
 		String redirectUrl = "redirect:/account/pwConfirm";
 		
-		String getPw = service.getUserpw(userid);
+		log.info("userid : " + userid + "//userpw : " + userpw);
+		
+		String getPw = service.getUserpw(userpw);
 		
 		if ( userpw.equals(getPw) ) {
 			redirectUrl = "redirect:/myInfoMod";
 			log.info("비밀번호 일치함");
 		} else {
 			log.info("비밀번호 일치하지 않음");
-			log.info("userid : " + userid + "//userpw : " + userpw);
 			model.addAttribute("msg", "비밀번호가 틀립니다.");
 		}
 		

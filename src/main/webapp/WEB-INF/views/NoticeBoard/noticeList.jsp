@@ -50,7 +50,7 @@
 								</c:if>
 							</ul>
 						</div>
-						<form id = "actionForm" action = "/NoticeBoard/noticelist" method = "get">
+						<form id = "actionForm" action = "/NoticeBoard/noticeList" method = "get">
 							<input type = "hidden" name = "pageNum" value = "${paging.cri.pageNum}">
 							<input type = "hidden" name = "amount" value = "${paging.cri.amount}">
 						</form>
