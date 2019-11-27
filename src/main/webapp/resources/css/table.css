@@ -237,11 +237,6 @@ table th[class*="col-"] {
 .pull-right {
   float: right !important;
 }
-.btn-xs {
-  margin-top: 14px;
-  margin-bottom: 14px;
-}
-
 .panel {
   margin-bottom: 20px;
   background-color: #fff;

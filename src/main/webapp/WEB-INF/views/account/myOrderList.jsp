@@ -22,7 +22,9 @@
 						<th><c:out value="${order.orderid }" /></th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th>
 					</tr>
 					</c:forEach>
-					
+					<tr>
+						<th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th>
+					</tr>
 				</table>
 			</div>
 		</div>
