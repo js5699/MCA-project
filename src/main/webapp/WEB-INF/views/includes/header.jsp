@@ -57,7 +57,7 @@
 								<a class="nav-link logoutbtn" href="/">로그아웃</a>
 								<script src="/resources/vendor/jquery/jquery.min.js"></script>
 								<script>
-									$(".logoutbtn").on("click", function(e) {
+									$(".logoutbtn").on("click",function(e) {
 										e.preventDefault();
 										$("form").submit();
 									});
@@ -79,5 +79,3 @@
 				<%@ include file="sideMenu.jsp" %>
 			</div>
 			<!-- /.col-lg-3 -->
-
-			<div class="col-lg-9">

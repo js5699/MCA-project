@@ -11,15 +11,15 @@ public interface NoticeBoardMapper {
 	
 	public List<NoticeBoardVO> getListWithPaging(Criteria cri);
 	
-	public NoticeBoardVO read(Long bno);
-	
 	public void insert(NoticeBoardVO NBVO);
 	
 	public void insertSelectKey(NoticeBoardVO NBVO);
 	
-	public void delete(Long bno);
+	public NoticeBoardVO read(Long bno);
 	
-	public void update(NoticeBoardVO NBVO);
+	public int delete(Long bno);
+	
+	public int update(NoticeBoardVO NBVO);
 	
 	public int getTotalCount(Criteria cri);
 }
