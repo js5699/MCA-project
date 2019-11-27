@@ -20,6 +20,9 @@
 <!-- Custom styles for this template -->
 <link href="/resources/css/shop-homepage.css" rel="stylesheet" type = "text/css">
 
+<!-- Table CSS -->
+<link href="/resources/css/table.css" rel="stylesheet" type = "text/css">
+
 </head>
 
 <body>
