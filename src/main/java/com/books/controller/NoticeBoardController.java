@@ -1,6 +1,8 @@
 
 package com.books.controller;
 
+import javax.servlet.annotation.ServletSecurity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,9 +87,10 @@ public class NoticeBoardController {
 		return "redirect:/NoticeBoard/noticeList";
 	}
 	
+	
 	@GetMapping("/noticeRegister")
 	public void register() {
-		
+		//공지글 작성
 	}
 }
  
