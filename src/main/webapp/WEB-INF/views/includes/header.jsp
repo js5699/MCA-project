@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +22,7 @@
 <!-- Custom styles for this template -->
 <link href="/resources/css/shop-homepage.css" rel="stylesheet" type = "text/css">
 
-<!-- Table CSS --> 
+<!-- Table CSS -->
 <link href="/resources/css/table.css" rel="stylesheet" type = "text/css">
 
 </head>
@@ -38,7 +40,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Home
+					<li class="nav-item active"><a class="nav-link" href="/">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">About</a></li>
@@ -47,7 +49,25 @@
 					<li class="nav-item"><a class="nav-link" href="#">Contact</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="../NoticeBoard/noticeList">고객센터</a></li>
-					<li class="nav-item"><a class="nav-link" href="account/join">회원가입</a></li>
+					<sec:authorize access="isAnonymous()">
+						<li class="nav-item"><a class="nav-link" href="account/join">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="/login">로그인</a></li>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">
+						<li class="nav-item">
+							<form action="/logout" method="post" role="form">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+								<a class="nav-link logoutbtn" href="/">로그아웃</a>
+								<script src="/resources/vendor/jquery/jquery.min.js"></script>
+								<script>
+									$(".logoutbtn").on("click",function(e) {
+										e.preventDefault();
+										$("form").submit();
+									});
+								</script>
+							</form>
+						</li>	
+					</sec:authorize>
 				</ul>
 			</div>
 		</div>
