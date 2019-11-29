@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 
+import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
 import com.books.mapper.OrderMapper;
 
@@ -31,11 +32,18 @@ public class UserOrderServiceImpl implements UserOrderService{
 		return mapper.getList(userid);
 	}
 	
-	@Override//주문상세조회
+	@Override//주문상세조회-수령자정보
 	public OrderVO get(String orderid) {
 		log.info("get.............."+orderid);
 		
-		return mapper.read(orderid);
+		return mapper.dNameInfo(orderid);
+	}
+	
+	@Override//주문상세조회-책목록
+	public List<OrderDetailVO> orderView(String orderid){
+		log.info("orderview.............."+orderid);
+		
+		return mapper.orderDetailList(orderid);
 	}
 	
 	@Override//주문수정

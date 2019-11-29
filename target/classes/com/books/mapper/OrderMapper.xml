@@ -11,11 +11,21 @@
  ]]>
 </select>
 
-<!-- 주문상세조회 -->
-<select id="read" resultType="com.books.domain.OrderVO">
+<!-- 주문상세조회-수령자정보 -->
+<select id="dNameInfo" resultType="com.books.domain.OrderVO">
 	select * from tbl_order where orderid = #{orderid}
 </select>
 
+<!-- 주문상세조회-책목록 -->
+<select id="orderDetailList" resultType="com.books.domain.OrderDetailVO">
+	select
+	    d.orderid, d.ea, d.saleprice, p.pTitle, p.price, p.saleCnt 
+	from tbl_product p
+		inner join tbl_orderdetail d on p.productid = d.productid
+	where orderid = #{orderid}
+</select>
+ 
+ 
 <!-- 주문수정 -->
 <update id="update">
 	update tbl_order
