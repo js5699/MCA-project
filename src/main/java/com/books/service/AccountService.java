@@ -8,12 +8,11 @@ public interface AccountService {
 	
 	public UserVO get(String userid);
 	
-	public boolean modify(UserVO user);
+	public boolean modifyInfo(UserVO user);
 	
 	public boolean remove(String userid);
 	
 	public String getUserpw(String userid);
-	
-	public void userAuth(String userid);
-	
+
+	public boolean modPw(UserVO user);
 }

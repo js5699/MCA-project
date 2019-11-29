@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -33,7 +34,16 @@ public class AccountControllerTests {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 	
+	@Test
+	public void testModPw() throws Exception{
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/account/myInfoMod/pw")
+				.param("userid", "test6")
+				.param("userpw", "1111")
+				.param("newUserPw1","2222")).andReturn().getModelAndView().getViewName();
+		log.info(resultPage);
+	}
 	
+	/*
 	// 회원 가입 테스트 -- id 중복 주의
 	@Test
 	public void testRegister() throws Exception {	//done
@@ -51,7 +61,7 @@ public class AccountControllerTests {
 		log.info(resultPage);
 		
 	}
-	
+	*/
 	
 	/*
 	@Test
@@ -63,7 +73,7 @@ public class AccountControllerTests {
 		
 				log.info(resultPage);
 	}
-	*/
+*/
 	/*
 	@Test
 	public void testMyPage() throws Exception {		//done
