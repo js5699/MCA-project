@@ -8,7 +8,8 @@ body {
 }
 
 .formContainer {
-	padding: 25px 0;
+	padding-top: 25px;
+	padding-bottom: 25px;
 }
 
 .btn-submit {
@@ -26,4 +27,31 @@ body {
 	border-bottom: 1px solid #dee2e6;
 	padding-bottom: 10px;
 	margin-bottom: 25px;
+}
+
+/* board */
+
+.bd_title {
+	color: #aeaeae;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #dee2e6;
+}
+
+p i { margin-right: 15px }
+
+.bd_container {
+	border-bottom: 1px solid #dee2e6;
+	padding-top: 25px;
+}
+
+.bd_information {
+	font-size: 0.8em;
+    color: #adb5bd;
+}
+
+.btnBox button {
+	margin-right: 15px;
+}
+.btnBox button:last-child {
+	margin-right: 0;
 }

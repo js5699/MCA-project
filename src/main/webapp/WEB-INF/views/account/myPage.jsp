@@ -5,7 +5,7 @@
 <%@ include file="../includes/header.jsp"%>
 
 	
-<div class="col-md-9 formContainer">
+<div class="col-md-12 formContainer">
 	<c:if test="${result eq 'pwModSuccess'}">
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
 			<strong>비밀번호 변경 완료</strong> 비밀번호가 변경 되었습니다. 로그인시 새로운 비밀번호를 입력하세요.

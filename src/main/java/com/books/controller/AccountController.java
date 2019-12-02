@@ -1,6 +1,5 @@
 package com.books.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -169,10 +168,10 @@ public class AccountController {
 				if (service.modPw(user)) 
 					result = "pwModSuccess";
 				else
-					result = "pwModfail";
+					result = "pwModFail";
 				
 			} else {
-				result = "pwModfail";
+				result = "pwModFail";
 			}
 			
 		//정보만 변경시	
@@ -185,13 +184,13 @@ public class AccountController {
 			if( service.modifyInfo(user) )
 				result = "infoModsuccess";
 			else
-				result = "infoModfail";
+				result = "infoModFail";
 			
 		} else {
 			result = "error";
 		}
 		
-		rttr.addAttribute("result", result);
+		rttr.addFlashAttribute("result", result);
 		
 		return "redirect:/account/myPage";
 		

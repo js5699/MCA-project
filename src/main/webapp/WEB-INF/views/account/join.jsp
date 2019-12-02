@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="../includes/header.jsp"%>
-	<div class="col-lg-12 formContainer">
+	<div class="row col-lg-12 formContainer">
 		<h5 class="pageSubtitle">회원가입 정보 입력</h5>
 	</div>
 	<form action="/account/join" method="post" class="form-horizontal " name="joinForm" >
@@ -25,7 +25,7 @@
 		    	<input type="password" class="form-control" placeholder="PASSWORD CONFIRM" id="inputuserpw2" name="userpw2">
 		    </div>
 		</div>
-		 --%>
+
 		<div class="form-group row">
 		    <label for="inputname" class="col-sm-2 ">이름</label>
 		    <div class="col-sm-3">
@@ -43,40 +43,40 @@
 		<div class="form-group row">
 		    <label for="input" class="col-sm-2 ">전화번호</label>
 		    <div class="col-sm-2">
-					<select name="phone1" class="form-control" required="required">
-						<option>선택</option>
-						<option value="010">010</option>
-						<option value="011">011</option>
-						<option value="016">016</option>
-						<option value="017">017</option>
-						<option value="018">018</option>
-						<option value="019">019</option>
-						<option value="02">서울 (02)</option>
-						<option value="031">경기 (031)</option>
-						<option value="032">인천 (032)</option>
-						<option value="033">강원 (033)</option>
-						<option value="041">충남 (041)</option>
-						<option value="042">대전 (042)</option>
-						<option value="043">충북 (043)</option>
-						<option value="051">부산 (051)</option>
-						<option value="052">울산 (052)</option>
-						<option value="053">대구 (053)</option>
-						<option value="054">경북 (054)</option>
-						<option value="055">경남 (055)</option>
-						<option value="061">전남 (061)</option>
-						<option value="062">광주 (062)</option>
-						<option value="063">전북 (063)</option>
-						<option value="064">제주 (064)</option>
-						<option value="070">인터넷전화 (070)</option>
-						<option value="050">평생전화 (050)</option>
-					</select>
-                </div>
-                <div class="col-sm-2"> 
-                    <input type="number" class="form-control" id="ph2" name="phone2" required="required">
-                </div>
-                <div class="col-sm-2">
-                    <input type="number" class="form-control" id="ph3" name="phone3" required="required">
-                </div>
+				<select name="phone1" class="form-control" required="required">
+					<option>선택</option>
+					<option value="010">010</option>
+					<option value="011">011</option>
+					<option value="016">016</option>
+					<option value="017">017</option>
+					<option value="018">018</option>
+					<option value="019">019</option>
+					<option value="02">서울 (02)</option>
+					<option value="031">경기 (031)</option>
+					<option value="032">인천 (032)</option>
+					<option value="033">강원 (033)</option>
+					<option value="041">충남 (041)</option>
+					<option value="042">대전 (042)</option>
+					<option value="043">충북 (043)</option>
+					<option value="051">부산 (051)</option>
+					<option value="052">울산 (052)</option>
+					<option value="053">대구 (053)</option>
+					<option value="054">경북 (054)</option>
+					<option value="055">경남 (055)</option>
+					<option value="061">전남 (061)</option>
+					<option value="062">광주 (062)</option>
+					<option value="063">전북 (063)</option>
+					<option value="064">제주 (064)</option>
+					<option value="070">인터넷전화 (070)</option>
+					<option value="050">평생전화 (050)</option>
+				</select>
+               </div>
+               <div class="col-sm-2"> 
+                   <input type="number" class="form-control" id="ph2" name="phone2" required="required">
+               </div>
+               <div class="col-sm-2">
+                   <input type="number" class="form-control" id="ph3" name="phone3" required="required">
+               </div>
 		</div>
 		
 		<div class="form-group row">
