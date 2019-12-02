@@ -8,10 +8,10 @@
 <form class="form-horizontal" role="form">
 	<div class="row">
 		
-		${principal.username}
+		<%-- ${principal.username}
 		
 		<input type="text" class="form-control col-md-10" value="<sec:authentication property="principal.username"/>">
-		
+		 --%>
 				
 		<div class="form-group">
 			<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>

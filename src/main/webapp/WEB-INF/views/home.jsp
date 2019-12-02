@@ -169,3 +169,10 @@
 	
 	<%@ include file="includes/footer.jsp" %>
 
+<script>
+$(document).ready(function(){
+
+	$("#includes").load("../includes/sideMenu");
+	
+});
+</script>

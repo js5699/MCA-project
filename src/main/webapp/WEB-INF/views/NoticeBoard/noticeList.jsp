@@ -15,7 +15,10 @@
 				<div class="panel panel-default">
 					<div class = "panel-heading">
 						Notice Board
-						<button id = "regbtn" type = "button" class = "btn btn-xs pull-right">글쓰기</button>
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<button id = "regbtn" type = "button" class = "btn btn-xs pull-right">글쓰기</button>
+						</sec:authorize>
+						
 					</div>
 					<div class="panel-body">
 						<table class="table table-striped table-bordered table-hover">
@@ -61,6 +64,8 @@
 <%@ include file="../includes/footer.jsp"%>
 <script type = "text/javascript">
 $(document).ready(function(){
+	$("#includes").load("../includes/serviceMenu");
+	
 	var actionForm = $("#actionForm");
 	
 	$(".paginate_button a").on("click", function(e){
@@ -82,5 +87,8 @@ $(document).ready(function(){
 		actionForm.attr("action", "/NoticeBoard/noticeGet");
 		actionForm.submit();
 	});
+	
 });
 </script>
+
+

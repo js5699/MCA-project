@@ -1,8 +1,8 @@
 
 package com.books.controller;
 
-import javax.servlet.annotation.ServletSecurity;
-
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -87,7 +87,7 @@ public class NoticeBoardController {
 		return "redirect:/NoticeBoard/noticeList";
 	}
 	
-	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/noticeRegister")
 	public void register() {
 		//공지글 작성

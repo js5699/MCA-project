@@ -18,7 +18,8 @@
 			<div class = "panel-heading">Board Modify Page</div>
 			<!-- /.panel-heading -->
 			<div class = "panel-body">
-				<form role = "form" action = "/board/modify" method = "post">
+				<form role = "form" action = "/NoticeBoard/noticeModify" method = "post">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type = "hidden" name = "pageNum" value = "<c:out value = '${cri.pageNum}'/>">
 					<input type = "hidden" name = "amount" value = "<c:out value = '${cri.amount}'/>">
 					<div class = "form-group">

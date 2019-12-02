@@ -25,9 +25,13 @@
 <!-- Table CSS -->
 <link href="/resources/css/table.css" rel="stylesheet" type = "text/css">
 
+<!-- Jquery 최신버전 -->
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 </head>
 
 <body>
+
 
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -48,7 +52,7 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">Contact</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="../NoticeBoard/noticeList">고객센터</a></li>
+					<li class="nav-item"><a class="nav-link service" href="/NoticeBoard/noticeList">고객센터</a></li>
 					<sec:authorize access="isAnonymous()">
 						<li class="nav-item"><a class="nav-link" href="account/join">회원가입</a></li>
 						<li class="nav-item"><a class="nav-link" href="/login">로그인</a></li>
@@ -78,8 +82,8 @@
 	<div class="container">
 		<div class="row">
 
-			<div class="col-lg-3">
-				<%@ include file="sideMenu.jsp" %>
+			<div class="col-lg-3" id = "includes">
+<%-- 				<%@ include file="sideMenu.jsp" %> --%>
 			</div>
 			<!-- /.col-lg-3 -->
 

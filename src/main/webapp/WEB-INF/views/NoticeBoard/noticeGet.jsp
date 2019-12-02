@@ -36,8 +36,10 @@
 					<input class = "form-control" name = "writer"
 					value = "<c:out value='${NB.title}'/>" readonly="readonly">
 				</div>
-				<button data-oper = "modify" class = "btn btn-default">Modify</button>
-				<button data-oper = "list" class = "btn btn-info">List</button>
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<button data-oper = "modify" class = "btn btn-default">Modify</button>
+					</sec:authorize>
+					<button data-oper = "list" class = "btn btn-info">List</button>
 				<form id = 'operForm' action = "/NoticeBoard/noticeModify" method = "get">
 					<input type = "hidden" id = "bno" name = "bno" value = "<c:out value = '${NB.bno}'/>">
 					<input type = "hidden" name = "pageNum" value = "<c:out value = '${cri.pageNum}'/>">
