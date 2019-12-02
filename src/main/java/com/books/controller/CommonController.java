@@ -25,11 +25,11 @@ public class CommonController {
 	@GetMapping("/login")
 	public void loginInput(String error, String logout, Model model) {
 		
-		log.info("error: " + error);
+		log.warn("error: " + error);
 		log.info("logout:" + logout);
 		
 		if (error != null ) {
-			model.addAttribute("error", "Login Error Check Your Account");
+			model.addAttribute("error", "아이디와 비밀번호를 확인하세요.");
 		}
 		
 		if (logout != null) { 

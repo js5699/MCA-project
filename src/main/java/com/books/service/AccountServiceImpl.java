@@ -1,6 +1,7 @@
 package com.books.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.books.domain.UserVO;
 import com.books.mapper.AccountMapper;
@@ -15,12 +16,14 @@ public class AccountServiceImpl implements AccountService {
 	
 	private AccountMapper mapper;
 	
+	
 	@Override
 	public void register(UserVO user) {
 		
 		log.info("Register......" + user);
-		
 		mapper.insert(user);
+		mapper.insertAuth(user.getUserid());
+		
 	}
 
 	@Override
@@ -29,14 +32,6 @@ public class AccountServiceImpl implements AccountService {
 		log.info("get......" + userid);
 		
 		return mapper.read(userid);
-	}
-
-	@Override
-	public boolean modify(UserVO user) {
-		
-		log.info(" service - 회원 정보 수정 id : " + user);
-		
-		return mapper.update(user) == 1;
 	}
 
 	@Override
@@ -54,10 +49,17 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void userAuth(String userid) {
-		log.info("serice - insert User Auth");
+	public boolean modPw(UserVO user) {
+		log.info(" service - 회원 정보 비밀번호 수정 id : " + user.getUserid());
 		
-		mapper.insertAuth(userid);
+		return mapper.updatePw(user) == 1;
+	}
+
+	@Override
+	public boolean modifyInfo(UserVO user) {
+		log.info(" service - 회원 정보 수정 id : " + user);
+		
+		return mapper.updateInfo(user) == 1;
 	}
 
 }

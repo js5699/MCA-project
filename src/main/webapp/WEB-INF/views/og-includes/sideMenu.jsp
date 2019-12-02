@@ -16,14 +16,14 @@
 	<!-- shopping menu  -->
 	<c:choose>
 		<c:when test="${sideNavName eq 'account'}">
-			<h4 class="sidevarName">마이페이지</h4>
+			<h1 class="my-4">마이페이지</h1>
 			<div class="list-group">
 				<a href="/account/myPage" class="list-group-item">내 정보 수정</a>
 				<a href="#"	class="list-group-item">주문 내역</a>
 			</div>
 		</c:when>
 		<c:otherwise>
-			<h4 class="sidevarName">분류</h4>
+			<h1 class="my-4">MCA Books</h1>
 			<div class="list-group">
 				<a href="#" class="list-group-item">국내 도서</a>
 				<a href="#"	class="list-group-item">해외 도서</a>
