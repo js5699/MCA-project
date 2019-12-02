@@ -44,7 +44,7 @@ public class NoticeBoardController {
 	
 	@PostMapping("/noticeRegister")
 	public String register(NoticeBoardVO NBVO, RedirectAttributes rttr) {
-		log.info("register : " + NBVO);
+		log.warn("register : " + NBVO);
 		
 		NBservice.register(NBVO);
 		

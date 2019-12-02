@@ -12,7 +12,7 @@ public class ProductVO {
 	private String pTitle;
 	private int price;
 	private String publisher;
-	private Date pubDate;
+	private String pubDate;
 	private String author;
 	private String bkSize;
 	private int bkPage;

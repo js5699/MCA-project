@@ -50,9 +50,6 @@
 						<label>ISBN</label> <input class="form-control" name="ISBN">
 					</div>
 					<div class="form-group">
-						<label>stock</label> <input class="form-control" name="stock">
-					</div>
-					<div class="form-group">
 						<label>cId</label> <input class="form-control" name="cId">
 					</div>
 					<button type="submit" class="btns btn-default">Submit Button</button>

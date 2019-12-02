@@ -42,8 +42,8 @@ public class AdminProductController {
 	//상품수정페이지 이동
 	@GetMapping("modify")
 	public void get(@RequestParam("productId") String productId, Model model) {
-		//read mapper
-		//
+		
+		model.addAttribute("AP", APservice.get(productId));
 	}
 	
 	//상품수정

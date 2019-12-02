@@ -34,7 +34,7 @@
 				<div class = "form-group">
 					<label>Writer</label>
 					<input class = "form-control" name = "writer"
-					value = "<c:out value='${NB.title}'/>" readonly="readonly">
+					value = "<c:out value='${NB.writer}'/>" readonly="readonly">
 				</div>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<button data-oper = "modify" class = "btn btn-default">Modify</button>
