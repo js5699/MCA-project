@@ -5,11 +5,16 @@
  */
 body {
   padding-top: 56px;
+  font-size: 0.9em;
 }
 
 .formContainer {
 	padding-top: 25px;
 	padding-bottom: 25px;
+}
+
+.formContainer-top {
+	margin-top: 25px;
 }
 
 .btn-submit {
@@ -29,8 +34,9 @@ body {
 	margin-bottom: 25px;
 }
 
-/* board */
 
+
+/* board */
 .bd_title {
 	color: #aeaeae;
 	padding-bottom: 15px;
@@ -54,4 +60,18 @@ p i { margin-right: 15px }
 }
 .btnBox button:last-child {
 	margin-right: 0;
+}
+
+
+/* admin - user */
+.customerList th, .customerList td{
+	text-align: center;
+}
+
+.customerList .cell-justify-right {
+	text-align: right;
+}
+
+.customerList td {
+	vertical-align: middle;
 }
