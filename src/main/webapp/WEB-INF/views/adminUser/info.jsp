@@ -4,22 +4,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../includes/header.jsp"%>
 
+<div class="row formContainer AdminMenuSubtitle">
+	<div class="col-lg-10">
+		<h5>관리자 <i class="fas fa-caret-right"></i> 고객 관리 <i class="fas fa-caret-right"></i> ${user.userid}님의 회원 등록 정보</h5>
+	</div>
+	<div class="col-lg-2 text-right">
+		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/adminUser/list'">목록</button>
+	</div>
+</div>
+
 <div class="row formContainer">
-	<h5 class="pageSubtitle">관리자 <i class="fas fa-caret-right"></i> 고객 관리 <i class="fas fa-caret-right"></i> ${user.userid}님의 회원 등록 정보</h5>
-</div>
-
-<div class="row">
 	<div class="col-lg-6">
-		<button type="button" class="btn btn-primary" onclick="history.go(-1)">목록으로</button>	
+		<h5>회원 정보</h5>
 	</div>
+	
 	<div class="col-lg-6 text-right">
-		<button type="button" class="btn btn-warning">회원 정보 수정</button>
+		<button type="button" class="btn btn-warning btn-sm" onclick="location.href='/adminUser/mod?userid=${user.userid}'">회원 정보 수정</button>
 	</div>
 </div>
 
-<div class="row formContainer-top">
-	<h5>회원 정보</h5>
-</div>
 <div class="row">
 	<table class="table">
 		<tr>
@@ -45,13 +48,25 @@
 			<th>주소</th>
 			<td>(우)${user.zipcode}<br>${user.address1}<br>${user.address2}</td>
 		</tr>
+		<tr>
+			<th>
+				메모
+				<p><small>관리자만 확인할 수 있으며 회원에게 노출되지 않습니다.</small></p>
+			</th>
+			<td>${!empty user.adminMemo ? user.adminMemo : "-"}</td>
+		</tr>
 	</table>
-
 </div>
 
 <div class="row formContainer-top">
-	<h5>주문 내역</h5>
+	<div class="col-lg-6">
+		<h5>주문 내역<small>(최근-오래된 순)</small></h5>
+	</div>
+	<div class="col-lg-6 text-right">
+		<small><span class="badge badge-pill badge-info"><i class="fas fa-info"></i> </span>눌러서 주문 상태를 처리할 수 있습니다.</small>
+	</div>
 </div>
+
 <div class="row">
 	<table class="table">
 		<tr>
@@ -61,21 +76,32 @@
 			<th>주문금액</th>
 			<th>연락처</th>
 			<th>상세보기</th>
-			<th>상태처리</th>
+			<th>상태</th>
 		</tr>
-		<c:forEach var="order" items="${order}" varStatus="idx">
-			<tr>
-				<td>${idx.current}</td>
-				<td>${order.orderid}</td>
-				<td>${order.orderdate}</td>
-				<td>${order.totalprice}</td>
-				<td>${order.dTell}</td>
-				<td>-</td>
-				<td>-</td>
-			</tr>
-		</c:forEach>
+		<c:choose>
+			<c:when test="${!empty order}">
+				<c:forEach var="order" items="${order}" varStatus="idx">
+					<tr>
+						<td>${idx.count}</td>
+						<td>${order.orderid}</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${order.orderdate}" /></td>
+						<td>${order.totalprice}</td>
+						<td>${order.dtell}</td>
+						<td>-</td>
+						<td>-</td>
+					</tr>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td colspan="7" class="text-center">
+						<p><em>주문 내역이 없습니다.</em></p>
+					</td>
+				</tr>
+			
+			</c:otherwise>
+		</c:choose>
 	</table>
 </div>
-
 
 <%@ include file="../includes/footer.jsp"%>

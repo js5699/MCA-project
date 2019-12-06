@@ -14,8 +14,14 @@ public class Criteria {
 	private int pageNum;
 	private int amount;
 	
-	private String type;
+	private String type; 
 	private String keyword;
+	
+	//admin user search
+	private String pkType;
+	private String roleType;
+	
+	private String pkKeyword;
 	
 	public Criteria() {
 		this(1,10);
@@ -26,8 +32,29 @@ public class Criteria {
 		this.amount = amount;
 	}
 	
+	public String[] getPkTypeArr() {
+		return pkType == null? new String[] {}: pkType.split("");
+	}
+	
+	public String[] getRoleTypeArr() {
+		return roleType == null? new String[] {}: roleType.split("");
+	}
+	
 	public String[] getTypeArr() {
 		return type == null? new String[] {}: type.split("");
+	}
+	
+	public String getUserListLink() {
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+				.queryParam("pageNum", this.pageNum)
+				.queryParam("amount", this.getAmount())
+				.queryParam("pkType", this.getPkType())
+				.queryParam("pkKeyword", this.getPkKeyword())
+				.queryParam("roleType", this.getRoleType());
+		
+		return builder.toUriString();
+		
 	}
 	
 	public String getListLink() {
@@ -40,5 +67,6 @@ public class Criteria {
 		
 		return builder.toUriString();
 	}
+	
 
 }

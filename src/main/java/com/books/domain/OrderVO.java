@@ -11,10 +11,10 @@ public class OrderVO {
 	private Date orderdate;
 	private Long quantity;
 	private Long totalprice;
-	private String dName;
-	private String dTell;
-	private String dZipcode;
-	private String dAddress1;
-	private String dAddress2;
-	private String dMsg;
+	private String dname;
+	private String dtell;
+	private String dzipcode;
+	private String daddress1;
+	private String daddress2;
+	private String dmsg;
 }

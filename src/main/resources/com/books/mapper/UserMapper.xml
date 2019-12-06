@@ -2,9 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.books.mapper.UserMapper">
 	
-	<update id="upadte">
+	<select id="getList" resultType="com.books.domain.UserVO">
+		<![CDATA[
+			SELECT userid, name, phone, regdate, orderid
+			FROM(
+				SELECT rownum rn, userid, name, phone, regdate, orderid 
+				FROM(
+					SELECT u.userid, name, phone, regdate, max(orderid) orderid
+					FROM tbl_user u
+					INNER JOIN TBL_ORDER o ON u.userid = o.USERID (+)	
+					GROUP BY u.USERID, name, phone, regdate
+				)
+				WHERE rownum <= #{pageNum} * #{amount}
+			)
+			WHERE rn > (#{pageNum} -1) * #{amount}
+ 		]]>  
+	</select>
+	
+	
+	<update id="update">
 		UPDATE tbl_user
-		SET userpw = #{userpw},
+		SET name = #{name},
 			phone = #{phone},
 			email = #{email},
 			zipcode = #{zipcode},
@@ -23,12 +41,5 @@
 		]]>
 	</select>
 	
-	<select id="getList" resultType="com.books.domain.UserVO">
-		<![CDATA[
-			SELECT userid, userpw, name, phone, email, zipcode, address1, address2, regdate 
-			FROM (SELECT rownum rn, userid, userpw, name, phone, email, zipcode, address1, address2, regdate
-	 			  FROM tbl_user WHERE rownum <= #{pageNum} * #{amount})
-	 		WHERE rn > (#{pageNum} -1) * #{amount}
- 		]]>  
-	</select>
+	
 </mapper>
