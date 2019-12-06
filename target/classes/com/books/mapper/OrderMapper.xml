@@ -7,8 +7,29 @@
 <!-- 주문목록조회 -->
 <select id="getList" resultType="com.books.domain.OrderVO">
 <![CDATA[
-	select * from tbl_order where userid = #{userid}
+	select * from tbl_order where userid = #{userid} order by orderdate desc
  ]]>
+</select>
+
+<!-- 주문목록페이징 -->
+<select id = "getListWithPaging" resultType="com.books.domain.OrderVO">
+	<![CDATA[
+		select orderid, userid, orderdate, quantity, totalprice, dname, dtell,
+		dzipcode, daddress1, daddress2, dmsg, orderstatus from
+		(select /*+ INDEX_DESC(tbl_order pk_tbl_order) */
+		rownum rn, orderid, userid, orderdate, quantity, totalprice, dname, dtell,
+		dzipcode, daddress1, daddress2, dmsg, orderstatus
+		from tbl_order where
+		rownum <= #{pageNum} * #{amount})
+		where rn > (#{pageNum} -1) * #{amount}
+	]]>
+</select>
+
+<!-- 전체데이터 개수처리 -->
+<select id = "getTotalCount" resultType="int">
+<![CDATA[
+	select count(*) from tbl_order where orderid > 0
+]]>
 </select>
 
 <!-- 주문상세조회-수령자정보 -->
@@ -29,9 +50,7 @@
 <!-- 주문수정 -->
 <update id="update">
 	update tbl_order
-	set quantity = #{quantity},
-	totalPrice = #{totalPrice},
-	dName = #{dName},
+	set dName = #{dName},
 	dTell = #{dTell},
 	dZipcode = #{dZipcode},
 	dAddress1 = #{dAddress1},

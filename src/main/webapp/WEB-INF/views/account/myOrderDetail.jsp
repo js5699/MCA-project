@@ -21,7 +21,7 @@ th, td{
 <div class="row">
 
 	<h1 class="my-4">주문상세보기</h1><br>
-		<table>
+		<table class="table">
 			<tr>
 				<th>주문번호</th>
 				<th>도서명</th>
@@ -37,8 +37,7 @@ th, td{
 			</tr>
 			</c:forEach>
 		</table>
-		<div style="margin-top:20px;"></div>
-		<table>
+		<table class="table">
 			<tr>
 				<th>수령자</th>
 				<td>${dNameinfo.dname}</td>
@@ -94,10 +93,39 @@ th, td{
 				<td colspan="3">${dNameinfo.dmsg}</td>
 			</tr>
 		</table>
-		
-		<button data-oper='list' class="btn btn-default" onclick="location.href='/account/myOrderList?userid=<c:out value="${dNameinfo.userid}" />'">목록</button>
-		<button data-oper='list' class="btn btn-default" onclick="location.href='/account/myOrderMod?orderid=<c:out value="${dNameinfo.orderid}" />'">수정</button>
+		<div style="margin-top:20px;"></div>
+		<button type="submit" data-oper='modify' class="btn btn-default">주문수정</button>&nbsp;
+		<button type="submit" data-oper='list' class="btn btn-info">목록</button>
+
+		<form id='operForm' action="/account/myOrderMod" method="get">
+			<input type='hidden' id='userid' name='userid' value='<c:out value="${dNameinfo.userid}" />'>
+			<input type = "hidden" name = "pageNum" value = "<c:out value = '${cri.pageNum}'/>">
+			<input type = "hidden" name = "amount" value = "<c:out value = '${cri.amount}'/>">
+			<input type='hidden' id='orderid' name='orderid' value='<c:out value="${dNameinfo.orderid}" />'>
+		</form>
 
 	</div>
 
 <c:import url="../includes/footer.jsp"/>
+<script type="text/javascript">
+$(document).ready(function() {
+  
+  var operForm = $("#operForm"); 
+  
+  $("button[data-oper='modify']").on("click", function(e){
+    
+	operForm.attr("action","/account/myOrderMod");
+	operForm.submit();
+    
+  });
+  
+    
+  $("button[data-oper='list']").on("click", function(e){
+    
+    operForm.find("#orderid").remove();
+    operForm.attr("action","/account/myOrderList");
+    operForm.submit();
+    
+  });  
+});
+</script>

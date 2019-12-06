@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <style>
 table, td, th {  
   border: 1px solid #ddd;
@@ -21,7 +22,7 @@ th, td{
 <div class="row">
 
 <h1 class="my-4">주문내역</h1><br>
-<table>
+<table class="table">
 	<tr>
 		<th>주문번호</th>
 		<th>도서명</th>
@@ -33,8 +34,7 @@ th, td{
 	<c:forEach items="${orderlist}" var="order">
 	<tr>
 		<td>
-			<a href='/account/myOrderDetail?orderid=<c:out value="${order.orderid}" />'>
-			<c:out value="${order.orderid}" /></a>
+			<a class='move' href="${order.orderid}">${order.orderid}</a>
 		</td>
 		<td>외 <c:out value="${order.quantity-1}" />권</td>
 		<td><c:out value="${order.quantity}" /></td>
@@ -69,7 +69,25 @@ th, td{
 	</c:forEach>
 	
 </table><br><br><br>
-
+<div class = 'pull-right'>
+	<ul class = "pagination">
+		<c:if test = "${paging.prev}">
+			<li class = "paginate_button previous"><a href = "${paging.startPage -1}">Previous</a></li>
+		</c:if>
+		<c:forEach var = "num" begin = "${paging.startPage}" end = "${paging.endPage}">
+			<li class = "paginate_button ${paging.cri.pageNum == num ? "active":""}"><a href = "${num}">${num}</a></li>
+		</c:forEach>
+		<c:if test = "${paging.next}">
+			<li class = "paginate_button next"><a href = "${paging.endPage + 1}">Next</a></li>
+		</c:if>
+	</ul>
+</div>
+<form id = "actionForm" action = "/account/myOrderList" method = "get">
+	<input type="hidden" id="userid" name="userid" value="${order.userid}">
+	<input type = "hidden" name = "pageNum" value = "${paging.cri.pageNum}">
+	<input type = "hidden" name = "amount" value = "${paging.cri.amount}">
+	
+</form>
 	
 	
 </div>
@@ -78,5 +96,23 @@ th, td{
 <script type="text/javascript">
 $(document).ready(function(){
 	var result = '<c:out value="${result}" />'
+	
+	var actionForm = $("#actionForm");
+	
+	$(".paginate_button a").on("click", function(e){
+		e.preventDefault();
+		
+		console.log('click');
+		
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.submit();
+	});
+	
+	$(".move").on("click", function(e){
+		e.preventDefault();
+		actionForm.append("<input type = 'hidden' name = 'orderid' value = '" + $(this).attr("href") + "'>");
+		actionForm.attr("action", "/account/myOrderDetail");
+		actionForm.submit();
+	});
 });
 </script>

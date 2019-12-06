@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 
+import com.books.domain.Criteria;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
 import com.books.mapper.OrderMapper;
@@ -25,11 +26,13 @@ public class UserOrderServiceImpl implements UserOrderService{
 		mapper.insertSelectKey(order);
 	}
 	
-	@Override//주문목록
-	public List<OrderVO> getList(String userid){
-		log.info("getList..............");
+
+	@Override//주문목록+페이징
+	public List<OrderVO> getList(String userid, Criteria cri){
+		log.info("getList with criteria:" + cri);
 		
-		return mapper.getList(userid);
+		//return mapper.getList(userid);
+		return mapper.getListWithPaging(cri);
 	}
 	
 	@Override//주문상세조회-수령자정보
@@ -51,5 +54,12 @@ public class UserOrderServiceImpl implements UserOrderService{
 		log.info("modify................"+order);
 		
 		return mapper.update(order) == 1;
+	}
+	
+	@Override//전체 데이터 개수
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+		return mapper.getTotalCount(cri);
+
 	}
 }
