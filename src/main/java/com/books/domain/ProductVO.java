@@ -8,21 +8,21 @@ import lombok.Data;
 public class ProductVO {
 	
 	private String productId;
-	private String pImg;
-	private String pTitle;
+	private String pimg;
+	private String ptitle;
 	private int price;
 	private String publisher;
-	private Date pubDate;
+	private String pubdate;
 	private String author;
-	private String bkSize;
-	private int bkPage;
-	private String bkIndex;
-	private String bkDesc;
-	private String ISBN;
-	private Date regDate;
+	private String bksize;
+	private int bkpage;
+	private String bkindex;
+	private String bkdesc;
+	private String isbn;
+	private Date regdate;
 	private Date updateDate;
 	private int stock;
-	private String cId;
-	private int saleCnt;
+	private String cid;
+	private int salecnt;
 	
 }

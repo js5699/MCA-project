@@ -12,8 +12,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<selectKey keyProperty="productId" order="BEFORE" resultType="String">
 		select seq_product.nextval from dual
 	</selectKey>
-	insert into tbl_product(productId, pImg, pTitle, price, publisher, pubDate, author, bkSize, bkPage, bkIndex, bkDesc, ISBN, stock, cId)
-	values(#{productId}, #{pImg}, #{pTitle}, #{price}, #{publisher}, #{pubDate}, #{author}, #{bkSize}, #{bkPage}, #{bkIndex}, #{bkDesc}, #{ISBN}, #{stock}, #{cId})
+	insert into tbl_product(productId, pimg, pTitle, price, publisher, pubDate, author, bkSize, bkPage, bkIndex, bkDesc, ISBN, stock, cId)
+	values(#{productId}, #{pimg}, #{ptitle}, #{price}, #{publisher}, #{pubdate}, #{author}, #{bksize}, #{bkpage}, #{bkindex}, #{bkdesc}, #{isbn}, #{stock}, #{cid})
 </insert>
+
+<update id="update">
+	update tbl_product set
+	pimg = #{pimg},
+	ptitle = #{ptitle},
+	price = #{price},
+	publisher = #{publisher},
+	pubdate = #{pubdate},
+	author = #{author},
+	bksize = #{bksize},
+	bkindex = #{bkindex},
+	bkpage = #{bkpage},
+	bkdesc = #{bkdesc},
+	isbn = #{isbn},
+	stock = #{stock},
+	cid = #{cid},
+	updatedate = sysdate
+	where productId = #{productId}
+	
+</update>
 
 </mapper>

@@ -7,4 +7,6 @@ public interface ProductMapper {
 	public ProductVO read(String productId);
 	
 	public void insertSelectKey(ProductVO PVO);
+	
+	public int update(ProductVO PVO);
 }

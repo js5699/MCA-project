@@ -14,17 +14,20 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<form role="form" action="/adminProduct/register" method="post">
+				<form role="form" action="/adminProduct/modify" method="post">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<input type="hidden" name = "productId" value = "${product.productId}"/>
+				<input type="hidden" name = "regdate" value = "${product.regdate}"/>
+				<input type="hidden" name = "salecnt" value = "${product.salecnt}"/>
 				<div class = "col-lg-12">
 					<table style = "width : 100%">
 						<tr>
 							<td>
 								<div class="col-lg-6" id = "img">
-
+									<img style = 'width:250px; height:auto' src = '/adminProduct/display?fileName=${product.pimg}'>
 								</div>
 								<div class="col-lg-6">
-									<input type = "file" name="pimg">
+									<input type = "file" name="pimg" value = "${product.pimg}">
 								</div>
 							</td>
 							<td>
@@ -32,19 +35,19 @@
 									<tr>
 										<td>
 											<div class="form-group">
-												<label>제목</label> <input class="form-control" name="ptitle">
+												<label>제목</label> <input class="form-control" name="ptitle" value = "${product.ptitle}">
 											</div>
 											<div class="form-group">
-												<label>출판사</label> <input class="form-control" name="publisher">
+												<label>출판사</label> <input class="form-control" name="publisher" value = "${product.publisher}">
 											</div>
 											<div class="form-group">
-												<label>출판일</label> <input class="form-control" name="pubdate">
+												<label>출판일</label> <input class="form-control" name="pubdate" value = "${product.pubdate}">
 											</div>
 											<div class="form-group">
-												<label>저자</label> <input class="form-control" name="author">
+												<label>저자</label> <input class="form-control" name="author" value = "${product.author}">
 											</div>
 											<div class="form-group">
-												<label>가격</label> <input class="form-control" name="price">
+												<label>가격</label> <input class="form-control" name="price" value = "${product.price}">
 											</div>
 											
 										</td>
@@ -56,19 +59,19 @@
 									<tr>
 										<td>
 											<div class="form-group">
-												<label>카테고리</label> <input class="form-control" name="cid">
+												<label>카테고리</label> <input class="form-control" name="cid" value = "${product.cid}">
 											</div>
 											<div class="form-group">
-												<label>책 크기</label> <input class="form-control" name="bksize">
+												<label>책 크기</label> <input class="form-control" name="bksize" value = "${product.bksize}">
 											</div>
 											<div class="form-group">
-												<label>페이지수</label> <input class="form-control" name="bkpage">
+												<label>페이지수</label> <input class="form-control" name="bkpage" value = "${product.bkpage}">
 											</div>
 											<div class="form-group">
-												<label>ISBN</label> <input class="form-control" name="isbn">
+												<label>ISBN</label> <input class="form-control" name="isbn" value = "${product.isbn}">
 											</div>
 											<div class="form-group">
-												<label>재고 수량</label> <input class="form-control" name="stock">
+												<label>재고 수량</label> <input class="form-control" name="stock" value = "${product.stock}">
 											</div>
 										</td>
 									</tr>
@@ -78,10 +81,10 @@
 					</table>
 				</div>
 					<div class="form-group">
-						<label>목차</label> <textarea rows = "6" class="form-control" name="bkindex"></textarea>
+						<label>목차</label> <textarea rows = "6" class="form-control" name="bkindex">${product.bkindex}</textarea>
 					</div>
 					<div class="form-group">
-						<label>상세정보</label> <textarea rows = "6" class="form-control" name="bkdesc"></textarea>
+						<label>상세정보</label> <textarea rows = "6" class="form-control" name="bkdesc">${product.bkdesc}</textarea>
 					</div>
 					<button type="submit" class="btn btn-light">상품등록</button>
 					<button type="reset" class="btn btn-light">다시쓰기</button>
@@ -104,11 +107,8 @@ $(document).ready(function() {
 		for(var i in fullname){
 			name = fullname[i];
 		}
-		
 		$("#img").html("<img style = 'width:250px; height:auto' src = '/adminProduct/display?fileName=" + name + "'>");
 		
-		
-
 	});
 });
 </script>

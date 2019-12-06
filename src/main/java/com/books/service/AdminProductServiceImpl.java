@@ -27,8 +27,8 @@ public class AdminProductServiceImpl implements AdminProductService{
 
 	@Override
 	public boolean modify(ProductVO PVO) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return Pmapper.update(PVO) == 1;
 	}
 
 	@Override
