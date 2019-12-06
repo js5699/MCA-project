@@ -40,7 +40,7 @@
 <!-- 주문상세조회-책목록 -->
 <select id="orderDetailList" resultType="com.books.domain.OrderDetailVO">
 	select
-	    d.orderid, d.ea, d.saleprice, p.pTitle, p.price, p.saleCnt 
+	    d.orderid, d.ea, d.saleprice, p.ptitle, p.price, p.salecnt 
 	from tbl_product p
 		inner join tbl_orderdetail d on p.productid = d.productid
 	where orderid = #{orderid}
@@ -50,12 +50,12 @@
 <!-- 주문수정 -->
 <update id="update">
 	update tbl_order
-	set dName = #{dName},
-	dTell = #{dTell},
-	dZipcode = #{dZipcode},
-	dAddress1 = #{dAddress1},
-	dAddress2 = #{dAddress2},
-	dMsg = #{dMsg}
+	set dname = #{dname},
+	dtell = #{dtell},
+	dzipcode = #{dzipcode},
+	daddress1 = #{daddress1},
+	daddress2 = #{daddress2},
+	dmsg = #{dmsg}
 	where userid = #{userid}
 </update>
 
@@ -67,8 +67,8 @@
 		select seq_order.nextval from dual
 	</selectKey>
 	
-	insert into tbl_order (orderid, userid, orderdate, quantity, totalPrice, dName, dTell, dZipcode, dAddress1, dAddress2, dMsg)
-	values (#{orderid}, #{userid}, sysdate, #{quantity}, #{totalPrice}, #{dName}, #{dTell}, #{dZipcode}, #{dAddress1}, #{dAddress2}, #{dAddress2}, #{dMsg})
+	insert into tbl_order (orderid, userid, orderdate, quantity, totalprice, dname, dtell, dzipcode, daddress1, daddress2, dmsg)
+	values (#{orderid}, #{userid}, sysdate, #{quantity}, #{totalprice}, #{dname}, #{dtell}, #{dzipcode}, #{daddress1}, #{daddress2}, #{daddress2}, #{dmsg})
 </insert>
 
 <!-- 
