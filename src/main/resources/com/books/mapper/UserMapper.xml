@@ -10,8 +10,8 @@
 				FROM(
 					SELECT u.userid, name, phone, regdate, max(orderid) orderid
 					FROM tbl_user u
-					INNER JOIN TBL_ORDER o ON u.userid = o.USERID (+)	
-					GROUP BY u.USERID, name, phone, regdate
+					INNER JOIN TBL_ORDER o ON u.userid = o.userid (+)
+					GROUP BY u.userid, name, phone, regdate
 				)
 				WHERE rownum <= #{pageNum} * #{amount}
 			)
@@ -19,16 +19,16 @@
  		]]>  
 	</select>
 	
-	
 	<update id="update">
 		UPDATE tbl_user
-		SET name = #{name},
+		SET name  = #{name},
 			phone = #{phone},
 			email = #{email},
-			zipcode = #{zipcode},
+			zipcode  = #{zipcode},
 			address1 = #{address1},
-			address2 = #{address2}
-		WHERE userid = #{userid}
+			address2 = #{address2},
+			adminmemo = #{adminMemo}
+		WHERE userid  = #{userid}
 	</update>
 	
 	<delete id="delete">

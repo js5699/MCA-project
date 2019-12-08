@@ -23,65 +23,67 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/adminUser/*")
 @AllArgsConstructor
-public class AdminUserController { //관리자 권한 추가
+public class AdminUserController { // 관리자 권한 추가
 
 	private AccountService acService;
-	
+
 	private AdminUserService auService;
-	
+
 	private UserOrderService odService;
-	
-	
+
+	// odermapper에 따른 수정필요
 	@GetMapping("/list")
 	public void userList(Criteria cri, Model model) {
-		
+
 		model.addAttribute("list", auService.getList(cri));
-		
-		int total = auService.getTotal(cri);
-		
+
+		/*
+		 * int total = odService.get
+		 * 
+		 * model.addAttribute("total", total); model.addAttribute("paging", new
+		 * NoticePageDTO(cri, total));
+		 */
+
+	}
+
+	// odermapper에 따른 수정필요
+	@GetMapping("/info")
+	public void userInfomation(@RequestParam("userid") String userid, Criteria cri, Model model) {
+
+		log.info("controller - get user information - " + userid);
+
+		model.addAttribute("user", acService.get(userid));
+
+		int total = odService.getTotal(cri);
+		model.addAttribute("orderList", odService.getList(userid, cri));
 		model.addAttribute("total", total);
 		model.addAttribute("paging", new NoticePageDTO(cri, total));
-		
+
 	}
-	
-	
-	@GetMapping("/info")
-	public void userInfomation(@RequestParam("userid") String userid, Model model) {
-		
-		log.info("controller - get user information - " + userid);
-		
-		model.addAttribute("user", acService.get(userid));
-		model.addAttribute("order", odService.getList(userid));
-		
-	}
-	
-	
+
 	@GetMapping("/mod")
 	public void userModify(@RequestParam("userid") String userid, PhoneDTO phone, Model model) {
-		
+
 		UserVO user = acService.get(userid);
 
 		phone.phoneSplit(user);
 
 		model.addAttribute("user", user);
-		
+
 	}
-	
-	
+
 	@PostMapping("/mod")
-	public String userModifyPost(@RequestParam("userid") String userid, UserVO user, PhoneDTO phone, RedirectAttributes rttr) {
-		
+	public String userModifyPost(@RequestParam("userid") String userid, UserVO user, PhoneDTO phone,
+			RedirectAttributes rttr) {
+
 		user.setPhone(phone.phoneAppend(user));
-		
+
 		auService.modify(user);
-		
+
 		rttr.addFlashAttribute("result", "userModSuccess");
-		
-		return "redirect:/adminUser/mod?userid="+userid;
-		
+
+		return "redirect:/adminUser/mod?userid=" + userid;
+
 	}
-	
-	
-	
-	
+
 }

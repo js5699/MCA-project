@@ -12,7 +12,7 @@
 		<div class="card col-lg-12">
 			<div class="card-body">
 				<p><i class="fas fa-search"></i>검색조건</p>
-				<form action="/adminUser/list" method="post" class="form-horizontal" name="userList">
+				<form action="/adminUser/list" method="post" class="form-horizontal" name="criteriaForm">
 					<div class="form-group row">
 						<label for="inputuserid" class="col-sm-3">아이디 혹은 이름</label>
 						<div class="col-sm-3">
@@ -22,18 +22,11 @@
 							</select>
 						</div>
 						<div class="col-sm-4">
-							<input type="text" class="form-control form-control-sm" id="inputuserid" name="name" placeholder="NAME">
+							<input type="text" class="form-control form-control-sm" id="inputuserid" name="keywword" placeholder="keyword">
 						</div>
-					</div>
-					<div class="form-group row">
-						<label for="inputuserid" class="col-sm-3">등급</label>
-						<div class="col-sm-4">
-							<select class="custom-select custom-select-sm" name="roleType">
-								<option value="A">전체</option>
-								<option value="U">일반</option>
-								<option value="D">관리자</option>
-							</select>
-						</div>
+						<div class="col-sm-2 text-right">
+					    	<button type="submit" class="btn btn-primary btn-sm" onclick="return nullCheck()">검색</button>
+					    </div>
 					</div>
 				</form>
 			</div>
@@ -62,7 +55,7 @@
 					<td>${user.name}</td>
 					<td>${user.phone}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.regdate}" /></td>
-					<td>${user.orderid}</td>
+					<td>${!empty user.orderid ? user.orderid : '-'}</td>
 					<td class="cell-justify-right">
 						<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='/adminUser/mod?userid=${user.userid}'">정보수정</button>
 						<button type="button" class="btn btn-outline-info btn-sm" onclick="location.href='/adminUser/info?userid=${user.userid}'">상세정보</button>
@@ -92,5 +85,17 @@
 			
 		</ul>
 	</nav>
-
+	
+	<script>
+		function nullCheck() {
+			cf = document.criteriaForm;
+			if ( cf.keywword.value == "") {
+				alert("검색어를 입력해주세요.");
+				cf.keywword.focus();
+				return false;
+			} else {
+				return true;
+			}
+		}
+	</script>
 <%@ include file="../includes/footer.jsp"%>

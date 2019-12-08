@@ -14,7 +14,8 @@
 			email = #{email},
 			zipcode = #{zipcode},
 			address1 = #{address1},
-			address2 = #{address2}
+			address2 = #{address2},
+			adminmemo = #{adminMemo}
 		WHERE userid = #{userid}
 	</update>
 	

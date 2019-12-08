@@ -13,7 +13,7 @@
 	</div>
 </div>
 
-<div class="row formContainer">
+<div class="row formContainer-top">
 	<div class="col-lg-6">
 		<h5>회원 정보</h5>
 	</div>
@@ -50,8 +50,7 @@
 		</tr>
 		<tr>
 			<th>
-				메모
-				<p><small>관리자만 확인할 수 있으며 회원에게 노출되지 않습니다.</small></p>
+				메모<i class="fas fa-question-circle" data-toggle="tooltip" data-html="true" title="<small>관리자만 확인할 수 있으며<br>회원에게 노출되지 않습니다.</small>"></i>
 			</th>
 			<td>${!empty user.adminMemo ? user.adminMemo : "-"}</td>
 		</tr>
@@ -103,5 +102,10 @@
 		</c:choose>
 	</table>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script>
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	})
+</script>
 <%@ include file="../includes/footer.jsp"%>

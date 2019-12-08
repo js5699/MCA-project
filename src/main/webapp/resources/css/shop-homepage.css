@@ -17,15 +17,19 @@ body {
 	margin-top: 25px;
 }
 
+.fc-no-magin {
+	margin-bottom: 0;
+}
+
 .btn-submit {
 	padding: 20px 0;
 }
 
-
+/* 
 .btnBox {
 	margin-left: -30px;
 	margin-Right: -30px;
-}
+} */
 
 .sidevarName {
 	padding-top: 25px;
