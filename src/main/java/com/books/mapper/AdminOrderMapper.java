@@ -1,4 +1,4 @@
-package com.books.service;
+package com.books.mapper;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
 import com.books.domain.UserVO;
 
-public interface AdminOrderService {
+public interface AdminOrderMapper {
 
 	// 주문이 있는 회원의 총 수
 	public int getHasOrderCount(Criteria cri);
@@ -34,7 +34,6 @@ public interface AdminOrderService {
 	public List<OrderDetailVO> getUserOrderItemsListWithPaging(String orderid, Criteria cri);
 	
 	// 회원 개인 주문 상세내역 수정
-	public boolean modUserOrder(OrderDetailVO orderDetail);
+	public int modifyUserOrder(OrderDetailVO orderDetail);
 	
-
 }

@@ -88,3 +88,12 @@ p i { margin-right: 15px }
 .customerList td {
 	vertical-align: middle;
 }
+
+
+/* admin - order */
+.orderList th {
+	vertical-align: middle;
+}
+.todayOrder {
+	background-color: #f6f5fa;
+}
