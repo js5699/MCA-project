@@ -76,7 +76,7 @@
 							<c:otherwise>-</c:otherwise>
 						</c:choose>
 					</td>
-					<td><a href="/adminOrder/userOrder-detail?orderid=${order.orderid}&userid=${order.userid}"><i class="fas fa-angle-double-right"></i></a></td>
+					<td><a href="/adminOrder/userOrder-detail?orderid=${order.orderid}"><i class="fas fa-angle-double-right"></i></a></td>
 				</tr>
 			</c:forEach>
 		</table>

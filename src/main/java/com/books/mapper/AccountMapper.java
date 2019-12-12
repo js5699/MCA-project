@@ -11,6 +11,8 @@ public interface AccountMapper {
 	public void insert(UserVO user);
 	
 	public int updateInfo(UserVO user);
+	
+	public int adminUserModify(UserVO user);
 
 	public int delete(String userid);
 	

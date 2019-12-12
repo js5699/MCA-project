@@ -57,8 +57,8 @@
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.regdate}" /></td>
 					<td>${!empty user.orderid ? user.orderid : '-'}</td>
 					<td class="cell-justify-right">
-						<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='/adminUser/mod?userid=${user.userid}'">정보수정</button>
-						<button type="button" class="btn btn-outline-info btn-sm" onclick="location.href='/adminUser/info?userid=${user.userid}'">상세정보</button>
+						<a href="${user.userid}" class="btn btn-outline-primary btn-sm" class="usermod"">정보수정</a>
+						<a href="${user.userid}" class="btn btn-outline-info btn-sm" class="userinfo">상세정보</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -86,6 +86,11 @@
 		</ul>
 	</nav>
 	
+	<form id="actionForm" action="/adminUser/list" method="get">
+		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}">
+		<input type="hidden" name="amount" value="${paging.cri.amount}">
+	</form>
+	
 	<script>
 		function nullCheck() {
 			cf = document.criteriaForm;
@@ -99,3 +104,18 @@
 		}
 	</script>
 <%@ include file="../includes/footer.jsp"%>
+<script type = "text/javascript">
+	$(document).ready(function(e){
+		
+		var actionForm = $("#actionForm");
+		
+		$(".userinfo").on("click", function(e) {
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='userid' value='"+ $(this).attr("href") + "'>");
+			actionForm.attr("action", "/adminUser/info");
+			actionForm.submit();
+		});
+
+	});
+	
+</script>

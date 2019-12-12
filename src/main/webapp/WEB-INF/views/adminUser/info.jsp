@@ -74,20 +74,31 @@
 			<th>주문일</th>
 			<th>주문금액</th>
 			<th>연락처</th>
-			<th>상세보기</th>
 			<th>상태</th>
+			<th>상세보기</th>
 		</tr>
 		<c:choose>
-			<c:when test="${!empty order}">
-				<c:forEach var="order" items="${order}" varStatus="idx">
+			<c:when test="${!empty orderList}">
+				<c:forEach var="order" items="${orderList}" varStatus="idx">
 					<tr>
 						<td>${idx.count}</td>
 						<td>${order.orderid}</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${order.orderdate}" /></td>
-						<td>${order.totalprice}</td>
+						<td><fmt:formatNumber value="${order.totalprice}" pattern="#,###" />원</td>
 						<td>${order.dtell}</td>
-						<td>-</td>
-						<td>-</td>
+						<td>
+							<c:choose>
+								<c:when test="${order.orderstatus == 'od01'}"><span>결제완료</span></c:when>
+								<c:when test="${order.orderstatus == 'od02'}"><span>배송대기</span></c:when>
+								<c:when test="${order.orderstatus == 'od03'}"><span>배송중</span></c:when>
+								<c:when test="${order.orderstatus == 'od04'}"><span>배송완료</span></c:when>
+								<c:when test="${order.orderstatus == 'od05'}"><span>결제취소</span></c:when>
+								<c:when test="${order.orderstatus == 'od06'}"><span>주문취소</span></c:when>
+								<c:when test="${order.orderstatus == 'od07'}"><span>교환신청</span></c:when>
+								<c:otherwise>-</c:otherwise>
+							</c:choose>
+						</td>
+						<td><a href="/adminOrder/userOrder-detail?orderid=${order.orderid}"><i class="fas fa-angle-double-right"></i></a></td>
 					</tr>
 				</c:forEach>
 			</c:when>

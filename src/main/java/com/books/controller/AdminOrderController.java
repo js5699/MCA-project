@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.books.domain.Criteria;
 import com.books.domain.NoticePageDTO;
 import com.books.domain.OrderVO;
+import com.books.domain.UserVO;
+import com.books.service.AccountService;
 import com.books.service.AdminOrderService;
 
 import lombok.AllArgsConstructor;
@@ -35,18 +37,14 @@ public class AdminOrderController {
 	}
 
 	@GetMapping("/userOrder-detail")
-	public void userOrder(@RequestParam("orderid") String orderid,
-						  @RequestParam("userid") String userid,
-						  Criteria cri, Model model) {
-		
-		log.warn("orderid : " + orderid);
-		log.warn("userid : " + userid);
+	public void userOrder(@RequestParam("orderid") String orderid, Criteria cri, Model model) {
+
 		int totalCount = service.getUserOrderItemsCount(orderid, cri);
-		model.addAttribute("user", service.getUserInformation(userid));
+		  
 		model.addAttribute("order", service.getUserOrderDetail(orderid));
-		model.addAttribute("list", service.getUserOrderItemsListWithPaging(orderid, cri));
-		model.addAttribute("paging", new NoticePageDTO(cri, totalCount));
-		
+		//model.addAttribute("list", service.getUserOrderItemsListWithPaging(orderid,cri)); 
+		//model.addAttribute("paging", new NoticePageDTO(cri, totalCount));
+
 	}
 
 

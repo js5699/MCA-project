@@ -5,7 +5,7 @@
 <%@ include file="../includes/header.jsp"%>
 
 	<div class="row formContainer">
-		<h5 class="pageSubtitle">관리자 <i class="fas fa-caret-right"></i> 주문 관리 <i class="fas fa-caret-right"></i> ${order.orderid}</h5>
+		<h5 class="pageSubtitle">관리자 <i class="fas fa-caret-right"></i> 주문 관리 <i class="fas fa-caret-right"></i> ..</h5>
 	</div>
 	
 	<table class="table">

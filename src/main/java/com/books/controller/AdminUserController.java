@@ -3,6 +3,7 @@ package com.books.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,8 +14,8 @@ import com.books.domain.NoticePageDTO;
 import com.books.domain.PhoneDTO;
 import com.books.domain.UserVO;
 import com.books.service.AccountService;
+import com.books.service.AdminOrderService;
 import com.books.service.AdminUserService;
-import com.books.service.UserOrderService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -25,46 +26,42 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class AdminUserController { // 관리자 권한 추가
 
-	private AccountService acService;
+	private AccountService accountSVC;
 
-	private AdminUserService auService;
+	private AdminUserService adminUserSVC;
+	
+	private AdminOrderService adminOrderSVC;
 
-	private UserOrderService odService;
 
-	// odermapper에 따른 수정필요
 	@GetMapping("/list")
 	public void userList(Criteria cri, Model model) {
-
-		model.addAttribute("list", auService.getList(cri));
-
-		/*
-		 * int total = odService.get
-		 * 
-		 * model.addAttribute("total", total); model.addAttribute("paging", new
-		 * NoticePageDTO(cri, total));
-		 */
-
+		int totalCount = adminUserSVC.getTotal(cri);
+		
+		model.addAttribute("list", adminUserSVC.getList(cri));
+		model.addAttribute("total", totalCount);
+		model.addAttribute("paging", new NoticePageDTO(cri,totalCount));
 	}
 
 	// odermapper에 따른 수정필요
 	@GetMapping("/info")
-	public void userInfomation(@RequestParam("userid") String userid, Criteria cri, Model model) {
-
+	public void userInfomation(@RequestParam("userid") String userid, @ModelAttribute("cri") Criteria cri, Model model) {
+		
+		Criteria subCri = new Criteria(1,10);
 		log.info("controller - get user information - " + userid);
 
-		model.addAttribute("user", acService.get(userid));
+		model.addAttribute("user", accountSVC.get(userid));
 
-		int total = odService.getTotal(cri);
-		model.addAttribute("orderList", odService.getList(userid, cri));
-		model.addAttribute("total", total);
-		model.addAttribute("paging", new NoticePageDTO(cri, total));
+		int totalCount = adminOrderSVC.getUserOrderCount(userid);
+		model.addAttribute("total", totalCount);
+		model.addAttribute("orderList", adminOrderSVC.getUserOrderListWithPaging(userid, subCri));
+		model.addAttribute("paging", new NoticePageDTO(subCri,totalCount));
 
 	}
 
 	@GetMapping("/mod")
 	public void userModify(@RequestParam("userid") String userid, PhoneDTO phone, Model model) {
 
-		UserVO user = acService.get(userid);
+		UserVO user = accountSVC.get(userid);
 
 		phone.phoneSplit(user);
 
@@ -78,7 +75,7 @@ public class AdminUserController { // 관리자 권한 추가
 
 		user.setPhone(phone.phoneAppend(user));
 
-		auService.modify(user);
+		adminUserSVC.modify(user);
 
 		rttr.addFlashAttribute("result", "userModSuccess");
 

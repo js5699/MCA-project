@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.books.domain.Criteria;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
-import com.books.domain.UserVO;
 import com.books.mapper.AdminOrderMapper;
 
 import lombok.AllArgsConstructor;
@@ -48,7 +47,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	
 	@Override
 	public OrderVO getUserOrderDetail(String orderid) {
-
+		log.warn("주문 정보 service : " + orderid);
 		return mapper.getUserOrderDetail(orderid);
 	}
 
@@ -69,14 +68,6 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 		
 		return mapper.modifyUserOrder(orderDetail) == 1;
 	}
-
-	@Override
-	public UserVO getUserInformation(String userid) {
-		return mapper.getUserInformation(userid);
-	}
-
-	
-
 
 
 }

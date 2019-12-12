@@ -24,9 +24,6 @@ public interface AdminOrderService {
 	// 회원 개인 주문내역 
 	public OrderVO getUserOrderDetail(String orderid);
 	
-	// 회원 정보
-	public UserVO getUserInformation(String userid);
-	
 	// 회원 개인 주문내역 상세 - 상품 수 카운트
 	public int getUserOrderItemsCount(String orderid, Criteria cri);
 	

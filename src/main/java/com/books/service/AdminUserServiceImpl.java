@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.books.domain.Criteria;
 import com.books.domain.UserVO;
 import com.books.mapper.AccountMapper;
+import com.books.mapper.AdminOrderMapper;
 import com.books.mapper.UserMapper;
 
 import lombok.AllArgsConstructor;
@@ -19,19 +20,21 @@ public class AdminUserServiceImpl implements AdminUserService {
 	
 	private UserMapper userMapper;
 	
-	private AccountMapper acMapper;
+	private AccountMapper accountMapper;
+	
+	private AdminOrderMapper AdminOrderMapper;
 	
 	@Override
 	public void register(UserVO user) {
 		log.info("admin-user-register"  + user);
-		acMapper.insert(user);
-		acMapper.insertAuth(user.getUserid());
+		accountMapper.insert(user);
+		accountMapper.insertAuth(user.getUserid());
 	}
 
 	@Override
 	public UserVO get(String userid) {
 		log.info("admin-user-get-" + userid);
-		return acMapper.read(userid);
+		return accountMapper.read(userid);
 	}
 
 	@Override
