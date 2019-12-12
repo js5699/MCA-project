@@ -42,7 +42,7 @@ public class AdminUserController { // 관리자 권한 추가
 		model.addAttribute("paging", new NoticePageDTO(cri,totalCount));
 	}
 
-	// odermapper에 따른 수정필요
+	// odermapper에 따른 수정필요 -- 
 	@GetMapping("/info")
 	public void userInfomation(@RequestParam("userid") String userid, @ModelAttribute("cri") Criteria cri, Model model) {
 		
