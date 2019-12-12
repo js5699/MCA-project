@@ -56,7 +56,13 @@
 									<tr>
 										<td>
 											<div class="form-group">
-												<label>카테고리</label> <input class="form-control" name="cid">
+												<label>카테고리</label>
+												<select name = "cid" class="form-control">
+													<c:forEach items="${cidList}" var="list">
+														<option value = "${list.cid}">${list.cname}</option>
+													</c:forEach>
+													
+												</select>
 											</div>
 											<div class="form-group">
 												<label>책 크기</label> <input class="form-control" name="bksize">

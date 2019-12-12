@@ -3,6 +3,9 @@ package com.books.controller;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.books.domain.Criteria;
 import com.books.domain.NoticeBoardVO;
 import com.books.domain.NoticePageDTO;
+import com.books.service.AccountService;
 import com.books.service.NoticeBoardService;
 
 import lombok.AllArgsConstructor;
@@ -30,6 +34,7 @@ import lombok.extern.log4j.Log4j;
 public class NoticeBoardController {
 
 	private NoticeBoardService NBservice;
+	private AccountService Aservice;
 
 	@GetMapping("/noticeList")
 	public void list(Criteria cri, Model model) {
@@ -89,7 +94,12 @@ public class NoticeBoardController {
 	
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/noticeRegister")
-	public void register() {
+	public void register(Model model) {
 		//공지글 작성
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal(); //유저정보
+		
+		// user에서 username획득하여 get처리
+		model.addAttribute("user", Aservice.get(user.getUsername()));
 	}
 }

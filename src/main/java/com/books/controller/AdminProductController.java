@@ -36,8 +36,8 @@ public class AdminProductController {
 	
 	//상품등록 페이지 이동
 	@GetMapping("/register")
-	public void register() {
-		
+	public void register(Model model) {
+		model.addAttribute("cidList", APservice.getCid());
 	}
 	
 	//상품 등록

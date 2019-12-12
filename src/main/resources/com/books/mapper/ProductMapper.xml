@@ -8,6 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from tbl_product where productId = #{productId}
 </select>
 
+<select id="getCid" resultType="com.books.domain.CidVO">
+	select * from tbl_cid
+</select>
+
 <insert id="insertSelectKey">
 	<selectKey keyProperty="productId" order="BEFORE" resultType="String">
 		select seq_product.nextval from dual

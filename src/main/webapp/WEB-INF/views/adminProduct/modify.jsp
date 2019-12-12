@@ -86,7 +86,7 @@
 					<div class="form-group">
 						<label>상세정보</label> <textarea rows = "6" class="form-control" name="bkdesc">${product.bkdesc}</textarea>
 					</div>
-					<button type="submit" class="btn btn-light">상품등록</button>
+					<button type="submit" class="btn btn-light">상품수정</button>
 					<button type="reset" class="btn btn-light">다시쓰기</button>
 				</form>
 			</div>

@@ -1,7 +1,10 @@
 package com.books.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.books.domain.CidVO;
 import com.books.domain.ProductVO;
 import com.books.mapper.ProductMapper;
 
@@ -36,5 +39,12 @@ public class AdminProductServiceImpl implements AdminProductService{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public List<CidVO> getCid() {
+		return Pmapper.getCid();
+	}
+
+	
 
 }

@@ -22,6 +22,13 @@
 				<a href="#"	class="list-group-item">주문 내역</a>
 			</div>
 		</c:when>
+		<c:when test="${sideNavName eq 'NoticeBoard'}">
+			<h1 class="my-4">마이페이지</h1>
+			<div class="list-group">
+				<a href="/NoticeBoard/noticeList" class="list-group-item">공지게시판</a>
+				<a href="#"	class="list-group-item">Q&A게시판</a>
+			</div>
+		</c:when>
 		<c:otherwise>
 			<h1 class="my-4">MCA Books</h1>
 			<div class="list-group">
