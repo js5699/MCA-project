@@ -36,9 +36,9 @@ th, td{
 		<td>
 			<a class='move' href="${order.orderid}">${order.orderid}</a>
 		</td>
-		<td>외 <c:out value="${order.quantity-1}" />권</td>
+		<td><c:out value="${order.orderbook}" />외 <c:out value="${order.quantity-1}" />권</td>
 		<td><c:out value="${order.quantity}" /></td>
-		<td><c:out value="${order.totalprice}" /></td>
+		<td><fmt:formatNumber pattern="###,###,###" value="${order.totalprice}" />원</td>
 		<td><fmt:formatDate pattern="yy-MM-dd" value="${order.orderdate}" /></td>
 		<td>
 			<c:choose>
@@ -86,7 +86,6 @@ th, td{
 	<input type="hidden" id="userid" name="userid" value="${order.userid}">
 	<input type = "hidden" name = "pageNum" value = "${paging.cri.pageNum}">
 	<input type = "hidden" name = "amount" value = "${paging.cri.amount}">
-	
 </form>
 	
 	

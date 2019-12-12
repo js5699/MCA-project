@@ -38,7 +38,7 @@ th, td{
 			<td><c:out value="${detail.orderid}" /></td>
 			<td><c:out value="${detail.ptitle}" /></td>
 			<td><c:out value="${detail.ea}" /></td>
-			<td><c:out value="${detail.saleprice}" /></td>
+			<td><fmt:formatNumber pattern="###,###,###" value="${detail.saleprice}" />원</td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -51,9 +51,13 @@ th, td{
 		</tr>
 		<tr>
 			<th>주문수량</th>
-			<td><input class="form-control" name='quantity' value='<c:out value="${dNameinfo.quantity}"/>' readonly="readonly"></td>
+			<td><input class="form-control" name='quantity' value='<c:out value="${dNameinfo.quantity}"/>' 
+				readonly="readonly"></td>
 			<th>주문금액</th>
-			<td><input class="form-control" name='totalprice' value='<c:out value="${dNameinfo.totalprice}"/>' readonly="readonly"></td>
+			<td>
+				<input class="form-control" name='totalprice' value='<fmt:formatNumber pattern="###,###,###" 
+				value="${dNameinfo.totalprice}"/>원' readonly="readonly">
+			</td>
 		</tr>
 		<tr>
 			<th>주문일자</th>
@@ -88,7 +92,8 @@ th, td{
 		<tr>
 			<th>배송지 주소</th>
 			<td colspan="3">
-				<input class="form-control" style="width:10%" name='dzipcode' value='<c:out value="${dNameinfo.dzipcode}"/>' ><br>
+				<input class="form-control" style="width:10%" name='dzipcode' 
+				value='<c:out value="${dNameinfo.dzipcode}"/>' ><br>
 				<input class="form-control" name='daddress1' value='<c:out value="${dNameinfo.daddress1}"/>' ><br>
 				<input class="form-control" name='daddress2' value='<c:out value="${dNameinfo.daddress2}"/>' >
 			</td>

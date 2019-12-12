@@ -13,7 +13,9 @@ public interface OrderMapper {
 	
 	public int getTotalCount(Criteria cri);//전체 데이터 개수처리
 	
-	public void insertSelectKey(OrderVO order);//회원주문
+	public void insertOrder(OrderVO order);//회원주문
+	
+	public void insertOrderDetail(OrderDetailVO orderDetail);//회원주문-상세
 
 	public OrderVO dNameInfo(String orderid);//주문상세조회-수령자정보
 	

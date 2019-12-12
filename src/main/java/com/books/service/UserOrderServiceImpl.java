@@ -23,15 +23,20 @@ public class UserOrderServiceImpl implements UserOrderService{
 	public void insertorder(OrderVO order) {
 		log.info("insert order..........................."+order);
 		
-		mapper.insertSelectKey(order);
+		mapper.insertOrder(order);
 	}
 	
+	@Override//회원주문-상세
+	public void insertorderDetail(OrderDetailVO orderDetail) {
+		log.info("insert orderDetail............."+orderDetail);
+		
+		mapper.insertOrderDetail(orderDetail);
+	}
 
 	@Override//주문목록+페이징
 	public List<OrderVO> getList(String userid, Criteria cri){
 		log.info("getList with criteria:" + cri);
 		
-		//return mapper.getList(userid);
 		return mapper.getListWithPaging(cri);
 	}
 	

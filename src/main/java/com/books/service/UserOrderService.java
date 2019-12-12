@@ -12,6 +12,8 @@ public interface UserOrderService {
 	
 	public void insertorder(OrderVO order);//회원주문
 	
+	public void insertorderDetail(OrderDetailVO orderDetail);//회원주문-상세
+	
 	public OrderVO get(String orderid);//주문상세조회-수령자정보
 	
 	public List<OrderDetailVO> orderView(String orderid);//주문상세조회-책목록

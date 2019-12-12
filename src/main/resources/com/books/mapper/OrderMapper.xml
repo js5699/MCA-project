@@ -15,10 +15,10 @@
 <select id = "getListWithPaging" resultType="com.books.domain.OrderVO">
 	<![CDATA[
 		select orderid, userid, orderdate, quantity, totalprice, dname, dtell,
-		dzipcode, daddress1, daddress2, dmsg, orderstatus from
+		dzipcode, daddress1, daddress2, dmsg, orderstatus, orderbook from
 		(select /*+ INDEX_DESC(tbl_order pk_tbl_order) */
 		rownum rn, orderid, userid, orderdate, quantity, totalprice, dname, dtell,
-		dzipcode, daddress1, daddress2, dmsg, orderstatus
+		dzipcode, daddress1, daddress2, dmsg, orderstatus, orderbook
 		from tbl_order where
 		rownum <= #{pageNum} * #{amount})
 		where rn > (#{pageNum} -1) * #{amount}
@@ -62,15 +62,24 @@
 
 <!-- 회원주문 -->
 
-<insert id="insertSelectKey">
+<insert id="insertOrder">
 	<selectKey keyProperty="oderid" order="BEFORE" resultType="String">
 		select seq_order.nextval from dual
 	</selectKey>
 	
-	insert into tbl_order (orderid, userid, orderdate, quantity, totalprice, dname, dtell, dzipcode, daddress1, daddress2, dmsg)
-	values (#{orderid}, #{userid}, sysdate, #{quantity}, #{totalprice}, #{dname}, #{dtell}, #{dzipcode}, #{daddress1}, #{daddress2}, #{daddress2}, #{dmsg})
+	insert into tbl_order (orderid, userid, orderdate, quantity, totalprice,
+	dname, dtell, dzipcode, daddress1, daddress2, dmsg, orderbook)
+	values (#{orderid}, #{userid}, sysdate, #{quantity}, #{totalprice},
+	#{dname}, #{dtell}, #{dzipcode}, #{daddress1}, #{daddress2}, #{daddress2},
+	#{dmsg}, #{orderbook})
 </insert>
 
+<!-- 회원주문-상세 -->
+
+<insert id="insertOrderDetail">
+	insert into tbl_orderdetail(orderid, productid, ea, saleprice)
+		select tbl_orderdetail
+</insert>
 <!-- 
 <insert id="insert">
 	insert into tbl_board (bno, title, content, writer)

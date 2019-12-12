@@ -33,7 +33,7 @@ th, td{
 				<td><c:out value="${detail.orderid}" /></td>
 				<td><c:out value="${detail.ptitle}" /></td>
 				<td><c:out value="${detail.ea}" /></td>
-				<td><c:out value="${detail.saleprice}" /></td>
+				<td><fmt:formatNumber pattern="###,###,###" value="${detail.saleprice}" />원</td>
 			</tr>
 			</c:forEach>
 		</table>
@@ -48,7 +48,7 @@ th, td{
 				<th>주문수량</th>
 				<td>${dNameinfo.quantity}</td>
 				<th>주문금액</th>
-				<td>${dNameinfo.totalprice}</td>
+				<td><fmt:formatNumber pattern="###,###,###" value="${dNameinfo.totalprice}" />원</td>
 			</tr>
 			<tr>
 				<th>주문일자</th>
@@ -96,7 +96,8 @@ th, td{
 		<div style="margin-top:20px;"></div>
 		<button type="submit" data-oper='modify' class="btn btn-default">주문수정</button>&nbsp;
 		<button type="submit" data-oper='list' class="btn btn-info">목록</button>
-
+		<div style="margin-bottom:20px;"></div>
+		
 		<form id='operForm' action="/account/myOrderMod" method="get">
 			<input type='hidden' id='userid' name='userid' value='<c:out value="${dNameinfo.userid}" />'>
 			<input type = "hidden" name = "pageNum" value = "<c:out value = '${cri.pageNum}'/>">
