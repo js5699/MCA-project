@@ -57,8 +57,8 @@
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.regdate}" /></td>
 					<td>${!empty user.orderid ? user.orderid : '-'}</td>
 					<td class="cell-justify-right">
-						<a href="${user.userid}" class="btn btn-outline-primary btn-sm" class="usermod"">정보수정</a>
-						<a href="${user.userid}" class="btn btn-outline-info btn-sm" class="userinfos">상세정보</a>
+						<a href="${user.userid}" class="btn btn-outline-primary btn-sm usermod">정보수정</a>
+						<a href="${user.userid}" class="btn btn-outline-info btn-sm userinfo">상세정보</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -91,12 +91,12 @@
 		<input type="hidden" name="amount" value="${paging.cri.amount}">
 	</form>
 	
-	<script type = "text/javascript">
+	<script type="text/javascript">
 	$(document).ready(function() {
 
 		var actionForm = $("#actionForm");
 
-		$(".userinfos").on("click", function(e) {
+		$(".userinfo").on("click", function(e) {
 			e.preventDefault();
 			actionForm.append("<input type='hidden' name='userid' value='"+ $(this).attr("href") + "'>");
 			actionForm.attr("action", "/adminUser/info");
