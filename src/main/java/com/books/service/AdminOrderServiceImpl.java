@@ -2,21 +2,25 @@ package com.books.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.books.domain.Criteria;
 import com.books.domain.OrderDetailVO;
+import com.books.domain.OrderPageDTO;
 import com.books.domain.OrderVO;
+import com.books.mapper.OrderManageMapper;
 import com.books.mapper.AdminOrderMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Service
 @Log4j
-@AllArgsConstructor
 public class AdminOrderServiceImpl implements AdminOrderService {
 	
+	@Setter(onMethod_ = @Autowired) 
 	private AdminOrderMapper mapper;
 	
 	@Override
@@ -34,33 +38,9 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	}
 
 	@Override
-	public int getUserOrderCount(String userid) {
-
-		return mapper.getUserOrderCount(userid);
-	}
-
-	@Override
-	public List<OrderVO> getUserOrderListWithPaging(String userid, Criteria cri) {
-
-		return mapper.getUserOrderListWithPaging(userid, cri);
-	}
-	
-	@Override
 	public OrderVO getUserOrderDetail(String orderid) {
 		log.warn("주문 정보 service : " + orderid);
 		return mapper.getUserOrderDetail(orderid);
-	}
-
-	@Override
-	public int getUserOrderItemsCount(String orderid, Criteria cri) {
-		
-		return mapper.getUserOrderItemsCount(orderid, cri);
-	}
-	
-	@Override
-	public List<OrderDetailVO> getUserOrderItemsListWithPaging(String orderid, Criteria cri) {
-
-		return mapper.getUserOrderItemsListWithPaging(orderid, cri);
 	}
 
 	@Override
@@ -68,6 +48,5 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 		
 		return mapper.modifyUserOrder(orderDetail) == 1;
 	}
-
 
 }

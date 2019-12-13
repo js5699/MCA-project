@@ -9,7 +9,12 @@
 	</div>
 	
 	<table class="table">
-		tr*2>td
+		<tr>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
 	
 	</table>
 

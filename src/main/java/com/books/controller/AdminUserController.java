@@ -29,9 +29,6 @@ public class AdminUserController { // 관리자 권한 추가
 	private AccountService accountSVC;
 
 	private AdminUserService adminUserSVC;
-	
-	private AdminOrderService adminOrderSVC;
-
 
 	@GetMapping("/list")
 	public void userList(Criteria cri, Model model) {
@@ -44,17 +41,9 @@ public class AdminUserController { // 관리자 권한 추가
 
 	// odermapper에 따른 수정필요 -- 
 	@GetMapping("/info")
-	public void userInfomation(@RequestParam("userid") String userid, @ModelAttribute("cri") Criteria cri, Model model) {
+	public void userInformation(@RequestParam("userid") String userid, @ModelAttribute("cri") Criteria cri, Model model) {
 		
-		Criteria subCri = new Criteria(1,10);
-		log.info("controller - get user information - " + userid);
-
 		model.addAttribute("user", accountSVC.get(userid));
-
-		int totalCount = adminOrderSVC.getUserOrderCount(userid);
-		model.addAttribute("total", totalCount);
-		model.addAttribute("orderList", adminOrderSVC.getUserOrderListWithPaging(userid, subCri));
-		model.addAttribute("paging", new NoticePageDTO(subCri,totalCount));
 
 	}
 

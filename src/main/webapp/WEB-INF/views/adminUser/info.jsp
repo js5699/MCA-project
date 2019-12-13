@@ -67,7 +67,7 @@
 </div>
 
 <div class="row">
-	<table class="table">
+	<table class="table orderList">
 		<tr>
 			<th></th>
 			<th>주문번호</th>
@@ -77,46 +77,107 @@
 			<th>상태</th>
 			<th>상세보기</th>
 		</tr>
-		<c:choose>
-			<c:when test="${!empty orderList}">
-				<c:forEach var="order" items="${orderList}" varStatus="idx">
-					<tr>
-						<td>${idx.count}</td>
-						<td>${order.orderid}</td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${order.orderdate}" /></td>
-						<td><fmt:formatNumber value="${order.totalprice}" pattern="#,###" />원</td>
-						<td>${order.dtell}</td>
-						<td>
-							<c:choose>
-								<c:when test="${order.orderstatus == 'od01'}"><span>결제완료</span></c:when>
-								<c:when test="${order.orderstatus == 'od02'}"><span>배송대기</span></c:when>
-								<c:when test="${order.orderstatus == 'od03'}"><span>배송중</span></c:when>
-								<c:when test="${order.orderstatus == 'od04'}"><span>배송완료</span></c:when>
-								<c:when test="${order.orderstatus == 'od05'}"><span>결제취소</span></c:when>
-								<c:when test="${order.orderstatus == 'od06'}"><span>주문취소</span></c:when>
-								<c:when test="${order.orderstatus == 'od07'}"><span>교환신청</span></c:when>
-								<c:otherwise>-</c:otherwise>
-							</c:choose>
-						</td>
-						<td><a href="/adminOrder/userOrder-detail?orderid=${order.orderid}"><i class="fas fa-angle-double-right"></i></a></td>
-					</tr>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<tr>
-					<td colspan="7" class="text-center">
-						<p><em>주문 내역이 없습니다.</em></p>
-					</td>
-				</tr>
-			
-			</c:otherwise>
-		</c:choose>
+		
 	</table>
+	
+	<div class="orderListNav">
+	</div>
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/resources/js/order.js"></script>
+<script>
+	$(document).ready(function() {
+		
+		var useridValue = '<c:out value="${user.userid}"/>';
+		var orderTable = $(".orderList");
+		
+		showOrderList(1);
+		
+		function showOrderList(page) {
+			
+			console.log("show order List " + page);
+			
+			orderListService.getList({userid:useridValue, page: page || 1}, function(orderCnt, list) {
+				
+				console.log("orderCount : " + orderCnt);
+				console.log("list: " + list);
+				
+				if(page == -1) {
+					pageNum = Math.ceil(orderCnt/10.0);
+					showList(pageNum);
+					return;
+				}
+				
+				var str = "";
+				
+				if(list == null || list.length == 0) {
+					return;
+				}
+				
+				for (var i = 0, len = list.length || 0; i<len; i++) {
+					str += "<tr>";
+					str +=  "<td></td>";
+					str +=  "<td>"+list[i].orderid+"</td>";
+					str +=  "<td>"+orderListService.displayTime(list[i].orderdate)+"</td>";
+					str +=  "<td>"+list[i].totalprice.toLocaleString();+"원</td>";
+					str +=  "<td>"+list[i].dtell+"</td>";
+					str +=  "<td>"+list[i].orderstatus+"</td>";
+					str +=  "<td><a href="+list[i].orderid+" class='btn btn-sm'><i class='fas fa-search-plus'></i></a></td>";
+					str += "</tr>";
+				}
+				
+				orderTable.append(str);
+				showOrderListNavigation(orderCnt)
+			});
+		}
+	})
+</script>
+<script type="text/javascript">
+	var pageNum = 1;
+	var orderListPageFooter = $(".orderListNav");
+	
+	function showOrderListNavigation(orderCnt) {
+		var endNum = Math.ceil(pageNum/10.0) * 10;
+		var startNum = endNum - 9;
+		
+		var prev = startNum != 1;
+		var next = false;
+		
+		if( endNum * 10 >= orderCnt ) {
+			endNum = Math.ceil(orderCnt/10.0);
+		}
+		
+		if( endNum * 10 > orderCnt ) {
+			next = true;
+		}
+		
+		var str = "<ul class='pagination pull-right'>";
+		
+		if(prev) {
+			str += "<li class='page-item'><a class='page-link' href=''" + (startNum-1) + "'>Prev</a></li>";
+		}
+		
+		for(var i = startNum ; i <= endNum ; i++ ) {
+			
+			var active = pageNum == i? "active" : "";
+			
+			str += "<li class='page-item " + active + "'><a class='page-link' href='" + i + "'>" + i + "</a></li>";
+			
+		}
+		
+		if(next) {
+			str += "<li calss='page-itrm'><a class='page-link' href='" + (endNum+1) + "'>Next</a></li>";
+		}
+		
+		str += "</ul></div>";
+		
+		console.log(str);
+		
+		orderListPageFooter.html(str);
+	}
+</script>
+<%@ include file="../includes/footer.jsp"%>
 <script>
 	$(function () {
 	  $('[data-toggle="tooltip"]').tooltip()
 	})
 </script>
-<%@ include file="../includes/footer.jsp"%>

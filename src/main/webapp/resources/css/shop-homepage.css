@@ -91,7 +91,7 @@ p i { margin-right: 15px }
 
 
 /* admin - order */
-.orderList th {
+.orderList th, .orderList td{
 	vertical-align: middle;
 }
 .todayOrder {

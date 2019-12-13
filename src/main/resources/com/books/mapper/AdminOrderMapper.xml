@@ -21,42 +21,8 @@
 		]]>
 	</select>
 	
-	<!-- 유저 주문내역 리스트 -->
-	<select id="getUserOrderCount" resultType="int">
-		SELECT COUNT(orderid) FROM tbl_order WHERE userid = #{userid}
-	</select>
-	
-	<select id="getUserOrderListWithPaging" resultType="com.books.domain.OrderVO">
-		<![CDATA[
-			SELECT orderid, orderdate, totalprice, dtell, orderstatus
-			FROM (
-					SELECT rownum rn, orderid, orderdate, totalprice, dtell, orderstatus
-					FROM tbl_order
-					WHERE rownum <= #{pageNum} * #{amount}
-				)
-			WHERE rn > (#{pageNum} -1) * #{amount}
-		]]>
-	</select>
-	
-	<!-- 특정 주문내역 -->
 	<select id="getUserOrderDetail" resultType="com.books.domain.OrderVO">
 		SELECT * FROM tbl_order WHERE orderid = #{orderid}
-	</select>
-	
-	<select id="getUserOrderItemsCount" resultType="int">
-		SELECT COUNT(productid) FROM tbl_orderdetail WHERE orderid = #{orderid}
-	</select>
-	
-	<select id="getUserOrderItemsListWithPaging" resultType="com.books.domain.OrderDetailVO">
-		<![CDATA[
-			SELECT orderid, productid, ea, saleprice
-			FROM (
-					SELECT rownum rn, orderid, productid, ea, saleprice
-					FROM tbl_orderdetail
-					WHERE rownum <= #{pageNum} * #{amount}
-				)
-			WHERE rn > (#{pageNum} -1) * #{amount}
-		]]>
 	</select>
 
 </mapper>

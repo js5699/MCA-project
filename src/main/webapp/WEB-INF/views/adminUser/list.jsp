@@ -58,7 +58,7 @@
 					<td>${!empty user.orderid ? user.orderid : '-'}</td>
 					<td class="cell-justify-right">
 						<a href="${user.userid}" class="btn btn-outline-primary btn-sm" class="usermod"">정보수정</a>
-						<a href="${user.userid}" class="btn btn-outline-info btn-sm" class="userinfo">상세정보</a>
+						<a href="${user.userid}" class="btn btn-outline-info btn-sm" class="userinfos">상세정보</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -86,36 +86,24 @@
 		</ul>
 	</nav>
 	
-	<form id="actionForm" action="/adminUser/list" method="get">
+	<form id="actionForm" action="/admiUser/list" method="get">
 		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}">
 		<input type="hidden" name="amount" value="${paging.cri.amount}">
 	</form>
 	
-	<script>
-		function nullCheck() {
-			cf = document.criteriaForm;
-			if ( cf.keywword.value == "") {
-				alert("검색어를 입력해주세요.");
-				cf.keywword.focus();
-				return false;
-			} else {
-				return true;
-			}
-		}
-	</script>
-<%@ include file="../includes/footer.jsp"%>
-<script type = "text/javascript">
-	$(document).ready(function(e){
-		
+	<script type = "text/javascript">
+	$(document).ready(function() {
+
 		var actionForm = $("#actionForm");
-		
-		$(".userinfo").on("click", function(e) {
+
+		$(".userinfos").on("click", function(e) {
 			e.preventDefault();
 			actionForm.append("<input type='hidden' name='userid' value='"+ $(this).attr("href") + "'>");
 			actionForm.attr("action", "/adminUser/info");
 			actionForm.submit();
 		});
-
 	});
-	
-</script>
+	</script>
+
+
+<%@ include file="../includes/footer.jsp"%>

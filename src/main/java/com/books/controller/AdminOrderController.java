@@ -36,15 +36,11 @@ public class AdminOrderController {
 		
 	}
 
-	@GetMapping("/userOrder-detail")
+	@GetMapping("/orderDetail")
 	public void userOrder(@RequestParam("orderid") String orderid, Criteria cri, Model model) {
 
-		int totalCount = service.getUserOrderItemsCount(orderid, cri);
-		  
 		model.addAttribute("order", service.getUserOrderDetail(orderid));
-		//model.addAttribute("list", service.getUserOrderItemsListWithPaging(orderid,cri)); 
-		//model.addAttribute("paging", new NoticePageDTO(cri, totalCount));
-
+		
 	}
 
 
