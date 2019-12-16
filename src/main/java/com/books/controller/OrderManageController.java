@@ -37,7 +37,7 @@ public class OrderManageController {
 	@GetMapping(value="/orderDetail/{orderid}/{page}",
 				produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<OrderDetailPageDTO> getOrderDetailsList(@PathVariable("page") int page, @PathVariable("orderid") String orderid) {
-		log.info("user order detail.....");
+		log.info("user order detail..... : " +  orderid);
 		Criteria cri = new Criteria(page, 15);
 		return new ResponseEntity<>(service.getUserOrderItemsListPage(orderid, cri), HttpStatus.OK);
 	}

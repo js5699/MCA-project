@@ -37,7 +37,7 @@
 	</div>
 
 	<div class="row formContainer">
-		<p class="text-right" style="width:100%"><small>전체 ${total}건 · 10개씩 ${paging.cri.pageNum}/${paging.endPage}페이지</small></p>
+		<p class="text-right" style="width:100%"><small><i class="fas fa-list-ul"></i>전체 ${total}건 · 10개씩 ${paging.cri.pageNum}/${paging.endPage}페이지</small></p>
 		
 		<table class="table customerList orderList table-hover">
 			<tr>
@@ -56,9 +56,9 @@
 				<fmt:formatDate pattern="yyyyMMdd" value="${order.orderdate}" var="orderDate" />
 				<tr ${nowDate eq orderDate ? ' class="todayOrder"' : ''}>
 					<td>${s.count}</td>
-					<td>${order.userid}</td>
+					<td><a href="/adminUser/info?userid=${order.userid}" class="text-info">${order.userid}</a></td>
 					<td class="text-left">
-						${order.orderid}<br />
+						<span class="text-secondary">${order.orderid}</span><br />
 						<fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderdate}" />
 						<fmt:formatDate pattern="HH시 mm분 ss초" value="${order.orderdate}" />
 					</td>
@@ -66,17 +66,17 @@
 					<td><fmt:formatNumber value="${order.totalprice}" pattern="#,###" />원</td>
 					<td>
 						<c:choose>
-							<c:when test="${order.orderstatus == 'od01'}"><span>결제완료</span></c:when>
-							<c:when test="${order.orderstatus == 'od02'}"><span>배송대기</span></c:when>
-							<c:when test="${order.orderstatus == 'od03'}"><span>배송중</span></c:when>
-							<c:when test="${order.orderstatus == 'od04'}"><span>배송완료</span></c:when>
-							<c:when test="${order.orderstatus == 'od05'}"><span>결제취소</span></c:when>
-							<c:when test="${order.orderstatus == 'od06'}"><span>주문취소</span></c:when>
-							<c:when test="${order.orderstatus == 'od07'}"><span>교환신청</span></c:when>
+							<c:when test="${order.orderstatus == 'od01'}"><span class="text-primary">결제완료</span></c:when>
+							<c:when test="${order.orderstatus == 'od02'}"><span class="text-warning">배송대기</span></c:when>
+							<c:when test="${order.orderstatus == 'od03'}"><span class="text-success">배송중</span></c:when>
+							<c:when test="${order.orderstatus == 'od04'}"><span class="text-info">배송완료</span></c:when>
+							<c:when test="${order.orderstatus == 'od05'}"><span class="text-muted">결제취소</span></c:when>
+							<c:when test="${order.orderstatus == 'od06'}"><span class="text-muted">주문취소</span></c:when>
+							<c:when test="${order.orderstatus == 'od07'}"><span class="text-danger">교환신청</span></c:when>
 							<c:otherwise>-</c:otherwise>
 						</c:choose>
 					</td>
-					<td><a href="/adminOrder/userOrder-detail?orderid=${order.orderid}"><i class="fas fa-angle-double-right"></i></a></td>
+					<td><a href="/adminOrder/detail?orderid=${order.orderid}" class="text-dark"><i class="far fa-edit"></i></a></td>
 				</tr>
 			</c:forEach>
 		</table>

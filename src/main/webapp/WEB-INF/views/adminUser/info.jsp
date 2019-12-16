@@ -13,76 +13,58 @@
 	</div>
 </div>
 
+
 <div class="row formContainer-top">
 	<div class="col-lg-6">
-		<h5>회원 정보</h5>
+		<h5><i class="far fa-user"></i> 회원 정보</h5>
 	</div>
 	
 	<div class="col-lg-6 text-right">
 		<button type="button" class="btn btn-warning btn-sm" onclick="location.href='/adminUser/mod?userid=${user.userid}'">회원 정보 수정</button>
 	</div>
 </div>
+<table class="table">
+	<tr>
+		<td colspan="4"><i class="far fa-calendar-alt"></i> 회원가입일 : <fmt:formatDate pattern="yyyy년 MM월 dd일 오후 h시 mm분 ss초" value="${user.regdate}" /></td>
+	</tr>
+	<tr>
+		<th style="width:25%">아이디</th>
+		<td>${user.userid}</td>
+		<th>이름</th>
+		<td>${user.name}</td>
+	</tr>
+	<tr>
+		<th>전화번호</th>
+		<td>${user.phone}</td>
+		<th>이메일</th>
+		<td>${user.email}</td>
+	</tr>
+	<tr>
+		<th>주소</th>
+		<td colspan="3">(우)${user.zipcode}<br>${user.address1}<br>${user.address2}</td>
+	</tr>
+	<tr>
+		<th>
+			메모<i class="fas fa-question-circle text-info" data-toggle="tooltip" data-html="true" title="<small>관리자만 확인할 수 있으며<br>회원에게 노출되지 않습니다.</small>" ></i>
+		</th>
+		<td colspan="3">${!empty user.adminMemo ? user.adminMemo : "-"}</td>
+	</tr>
+</table>
 
-<div class="row">
-	<table class="table">
-		<tr>
-			<td colspan="2"><i class="far fa-calendar-alt"></i> 회원가입일 : <fmt:formatDate pattern="yyyy년 MM월 dd일 오후 h시 mm분 ss초" value="${user.regdate}" /></td>
-		</tr>
-		<tr>
-			<th style="width:25%">아이디</th>
-			<td>${user.userid}</td>
-		</tr>
-		<tr>
-			<th>이름</th>
-			<td>${user.name}</td>
-		</tr>
-		<tr>
-			<th>전화번호</th>
-			<td>${user.phone}</td>
-		</tr>
-		<tr>
-			<th>이메일</th>
-			<td>${user.email}</td>
-		</tr>
-		<tr>
-			<th>주소</th>
-			<td>(우)${user.zipcode}<br>${user.address1}<br>${user.address2}</td>
-		</tr>
-		<tr>
-			<th>
-				메모<i class="fas fa-question-circle" data-toggle="tooltip" data-html="true" title="<small>관리자만 확인할 수 있으며<br>회원에게 노출되지 않습니다.</small>"></i>
-			</th>
-			<td>${!empty user.adminMemo ? user.adminMemo : "-"}</td>
-		</tr>
-	</table>
-</div>
 
 <div class="row formContainer-top">
 	<div class="col-lg-6">
-		<h5>주문 내역<small>(최근-오래된 순)</small></h5>
-	</div>
-	<div class="col-lg-6 text-right">
-		<small><span class="badge badge-pill badge-info"><i class="fas fa-info"></i> </span>눌러서 주문 상태를 처리할 수 있습니다.</small>
+		<h5><i class="fas fa-clipboard-list"></i>주문 내역<small>(최근-오래된 순)</small></h5>
 	</div>
 </div>
+<table class="table orderList">
+</table>
 
-<div class="row">
-	<table class="table orderList">
-		<tr>
-			<th></th>
-			<th>주문번호</th>
-			<th>주문일</th>
-			<th>주문금액</th>
-			<th>연락처</th>
-			<th>상태</th>
-			<th>상세보기</th>
-		</tr>
-		
-	</table>
-	
-	<div class="orderListNav">
-	</div>
-</div>
+
+<nav aria-label="Page navigation" class="navigation">
+</nav>
+
+
 <script type="text/javascript" src="/resources/js/order.js"></script>
 <script>
 	$(document).ready(function() {
@@ -103,11 +85,11 @@
 				
 				if(page == -1) {
 					pageNum = Math.ceil(orderCnt/10.0);
-					showList(pageNum);
+					showOrderList(pageNum);
 					return;
 				}
 				
-				var str = "";
+				var str = "<tr><th></th><th>주문번호</th><th>주문일</th><th>주문금액</th><th>연락처</th><th>상태</th><th class='text-center'>상세보기</th></tr>";
 				
 				if(list == null || list.length == 0) {
 					return;
@@ -118,22 +100,35 @@
 					str +=  "<td></td>";
 					str +=  "<td>"+list[i].orderid+"</td>";
 					str +=  "<td>"+orderListService.displayTime(list[i].orderdate)+"</td>";
-					str +=  "<td>"+list[i].totalprice.toLocaleString();+"원</td>";
+					str +=  "<td>"+list[i].totalprice.toLocaleString()+"원</td>";
 					str +=  "<td>"+list[i].dtell+"</td>";
 					str +=  "<td>"+list[i].orderstatus+"</td>";
-					str +=  "<td><a href="+list[i].orderid+" class='btn btn-sm'><i class='fas fa-search-plus'></i></a></td>";
+					str +=  "<td class='text-center'><a href='/adminOrder/detail?orderid="+list[i].orderid+"' class='btn btn-sm'><i class='fas fa-search-plus text-primary'></i></a></td>";
 					str += "</tr>";
 				}
 				
-				orderTable.append(str);
+				orderTable.html(str);
 				showOrderListNavigation(orderCnt)
 			});
 		}
+		
+		orderListPageFooter.on("click", "li a", function(e) {
+			e.preventDefault();
+			console.log("page click");
+			
+			var targetPageNum = $(this).attr("href");
+			
+			console.log("targetPageNum : " + targetPageNum);
+			
+			pageNum = targetPageNum;
+			
+			showOrderList(pageNum);
+		});
 	})
 </script>
 <script type="text/javascript">
 	var pageNum = 1;
-	var orderListPageFooter = $(".orderListNav");
+	var orderListPageFooter = $(".navigation");
 	
 	function showOrderListNavigation(orderCnt) {
 		var endNum = Math.ceil(pageNum/10.0) * 10;
@@ -146,11 +141,11 @@
 			endNum = Math.ceil(orderCnt/10.0);
 		}
 		
-		if( endNum * 10 > orderCnt ) {
+		if( endNum * 10 < orderCnt ) {
 			next = true;
 		}
 		
-		var str = "<ul class='pagination pull-right'>";
+		var str = "<ul class='pagination justify-content-end'>";
 		
 		if(prev) {
 			str += "<li class='page-item'><a class='page-link' href=''" + (startNum-1) + "'>Prev</a></li>";
@@ -165,10 +160,10 @@
 		}
 		
 		if(next) {
-			str += "<li calss='page-itrm'><a class='page-link' href='" + (endNum+1) + "'>Next</a></li>";
+			str += "<li class='page-item'><a class='page-link' href='" + (endNum+1) + "'>Next</a></li>";
 		}
 		
-		str += "</ul></div>";
+		str += "</ul>";
 		
 		console.log(str);
 		

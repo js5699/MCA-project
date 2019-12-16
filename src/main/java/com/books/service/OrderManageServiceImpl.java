@@ -28,8 +28,8 @@ public class OrderManageServiceImpl implements OrderManageService {
 
 	@Override
 	public OrderDetailPageDTO getUserOrderItemsListPage(String orderid, Criteria cri) {
-		// TODO Auto-generated method stub
-		return new OrderDetailPageDTO(mapper.getUserOrderItemsCount(orderid, cri),
+		
+		return new OrderDetailPageDTO(mapper.getUserOrderItemsCount(orderid),
 				  					  mapper.getUserOrderItemsListWithPaging(orderid, cri));
 	}
 

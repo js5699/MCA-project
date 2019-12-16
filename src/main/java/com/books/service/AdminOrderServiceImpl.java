@@ -39,7 +39,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 
 	@Override
 	public OrderVO getUserOrderDetail(String orderid) {
-		log.warn("주문 정보 service : " + orderid);
+		log.info("주문 정보 service : " + orderid);
 		return mapper.getUserOrderDetail(orderid);
 	}
 

@@ -19,8 +19,10 @@
 		</div>
 	</c:if>
 
-	<form action="/adminUser/mod" method="post" class="form-horizontal" name="adminUserMod">
+	<form action="/adminUser/mod" method="post" class="form-horizontal">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<input type="hidden" name="pageNum" value="${cri.pageNum}"/>
+		<input type="hidden" name="amount" value="${cri.amount}"/>
 		
 		<div class="form-group row">
 		    <label for="inputuserid" class="col-sm-2 col-form-label">아이디</label>
@@ -112,16 +114,16 @@
 		
 		<div class="row formContainer btnBox">
 			<div class="col-sm-6">
-		    	<button type="button" class="btn btn-secondary" onclick="location.href='/adminUser/list'">목록</button>
-		    	<button type="button" class="btn btn-info" onclick="location.href='/adminUser/info?userid=${user.userid}'">회원 상세 내역</button>
+		    	<button type="submit" class="btn btn-secondary" data-oper="list">목록</button>
+		    	<button type="submit" class="btn btn-info" data-oper="info">회원정보</button>
 		    </div>
 		    <div class="col-sm-6 text-right">
-		    	<button type="submit" class="btn btn-primary">저장</button>
+		    	<button type="submit" class="btn btn-primary" data-oper="mod">저장</button>
 		    </div>
 		</div>
 
 	</form>
-	
+
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 		function execDaumPostcode() {
@@ -133,6 +135,51 @@
 		        }
 		    }).open();
 		}
+	</script>
+	<script>
+		$(document).ready(function() {
+			
+			var formObj = $("form");
+			
+			$("button").on("click", function(e) {
+				
+				var operation = $(this).data("oper");
+				
+				e.preventDefault();
+				console.log(operation);
+				
+				if (operation == 'list') {
+					
+					formObj.attr("action", "/adminUser/list").attr("method", "get");
+					
+					var pageNumTag = $("input[name='pageNum']").clone();
+					var amountTag = $("input[name='amount']").clone();
+					
+					formObj.empty();
+					formObj.append(pageNumTag);
+					formObj.append(amountTag);
+					
+				}else if(operation == 'info') {
+					
+					formObj.attr("action", "/adminUser/info").attr("method", "get");
+					var pageNumTag = $("input[name='pageNum']").clone();
+					var amountTag = $("input[name='amount']").clone();
+					var useridTag = $("input[name='userid']").clone();
+					
+					formObj.empty();
+					formObj.append(useridTag);
+					formObj.append(pageNumTag);
+					formObj.append(amountTag);
+					
+				}else if(operation == 'mod') {
+					
+				} 
+				
+				formObj.submit();
+				
+			});
+
+		});
 	</script>
 
 <%@ include file="../includes/footer.jsp"%>

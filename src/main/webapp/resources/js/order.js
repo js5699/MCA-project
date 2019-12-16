@@ -1,5 +1,30 @@
 console.log("order List Module....");
 
+var orderDetailService = (function() {
+	
+	
+	function getList(param, callback, error) {
+		var orderid = param.orderid;
+		var page = param.page || 1;
+		
+		$.getJSON("/userOrders/orderDetail/" + orderid + "/" + page + ".json",
+			function(data) {
+				if(callback) {
+					callback(data.itemsCnt, data.list);
+				}
+			}).fail(function(xhr, status, err) {
+				if(error) {
+					error();
+				}
+			}
+		);
+	}
+	
+	return {
+		getList: getList
+	};
+})();
+
 var orderListService = (function() {
 	
 	function getList(param, callback, error) {
@@ -18,7 +43,6 @@ var orderListService = (function() {
 				}
 			});
 	}
-
 	
 	function displayTime(timeValue) {
 		

@@ -11,7 +11,7 @@
 	<div class="row">
 		<div class="card col-lg-12">
 			<div class="card-body">
-				<p><i class="fas fa-search"></i>검색조건</p>
+				<p><i class="fas fa-search"></i>검색</p>
 				<form action="/adminUser/list" method="post" class="form-horizontal" name="criteriaForm">
 					<div class="form-group row">
 						<label for="inputuserid" class="col-sm-3">아이디 혹은 이름</label>
@@ -35,7 +35,7 @@
 	</div>
 	
 	<div class="row formContainer">
-		<p class="text-right" style="width:100%"><small>전체 ${total}건 · 10개씩 ${paging.cri.pageNum}/${paging.endPage}페이지</small></p>
+		<p class="text-right" style="width:100%"><small><i class="fas fa-list-ul"></i>전체 ${total}건 · 10개씩 ${paging.cri.pageNum}/${paging.endPage}페이지</small></p>
 		
 		<table class="table customerList table-hover">
 			<tr>
@@ -55,7 +55,12 @@
 					<td>${user.name}</td>
 					<td>${user.phone}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.regdate}" /></td>
-					<td>${!empty user.orderid ? user.orderid : '-'}</td>
+					<td>
+						<c:if test="${!empty user.orderid}">
+							<a href="/adminOrder/detail?orderid=${user.orderid}">${user.orderid}</a>
+						</c:if>
+						<c:if test="${empty user.orderid}">-</c:if>
+					</td>
 					<td class="cell-justify-right">
 						<a href="${user.userid}" class="btn btn-outline-primary btn-sm usermod">정보수정</a>
 						<a href="${user.userid}" class="btn btn-outline-info btn-sm userinfo">상세정보</a>
@@ -96,6 +101,13 @@
 
 		var actionForm = $("#actionForm");
 
+		$(".usermod").on("click", function(e) {
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='userid' value='"+ $(this).attr("href") + "'>");
+			actionForm.attr("action", "/adminUser/mod");
+			actionForm.submit();
+		});
+		
 		$(".userinfo").on("click", function(e) {
 			e.preventDefault();
 			actionForm.append("<input type='hidden' name='userid' value='"+ $(this).attr("href") + "'>");

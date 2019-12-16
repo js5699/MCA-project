@@ -48,7 +48,7 @@ public class AdminUserController { // 관리자 권한 추가
 	}
 
 	@GetMapping("/mod")
-	public void userModify(@RequestParam("userid") String userid, PhoneDTO phone, Model model) {
+	public void userModify(@RequestParam("userid") String userid, @ModelAttribute("cri") Criteria cri, PhoneDTO phone, Model model) {
 
 		UserVO user = accountSVC.get(userid);
 
@@ -59,7 +59,7 @@ public class AdminUserController { // 관리자 권한 추가
 	}
 
 	@PostMapping("/mod")
-	public String userModifyPost(@RequestParam("userid") String userid, UserVO user, PhoneDTO phone,
+	public String userModifyPost(@RequestParam("userid") String userid, @ModelAttribute("cri") Criteria cri, UserVO user, PhoneDTO phone,
 			RedirectAttributes rttr) {
 
 		user.setPhone(phone.phoneAppend(user));

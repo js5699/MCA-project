@@ -3,6 +3,7 @@ package com.books.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,8 +37,8 @@ public class AdminOrderController {
 		
 	}
 
-	@GetMapping("/orderDetail")
-	public void userOrder(@RequestParam("orderid") String orderid, Criteria cri, Model model) {
+	@GetMapping("/detail")
+	public void userOrder(@RequestParam("orderid") String orderid, @ModelAttribute("cri") Criteria cri, Model model) {
 
 		model.addAttribute("order", service.getUserOrderDetail(orderid));
 		

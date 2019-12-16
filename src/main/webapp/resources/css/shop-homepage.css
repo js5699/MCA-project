@@ -25,6 +25,9 @@ body {
 	padding: 20px 0;
 }
 
+h5 > i {
+	margin-right : 15px;
+}
 /* 
 .btnBox {
 	margin-left: -30px;
@@ -96,4 +99,14 @@ p i { margin-right: 15px }
 }
 .todayOrder {
 	background-color: #f6f5fa;
+}
+.order-row-group {
+	vertical-align: middle !important;
+}
+.book-title i {
+	font-size: x-small;
+}
+
+span.list-orderid {
+	font-weight: bolder;
 }
