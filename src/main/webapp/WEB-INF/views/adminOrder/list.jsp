@@ -2,117 +2,170 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../includes/header.jsp" %>
+<link rel="stylesheet" type="text/css" href="/resources/css/datepicker3.css" />
+<script type="text/javascript" src="/resources/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/resources/js/bootstrap-datepicker.kr.js"></script>
 
-	<c:set var="now" value="<%=new java.util.Date()%>" />
-	<c:set var="nowDate"><fmt:formatDate value="${now}" pattern="yyyyMMdd" /></c:set>
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="nowDate"><fmt:formatDate value="${now}" pattern="yyyyMMdd" /></c:set>
 
-	<div class="row formContainer">
-		<h5 class="pageSubtitle">관리자 <i class="fas fa-caret-right"></i> 주문 관리</h5>
-	</div>
-
-	<div class="row">
-		<div class="card col-lg-12">
-			<div class="card-body">
-				<p><i class="fas fa-search"></i>검색조건</p>
-				<form action="/adminUser/list" method="post" class="form-horizontal" name="criteriaForm">
-					<div class="form-group row">
-						<label for="inputuserid" class="col-sm-3">아이디 혹은 이름</label>
-						<div class="col-sm-3">
-							<select class="custom-select custom-select-sm" name="pkType">
-								<option value="N">이름</option>
-								<option value="I">아이디</option>
-							</select>
-						</div>
-						<div class="col-sm-4">
-							<input type="text" class="form-control form-control-sm" id="inputuserid" name="keywword" placeholder="keyword">
-						</div>
-						<div class="col-sm-2 text-right">
-					    	<button type="submit" class="btn btn-primary btn-sm" onclick="return nullCheck()">검색</button>
-					    </div>
+<div class="row formContainer">
+	<h5 class="pageSubtitle">관리자 <i class="fas fa-caret-right"></i> 주문 관리</h5>
+</div>
+s
+<div class="row">
+	<div class="card col-lg-12">
+		<div class="card-body">
+			<p><i class="fas fa-search"></i>검색조건</p>
+			<form action="/adminOrder/list" method="get" class="form-horizontal" name="searchForm">
+				<div class="form-group row">
+					<label for="inputuserid" class="col-sm-2">이름 OR 아이디</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control form-control-sm" id="inputkw-name" name="kw_name" placeholder="홍길동" value="">
 					</div>
-				</form>
-			</div>
+					
+					<label for="inputuserid" class="col-sm-2">주문 번호</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control form-control-sm" id="inputkw-orderid" name="kw_orderid" placeholder="20190725123">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputuserid" class="col-sm-2">주문 일자</label>
+					<div class="input-group col-sm-3 date">
+						<div class="input-group-prepend">
+							<div class="input-group-text ">
+								<i class="far fa-calendar-alt"></i>
+							</div>
+						</div>
+						<input type="text" class="form-control form-control-sm text-info" id="datepickerFrom" name="kw_date_from" placeholder="2019-01-01" data-date-end-date="0d">
+					</div>
+					<label for="inputuserid" class="col-sm-2 text-center">~</label>
+					<div class="input-group col-sm-3 date">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="far fa-calendar-alt"></i>
+							</div>
+						</div>
+						<input type="text" class="form-control form-control-sm text-info" id="datepickerTo" name="kw_date_to" placeholder="2019-01-31" data-date-end-date="0d">
+					</div>
+					<div class="col-sm-2 text-right">
+				    	<button class="btn btn-primary btn-sm">검색</button>
+				    </div>
+				</div>
+				
+			</form>
 		</div>
-
 	</div>
 
-	<div class="row formContainer">
-		<p class="text-right" style="width:100%"><small><i class="fas fa-list-ul"></i>전체 ${total}건 · 10개씩 ${paging.cri.pageNum}/${paging.endPage}페이지</small></p>
+</div>
+
+<div class="row formContainer">
+	<p class="text-right" style="width:100%"><small><i class="fas fa-list-ul"></i>전체 ${total}건 · 10개씩 ${pageMaker.cri.pageNum}/${pageMaker.endPage}페이지</small></p>
+	
+	<table class="table customerList orderList table-hover">
+		<tr>
+			<th></th>
+			<th>주문자</th>
+			<th>
+				주문 번호<br />
+				주문 시간
+			</th>
+			<th>상품명</th>
+			<th>주문 금액</th>
+			<th colspan="2">주문 상태</th>
+		</tr>
 		
-		<table class="table customerList orderList table-hover">
-			<tr>
-				<th></th>
-				<th>주문자</th>
-				<th>
-					주문 번호<br />
-					주문 시간
-				</th>
-				<th>상품명</th>
-				<th>주문 금액</th>
-				<th colspan="2">주문 상태</th>
+		<c:forEach var="order" items="${list}" varStatus="s">
+			<fmt:formatDate pattern="yyyyMMdd" value="${order.orderdate}" var="orderDate" />
+			<tr ${nowDate eq orderDate ? ' class="todayOrder"' : ''}>
+				<td>${s.count}</td>
+				<td><a href="/adminUser/info?userid=${order.userid}" class="text-info">${order.userid}</a></td>
+				<td class="text-left">
+					<span class="text-secondary">${order.orderid}</span><br />
+					<fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderdate}" />
+					<fmt:formatDate pattern="HH시 mm분 ss초" value="${order.orderdate}" />
+				</td>
+				<td class="text-left">${order.orderbook }</td>
+				<td><fmt:formatNumber value="${order.totalprice}" pattern="#,###" />원</td>
+				<td>
+					<c:choose>
+						<c:when test="${order.orderstatus == 'od01'}"><span class="text-primary">결제완료</span></c:when>
+						<c:when test="${order.orderstatus == 'od02'}"><span class="text-warning">배송대기</span></c:when>
+						<c:when test="${order.orderstatus == 'od03'}"><span class="text-success">배송중</span></c:when>
+						<c:when test="${order.orderstatus == 'od04'}"><span class="text-info">배송완료</span></c:when>
+						<c:when test="${order.orderstatus == 'od05'}"><span class="text-muted">결제취소</span></c:when>
+						<c:when test="${order.orderstatus == 'od06'}"><span class="text-muted">주문취소</span></c:when>
+						<c:when test="${order.orderstatus == 'od07'}"><span class="text-danger">교환신청</span></c:when>
+						<c:otherwise>-</c:otherwise>
+					</c:choose>
+				</td>
+				<td><a href="/adminOrder/detail?orderid=${order.orderid}" class="text-dark"><i class="far fa-edit"></i></a></td>
 			</tr>
-			
-			<c:forEach var="order" items="${list}" varStatus="s">
-				<fmt:formatDate pattern="yyyyMMdd" value="${order.orderdate}" var="orderDate" />
-				<tr ${nowDate eq orderDate ? ' class="todayOrder"' : ''}>
-					<td>${s.count}</td>
-					<td><a href="/adminUser/info?userid=${order.userid}" class="text-info">${order.userid}</a></td>
-					<td class="text-left">
-						<span class="text-secondary">${order.orderid}</span><br />
-						<fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderdate}" />
-						<fmt:formatDate pattern="HH시 mm분 ss초" value="${order.orderdate}" />
-					</td>
-					<td class="text-left">${order.orderbook }</td>
-					<td><fmt:formatNumber value="${order.totalprice}" pattern="#,###" />원</td>
-					<td>
-						<c:choose>
-							<c:when test="${order.orderstatus == 'od01'}"><span class="text-primary">결제완료</span></c:when>
-							<c:when test="${order.orderstatus == 'od02'}"><span class="text-warning">배송대기</span></c:when>
-							<c:when test="${order.orderstatus == 'od03'}"><span class="text-success">배송중</span></c:when>
-							<c:when test="${order.orderstatus == 'od04'}"><span class="text-info">배송완료</span></c:when>
-							<c:when test="${order.orderstatus == 'od05'}"><span class="text-muted">결제취소</span></c:when>
-							<c:when test="${order.orderstatus == 'od06'}"><span class="text-muted">주문취소</span></c:when>
-							<c:when test="${order.orderstatus == 'od07'}"><span class="text-danger">교환신청</span></c:when>
-							<c:otherwise>-</c:otherwise>
-						</c:choose>
-					</td>
-					<td><a href="/adminOrder/detail?orderid=${order.orderid}" class="text-dark"><i class="far fa-edit"></i></a></td>
-				</tr>
-			</c:forEach>
-		</table>
-	</div>
+		</c:forEach>
+	</table>
+</div>
+
+<nav aria-label="Page navigation">
+	<ul class="pagination justify-content-end">
+		<c:if test="${pageMaker.prev}">
+			<li class="page-item">
+				<a href="${pageMaker.startPage -1}" class="page-link">이전</a>
+			</li>
+		</c:if>
+		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+			<li class="page-item ${pageMaker.cri.pageNum == num ? 'active' : ''}">
+				<a href="${num}" class="page-link">${num}</a>
+			</li>
+		</c:forEach>
+		<c:if test="${pageMaker.next}">
+			<li class="paginate_button next">
+				<a class="page-link" href="${pageMaker.endPage + 1}">Next</a>
+			</li>
+		</c:if>
+		
+	</ul>
+</nav>
+<script type='text/javascript'>
+	$('#datepickerFrom').datepicker({
+		calendarWeeks: false,
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+        language: "kr"
+	 });
+	$('#datepickerTo').datepicker({
+		calendarWeeks: false,
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+        language: "kr"
+	 });
 	
-	<nav aria-label="Page navigation">
-		<ul class="pagination justify-content-end">
-			<c:if test="${paging.prev}">
-				<li class="page-item">
-					<a href="${paging.startPage -1}" class="page-link">이전</a>
-				</li>
-			</c:if>
-			<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
-				<li class="page-item ${paging.cri.pageNum == num ? 'active' : ''}">
-					<a href="${num}" class="page-link">${num}</a>
-				</li>
-			</c:forEach>
-			<c:if test="${paging.next}">
-				<li class="paginate_button next">
-					<a class="page-link" href="${paging.endPage + 1}">Next</a>
-				</li>
-			</c:if>
-			
-		</ul>
-	</nav>
+	var searchForm = $("#searchForm");
 	
-	<script>
-		function nullCheck() {
-			cf = document.criteriaForm;
-			if ( cf.keywword.value == "") {
-				alert("검색어를 입력해주세요.");
-				cf.keywword.focus();
-				return false;
-			} else {
-				return true;
-			}
+	$("#searchForm button").on("click", function(e) {
+		
+/* 		//selected 된것이 없을 때
+		if( !searchForm.find("option:selected").val() ){
+			alert("검색종류를 선택하세요.");
+			return false;
 		}
-	</script>
+		
+		//keyword 필드 null일때
+		if( !searchForm.find("input[name='keyword']").val() ){
+			alert("키워드를 입력하세요.");
+			return false;
+		}
+		 */
+		//검색결과는 1page로 이동
+		searchForm.find("input[name='pageNum']").val("1");
+		
+		e.preventDefault();
+		
+		searchForm.submit();
+		
+	});
+	
+</script>
+
 <%@ include file="../includes/footer.jsp"%>

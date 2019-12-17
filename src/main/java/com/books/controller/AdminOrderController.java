@@ -24,19 +24,23 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class AdminOrderController {
 	
+	
 	//권한처리 필요
 	private AdminOrderService service;
 
+	
 	@GetMapping("/list")
 	public void userOrderList(Criteria cri, Model model) {
+		log.warn("list" + cri);
 		
+		model.addAttribute("list", service.getLatestOrderListWithPaging(cri));
 		int totalCount = service.getHasOrderCount(cri);
 		model.addAttribute("total", totalCount);
-		model.addAttribute("list", service.getLatestOrderListWithPaging(cri));
-		model.addAttribute("paging", new NoticePageDTO(cri, totalCount));
+		model.addAttribute("pageMaker", new NoticePageDTO(cri, totalCount));
 		
 	}
 
+	
 	@GetMapping("/detail")
 	public void userOrder(@RequestParam("orderid") String orderid, @ModelAttribute("cri") Criteria cri, Model model) {
 

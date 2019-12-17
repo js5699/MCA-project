@@ -16,11 +16,11 @@
 
 <div class="row formContainer-top">
 	<div class="col-lg-6">
-		<h5><i class="far fa-user"></i> 회원 정보</h5>
+		<h5><i class="far fa-user"></i>회원 정보</h5>
 	</div>
 	
 	<div class="col-lg-6 text-right">
-		<button type="button" class="btn btn-warning btn-sm" onclick="location.href='/adminUser/mod?userid=${user.userid}'">회원 정보 수정</button>
+		<a href="/adminUser/mod?userid=${user.userid}" class="badge badge-warning"><i class="fas fa-user-cog"></i> 회원정보 수정</a>
 	</div>
 </div>
 <table class="table">
@@ -56,6 +56,9 @@
 	<div class="col-lg-6">
 		<h5><i class="fas fa-clipboard-list"></i>주문 내역<small>(최근-오래된 순)</small></h5>
 	</div>
+	<div class="col-lg-6 text-right">
+		<small class="totalCount"></small>
+	</div>
 </div>
 <table class="table orderList">
 </table>
@@ -71,7 +74,7 @@
 		
 		var useridValue = '<c:out value="${user.userid}"/>';
 		var orderTable = $(".orderList");
-		
+		var totalCountSpan = $(".totalCount");
 		showOrderList(1);
 		
 		function showOrderList(page) {
@@ -108,7 +111,8 @@
 				}
 				
 				orderTable.html(str);
-				showOrderListNavigation(orderCnt)
+				totalCountSpan.text("총 " + orderCnt + "건");
+				showOrderListNavigation(orderCnt);
 			});
 		}
 		

@@ -26,14 +26,16 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	@Override
 	public int getHasOrderCount(Criteria cri) {
 		int count = mapper.getHasOrderCount(cri);
-		log.info("주문이 있는 회원 수 " + count);
+		//log.warn("주문이 있는 회원 수 " + count);
+		log.warn(mapper.getHasOrderCount(cri));
 		return count;
 	}
 
 	@Override
 	public List<OrderVO> getLatestOrderListWithPaging(Criteria cri) {
 		List<OrderVO> list = mapper.getLatestOrderListWithPaging(cri);
-		log.info("주문 리스트 " + list);
+		//log.warn("주문 리스트 " + list);
+		log.warn(mapper.getLatestOrderListWithPaging(cri));
 		return list;
 	}
 
