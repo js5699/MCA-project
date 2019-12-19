@@ -11,7 +11,6 @@ public class OrderDetailVO {
 	private Long ea;
 	private Long saleprice;
 	
-	private String ptitle;
-	private Long price;
-	private Long salecnt;
+	private String ptitle;//조인해서 얻는 컬럼도 넣어주기
+	
 }

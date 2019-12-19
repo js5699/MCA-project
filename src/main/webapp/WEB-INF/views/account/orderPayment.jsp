@@ -20,26 +20,37 @@ th, td{
 <c:import url="../includes/header.jsp" />
 <div class="row">
 <h1 class="my-4">주문하기</h1><br>
-	<table class="table">
-		<tr>
-			<th>#</th>
-			<th>도서명</th>
-			<th>수량</th>
-			<th>가격</th>
-		</tr>
-		
-		<tr>
-			<td>1</td>
-			<td>엄마의 20년</td>
-			<td>2</td>
-			<td>28,000원</td>
-		</tr>
-		
-	</table>
-<div class="col-lg-12 text-right"><h4>총 수량 : 2권 &nbsp; 총 금액 : 28,000원</h4></div>
-<div class="col-lg-12"><h3 class="my-4">주문 정보 입력</h3></div>
-<div class="col-lg-12">
-	<form role="form" method="post"  class="form-horizontal " action="/account/orderPayment">
+	<form role="form" action="/account/orderPayment" method="post" style="width:100%">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type = "hidden" name = "orderbook" value = "<c:out value = '${order.orderbook}'/>">
+		<!-- <input type = "hidden" name = "userid" value = "<c:out value = '${order.userid}'/>"> -->
+		<table class="table">
+			<tr>
+				<th>도서명</th>
+				<th>구입 수량</th>
+				<th>개당 가격</th>
+				<th>합계</th>
+			</tr>
+			<c:set var="quantity" value="0" />
+			<c:set var="totalprice" value="0" />
+			<c:forEach items="${cartlist}" var="cartlist">
+			<tr>
+				<td>${cartlist.orderbook}</td>
+				<td>${cartlist.ea}</td>
+				<td>${cartlist.saleprice}</td>
+				<td><fmt:formatNumber pattern="###,###,###" value="${cartlist.saleprice * cartlist.ea}" />원</td>
+			</tr>
+			<c:set var="quantity" value="${quantity + cartlist.ea}" />
+			<c:set var="totalprice" value="${totalprice + (cartlist.saleprice * cartlist.ea)}" />
+			</c:forEach>
+		</table>
+		<div class="col-lg-12 text-right">
+			<h4>총 개수 : ${quantity}권 &nbsp;
+				총 금액 : <fmt:formatNumber pattern="###,###,###" value="${totalprice}" />원</h4>
+		</div>
+		<div class="col-lg-12"><h3 class="my-4">주문 정보 입력</h3></div>
+		<div class="col-lg-12">
+		<!-- <form role="form" method="post"  class="form-horizontal " action="/account/orderPayment"> -->
 		
 		<input type="hidden" name="userid" value="${order.userid}" />
 		
@@ -68,8 +79,8 @@ th, td{
 			<input class="form-control" style="width:60%" type="text" name="dMsg" />
 		</div>
 		
-	   <button type="submit" class="btn btn-primary">주문</button>
-	   <button type="reset" class="btn btn-default">취소</button> 
+	   <button type="submit" data-oper='payment' class="btn btn-primary">주문</button>
+	   <button type="reset" data-oper='cancel' class="btn btn-default">취소</button> 
 		
 	</form>
 
@@ -79,3 +90,32 @@ th, td{
 
 </div>
 <c:import url="../includes/footer.jsp"/>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	var formObj = $("form");
+	
+	$('button').on("click", function(e){
+		
+		e.preventDefault();
+		
+		var operation = $(this).data("oper");
+		
+		console.log(operation);
+		
+		if(operation === 'payment'){
+			formObj.attr("action", "/account/myOrderList").attr("method","get");
+			//var userid = $("input[name='userid']").clone();
+			var orderbook = $("td.first-child").text();
+			formObj.append(orderbook);
+			//formObj.append(userid);
+		}
+		
+		formObj.submit();
+	});
+	
+	
+});
+
+
+</script>

@@ -36,6 +36,7 @@ th, td{
 				<td><fmt:formatNumber pattern="###,###,###" value="${detail.saleprice}" />원</td>
 			</tr>
 			</c:forEach>
+			
 		</table>
 		<table class="table">
 			<tr>

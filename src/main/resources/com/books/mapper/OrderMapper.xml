@@ -37,16 +37,28 @@
 	select * from tbl_order where orderid = #{orderid}
 </select>
 
+
+
 <!-- 주문상세조회-책목록 -->
-<select id="orderDetailList" resultType="com.books.domain.OrderDetailVO">
-	select
-	    d.orderid, d.ea, d.saleprice, p.ptitle, p.price, p.salecnt 
-	from tbl_product p
-		inner join tbl_orderdetail d on p.productid = d.productid
-	where orderid = #{orderid}
+<resultMap type="com.books.domain.ProductVO" id="tbl_product">
+	<result column="productid" property="productid" />
+	<result column="ptitle" property="ptitle" />
+</resultMap>
+
+<resultMap type="com.books.domain.OrderDetailVO" id="tbl_orderdetail">
+	<result column="orderid" property="orderid" />
+	<result column="productid" property="productid" />
+	<result column="ea" property="ea" />
+	<result column="saleprice" property="saleprice" />
+</resultMap>
+
+<select id="orderDetailList" parameterType="String" resultMap="tbl_orderdetail">
+	select p.ptitle, d.orderid, d.ea, d.saleprice
+	from tbl_orderdetail d join tbl_product p on d.productid = p.productid
+	where d.orderid = #{orderid}
+
 </select>
- 
- 
+
 <!-- 주문수정 -->
 <update id="update">
 	update tbl_order
@@ -66,7 +78,6 @@
 	<selectKey keyProperty="oderid" order="BEFORE" resultType="String">
 		select seq_order.nextval from dual
 	</selectKey>
-	
 	insert into tbl_order (orderid, userid, orderdate, quantity, totalprice,
 	dname, dtell, dzipcode, daddress1, daddress2, dmsg, orderbook)
 	values (#{orderid}, #{userid}, sysdate, #{quantity}, #{totalprice},
@@ -77,8 +88,12 @@
 <!-- 회원주문-상세 -->
 
 <insert id="insertOrderDetail">
+	<selectKey keyProperty="oderid" order="BEFORE" resultType="String">
+		select seq_order.nextval from dual
+	</selectKey>
 	insert into tbl_orderdetail(orderid, productid, ea, saleprice)
-		select tbl_orderdetail
+		select #{orderid}, #{productid}, #{productstock}, #{saleprice}
+			from tbl_cart
 </insert>
 <!-- 
 <insert id="insert">

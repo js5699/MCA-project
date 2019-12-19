@@ -5,6 +5,7 @@ import java.util.List;
 import com.books.domain.Criteria;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
+import com.books.domain.ProductVO;
 
 public interface OrderMapper {
 	public List<OrderVO> getList(String userid);//주문목록

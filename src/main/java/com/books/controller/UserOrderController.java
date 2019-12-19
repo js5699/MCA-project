@@ -76,11 +76,12 @@ public class UserOrderController {
 		return "redirect:/account/myOrderList";
 	}
 	*/
-	@GetMapping({"/myOrderDetail","/myOrderMod"})//주문상세조회(수령자정보,책목록)+페이지번호유지
+	@GetMapping({"/myOrderDetail","/myOrderMod"})//주문상세조회(수령자정보,책목록,책제목)+페이지번호유지
 	public void get(@RequestParam("orderid") String orderid, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/myOrderDetail or myOrderMod");
 		
 		model.addAttribute("orderdetail", service.orderView(orderid));
+		//model.addAttribute("orderdetailtitle", service.orderViewTitle(orderid));
 		model.addAttribute("dNameinfo", service.get(orderid));
 		
 	}
