@@ -7,9 +7,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import com.books.domain.Criteria;
 import com.books.domain.OrderVO;
-import com.books.mapper.AdminOrderMapper;
+import com.books.domain.UserVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -22,10 +23,28 @@ public class AdminOrderMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private AdminOrderMapper mapper;
 	
+	@Setter(onMethod_ = @Autowired)
+	private AdminUserMapper usermapper;
+	
 	//@Test
-	public void testCount() {
+	public void testUserSearch() {
 		Criteria cri = new Criteria();
 		cri.setKw_name("testset");
+		cri.setKw_date_from("");
+		cri.setKw_date_to("");
+		//cri.setKw_date_from("2019-12-07");
+		//cri.setKw_date_to("2019-12-15");
+		
+		log.warn('\n'+usermapper.getTotalCount(cri));
+		
+		List<UserVO> list = usermapper.getList(cri);
+		list.forEach(userList -> log.warn(userList));
+	}
+	
+	@Test
+	public void testCount() {
+		Criteria cri = new Criteria();
+		cri.setKw_name("");
 		cri.setKw_date_from("");
 		cri.setKw_orderid("");
 		cri.setKw_date_to("");
@@ -33,11 +52,13 @@ public class AdminOrderMapperTests {
 	}
 	
 	
-	@Test
+	//@Test
 	public void testSearch() {
 		Criteria cri = new Criteria();
-		cri.setKw_date_from("2019-12-05");
-		cri.setKw_date_to("2019-12-07");
+		cri.setKw_name("testset");
+		cri.setKw_orderid("");
+		cri.setKw_date_from("2019-12-10");
+		cri.setKw_date_to("2019-12-15");
 		
 		log.warn(mapper.getHasOrderCount(cri));
 		

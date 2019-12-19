@@ -12,7 +12,7 @@
 <div class="row formContainer">
 	<h5 class="pageSubtitle">관리자 <i class="fas fa-caret-right"></i> 주문 관리</h5>
 </div>
-s
+
 <div class="row">
 	<div class="card col-lg-12">
 		<div class="card-body">
@@ -21,12 +21,12 @@ s
 				<div class="form-group row">
 					<label for="inputuserid" class="col-sm-2">이름 OR 아이디</label>
 					<div class="col-sm-3">
-						<input type="text" class="form-control form-control-sm" id="inputkw-name" name="kw_name" placeholder="홍길동" value="">
+						<input type="text" class="form-control form-control-sm" id="inputkw-name" name="kw_name" placeholder="홍길동" value="${pageMaker.cri.kw_name}">
 					</div>
 					
 					<label for="inputuserid" class="col-sm-2">주문 번호</label>
 					<div class="col-sm-3">
-						<input type="text" class="form-control form-control-sm" id="inputkw-orderid" name="kw_orderid" placeholder="20190725123">
+						<input type="text" class="form-control form-control-sm" id="inputkw-orderid" name="kw_orderid" placeholder="20190725123" value="${pageMaker.cri.kw_orderid}">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -37,7 +37,7 @@ s
 								<i class="far fa-calendar-alt"></i>
 							</div>
 						</div>
-						<input type="text" class="form-control form-control-sm text-info" id="datepickerFrom" name="kw_date_from" placeholder="2019-01-01" data-date-end-date="0d">
+						<input type="text" class="form-control form-control-sm text-info" id="datepickerFrom" name="kw_date_from" placeholder="2019-01-01" autocomplete="off" data-date-end-date="0d" value="${pageMaker.cri.kw_date_from}">
 					</div>
 					<label for="inputuserid" class="col-sm-2 text-center">~</label>
 					<div class="input-group col-sm-3 date">
@@ -46,13 +46,12 @@ s
 								<i class="far fa-calendar-alt"></i>
 							</div>
 						</div>
-						<input type="text" class="form-control form-control-sm text-info" id="datepickerTo" name="kw_date_to" placeholder="2019-01-31" data-date-end-date="0d">
+						<input type="text" class="form-control form-control-sm text-info" id="datepickerTo" name="kw_date_to" placeholder="2019-01-31" autocomplete="off" data-date-end-date="0d" value="${pageMaker.cri.kw_date_to}">
 					</div>
 					<div class="col-sm-2 text-right">
 				    	<button class="btn btn-primary btn-sm">검색</button>
 				    </div>
 				</div>
-				
 			</form>
 		</div>
 	</div>
@@ -60,8 +59,16 @@ s
 </div>
 
 <div class="row formContainer">
-	<p class="text-right" style="width:100%"><small><i class="fas fa-list-ul"></i>전체 ${total}건 · 10개씩 ${pageMaker.cri.pageNum}/${pageMaker.endPage}페이지</small></p>
-	
+	<div class="col-sm-6">
+		<c:if test="${!empty pageMaker.cri.kw_name}"><span class="badge badge-pill badge-info">${pageMaker.cri.kw_name}</span></c:if>
+		<c:if test="${!empty pageMaker.cri.kw_orderid}"><span class="badge badge-pill badge-info">${pageMaker.cri.kw_orderid}</span></c:if>
+		<c:if test="${!empty pageMaker.cri.kw_date_from}"><span class="badge badge-pill badge-info">${pageMaker.cri.kw_date_from} 부터</span></c:if>
+		<c:if test="${!empty pageMaker.cri.kw_date_to}"><span class="badge badge-pill badge-info">${pageMaker.cri.kw_date_to} 까지</span></c:if>
+    </div>
+    <div class="col-sm-6 text-right">
+    	<p><small><i class="fas fa-list-ul"></i>전체 <span class="text-primary">${total}</span>건 · 10개씩 ${pageMaker.cri.pageNum}/${pageMaker.endPage}페이지</small></p>
+    </div>
+
 	<table class="table customerList orderList table-hover">
 		<tr>
 			<th></th>

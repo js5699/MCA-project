@@ -5,7 +5,7 @@ import java.util.List;
 import com.books.domain.Criteria;
 import com.books.domain.UserVO;
 
-public interface UserMapper {
+public interface AdminUserMapper {
 
 	public List<UserVO> getList(Criteria cri);
 	

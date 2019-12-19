@@ -8,7 +8,7 @@ import com.books.domain.Criteria;
 import com.books.domain.UserVO;
 import com.books.mapper.AccountMapper;
 import com.books.mapper.AdminOrderMapper;
-import com.books.mapper.UserMapper;
+import com.books.mapper.AdminUserMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class AdminUserServiceImpl implements AdminUserService {
 	
-	private UserMapper userMapper;
+	private AdminUserMapper userMapper;
 	
 	private AccountMapper accountMapper;
 	

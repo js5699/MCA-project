@@ -36,7 +36,7 @@ public class AdminUserController { // 관리자 권한 추가
 		
 		model.addAttribute("list", adminUserSVC.getList(cri));
 		model.addAttribute("total", totalCount);
-		model.addAttribute("paging", new NoticePageDTO(cri,totalCount));
+		model.addAttribute("pageMaker", new NoticePageDTO(cri,totalCount));
 	}
 
 	// odermapper에 따른 수정필요 -- 
