@@ -32,14 +32,15 @@ public class AdminUserController { // 관리자 권한 추가
 
 	@GetMapping("/list")
 	public void userList(Criteria cri, Model model) {
-		int totalCount = adminUserSVC.getTotal(cri);
+		
 		
 		model.addAttribute("list", adminUserSVC.getList(cri));
+		int totalCount = adminUserSVC.getTotal(cri);
 		model.addAttribute("total", totalCount);
 		model.addAttribute("pageMaker", new NoticePageDTO(cri,totalCount));
 	}
 
-	// odermapper에 따른 수정필요 -- 
+	
 	@GetMapping("/info")
 	public void userInformation(@RequestParam("userid") String userid, @ModelAttribute("cri") Criteria cri, Model model) {
 		

@@ -55,8 +55,13 @@
 	</div>
 	
 	<div class="row formContainer">
-		<p class="text-right" style="width:100%"><small><i class="fas fa-list-ul"></i>전체 ${total}건 · 10개씩 ${pageMaker.cri.pageNum}/${pageMaker.endPage}페이지</small></p>
-		
+		<div class="col-sm-6">
+			<c:if test="${!empty pageMaker.cri.kw_name}"><span class="badge badge-pill badge-info">${pageMaker.cri.kw_name}</span></c:if>
+			<c:if test="${!empty pageMaker.cri.kw_date_from}"><span class="badge badge-pill badge-info">${pageMaker.cri.kw_date_from} ~ ${pageMaker.cri.kw_date_to}</span></c:if>
+	    </div>
+	    <div class="col-sm-6 text-right">
+	    	<p><small><i class="fas fa-list-ul"></i>전체 <span class="text-primary">${total}</span>건 · 10개씩 ${pageMaker.cri.pageNum}/${pageMaker.endPage}페이지</small></p>
+	    </div>
 		<table class="table customerList table-hover">
 			<tr>
 				<th></th>
@@ -113,7 +118,7 @@
 	<form action="/adminOrder/list" id="actionForm" method="get">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}"/>
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}"/>
-		<input type="hidden" name="kw_name" value="${pageMaker.cri.type}"/>
+		<input type="hidden" name="kw_name" value="${pageMaker.cri.kw_name}"/>
 		<input type="hidden" name="kw_date_from" value="${pageMaker.cri.kw_date_from}"/>
 		<input type="hidden" name="kw_date_to" value="${pageMaker.cri.kw_date_to}"/>
 	</form>

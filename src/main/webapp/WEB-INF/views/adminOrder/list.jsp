@@ -62,8 +62,7 @@
 	<div class="col-sm-6">
 		<c:if test="${!empty pageMaker.cri.kw_name}"><span class="badge badge-pill badge-info">${pageMaker.cri.kw_name}</span></c:if>
 		<c:if test="${!empty pageMaker.cri.kw_orderid}"><span class="badge badge-pill badge-info">${pageMaker.cri.kw_orderid}</span></c:if>
-		<c:if test="${!empty pageMaker.cri.kw_date_from}"><span class="badge badge-pill badge-info">${pageMaker.cri.kw_date_from} 부터</span></c:if>
-		<c:if test="${!empty pageMaker.cri.kw_date_to}"><span class="badge badge-pill badge-info">${pageMaker.cri.kw_date_to} 까지</span></c:if>
+		<c:if test="${!empty pageMaker.cri.kw_date_from}"><span class="badge badge-pill badge-info">${pageMaker.cri.kw_date_from} ~ ${pageMaker.cri.kw_date_to}</span></c:if>
     </div>
     <div class="col-sm-6 text-right">
     	<p><small><i class="fas fa-list-ul"></i>전체 <span class="text-primary">${total}</span>건 · 10개씩 ${pageMaker.cri.pageNum}/${pageMaker.endPage}페이지</small></p>

@@ -4,24 +4,20 @@
 
 	<!-- 전체 주문내역 -->
 
-	<sql id="criteria">
-		<trim prefix="(" suffix=") AND ">
-			<if test="kw_name != '' or kw_orderid != ''">
-				<trim prefix="(" suffix=") AND " >
-					u.name LIKE '%'||#{kw_name}||'%' OR o.userid LIKE '%'||#{kw_name}||'%' OR o.orderid LIKE '%'||#{kw_orderid}||'%'
-				</trim>
-				<if test="kw_date_from != '' and kw_date_to != '' ">
-					o.orderdate BETWEEN TO_DATE(#{kw_date_from},'YYYY-MM-DD') AND TO_DATE(#{kw_date_to}, 'YYYY-MM-DD')+0.99999
+	<sql id="criteria">	
+		<if test="kw_name != null or kw_orderid != null">
+			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+				<if test="kw_name != null and kw_name != ''">
+					OR u.name LIKE '%'||#{kw_name}||'%' OR o.userid LIKE '%'||#{kw_name}||'%'
 				</if>
-			</if>
-				
-			<if test="kw_name == '' and kw_orderid == ''">
-				<if test="kw_date_from != '' and kw_date_to != '' ">
-					o.orderdate BETWEEN TO_DATE(#{kw_date_from},'YYYY-MM-DD') AND TO_DATE(#{kw_date_to}, 'YYYY-MM-DD')+0.99999
+				<if test="kw_orderid != null and kw_orderid != ''">
+					OR o.orderid LIKE '%'||#{kw_orderid}||'%'
 				</if>
-			</if>
-		</trim>
-		
+			</trim>
+		</if>
+		<if test="kw_date_from != null and kw_date_to != null and kw_date_from != '' and kw_date_to != ''">
+			o.orderdate BETWEEN TO_DATE(#{kw_date_from},'YYYY-MM-DD') AND TO_DATE(#{kw_date_to}, 'YYYY-MM-DD')+0.99999 AND
+		</if>
 	</sql>
 	
 	<select id="getLatestOrderListWithPaging" resultType="com.books.domain.OrderVO">

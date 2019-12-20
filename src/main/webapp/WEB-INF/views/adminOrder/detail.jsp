@@ -20,10 +20,13 @@
 </div>
 <table class="table table-bordered">
 	<tr>
-		<th>주문번호</th>
-		<td>${order.orderid}</td>
-		<th>주문일</th>
-		<td class="text-right"><fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderdate}" /> · <fmt:formatDate pattern="HH시 mm분 ss초" value="${order.orderdate}" /></td>
+		<th class="order-row-group">주문번호</th>
+		<td class="order-row-group">${order.orderid}</td>
+		<th class="order-row-group">주문일</th>
+		<td class="text-right">
+			<i class="far fa-calendar-alt"></i> <fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderdate}" /><br />
+			<i class="far fa-clock"></i> <fmt:formatDate pattern="HH시 mm분 ss초" value="${order.orderdate}" />
+		</td>
 	</tr>
 	<tr>
 		<th>진행 상태</th>
@@ -62,7 +65,7 @@
 		<th>전화번호</th>
 		<td>${order.dtell}</td>
 		<th>배송메세지</th>
-		<td>${order.dmsg}</td>
+		<td>${!empty order.dmsg ? order.dmsg : '-'}</td>
 	</tr>
 </table>
 

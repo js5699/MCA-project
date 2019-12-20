@@ -41,7 +41,7 @@ public class AdminOrderMapperTests {
 		list.forEach(userList -> log.warn(userList));
 	}
 	
-	@Test
+	//@Test
 	public void testCount() {
 		Criteria cri = new Criteria();
 		cri.setKw_name("");
@@ -53,12 +53,27 @@ public class AdminOrderMapperTests {
 	
 	
 	//@Test
-	public void testSearch() {
+	public void testOrderSearch1() {
 		Criteria cri = new Criteria();
 		cri.setKw_name("testset");
-		cri.setKw_orderid("");
-		cri.setKw_date_from("2019-12-10");
+		cri.setKw_orderid(null);
+		cri.setKw_date_from("2019-12-01");
 		cri.setKw_date_to("2019-12-15");
+		
+		log.warn(mapper.getHasOrderCount(cri));
+		
+		List<OrderVO> list = mapper.getLatestOrderListWithPaging(cri);
+		
+		list.forEach(orderList -> log.warn(orderList));
+	}
+	
+	@Test
+	public void testOrderSearch2() {
+		Criteria cri = new Criteria();
+		cri.setKw_name("testset");
+		cri.setKw_orderid(null);
+		cri.setKw_date_from(null);
+		cri.setKw_date_to(null);
 		
 		log.warn(mapper.getHasOrderCount(cri));
 		
