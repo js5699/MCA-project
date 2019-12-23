@@ -9,8 +9,10 @@
 <c:set var="now" value="<%=new java.util.Date()%>" />
 <c:set var="nowDate"><fmt:formatDate value="${now}" pattern="yyyyMMdd" /></c:set>
 
+
+
 <div class="row formContainer">
-	<h5 class="pageSubtitle">관리자 <i class="fas fa-caret-right"></i> 주문 관리</h5>
+	<h5>관리자 <i class="fas fa-caret-right depth-arrow"></i> 주문 관리</h5>
 </div>
 
 <div class="row">
@@ -105,7 +107,7 @@
 						<c:otherwise>-</c:otherwise>
 					</c:choose>
 				</td>
-				<td><a href="/adminOrder/detail?orderid=${order.orderid}" class="text-dark"><i class="far fa-edit"></i></a></td>
+				<td><a href="${order.orderid}" class="text-dark order-info"><i class="far fa-edit"></i></a></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -131,6 +133,16 @@
 		
 	</ul>
 </nav>
+
+<form action="/adminOrder/list" id="actionForm" method="get">
+	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}"/>
+	<input type="hidden" name="amount" value="${pageMaker.cri.amount}"/>
+	<input type="hidden" name="kw_name" value="${pageMaker.cri.kw_name}"/>
+	<input type="hidden" name="kw_oderid" value="${pageMaker.cri.kw_orderid}"/>
+	<input type="hidden" name="kw_date_from" value="${pageMaker.cri.kw_date_from}"/>
+	<input type="hidden" name="kw_date_to" value="${pageMaker.cri.kw_date_to}"/>
+</form>
+
 <script type='text/javascript'>
 	$('#datepickerFrom').datepicker({
 		calendarWeeks: false,
@@ -172,6 +184,15 @@
 		
 	});
 	
+	
+	var actionForm = $("#actionForm");
+	
+	$(".order-info").on("click", function(e) {
+		e.preventDefault();
+		actionForm.append("<input type='hidden' name='orderid' value='"+ $(this).attr("href") + "'>");
+		actionForm.attr("action", "/adminOrder/detail");
+		actionForm.submit();
+	});
 </script>
 
 <%@ include file="../includes/footer.jsp"%>

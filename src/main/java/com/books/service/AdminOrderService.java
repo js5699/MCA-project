@@ -18,7 +18,7 @@ public interface AdminOrderService {
 	// 회원 개인 주문내역 
 	public OrderVO getUserOrderDetail(String orderid);
 	
-	// 회원 개인 주문 상세내역 수정
-	public boolean modUserOrder(OrderDetailVO orderDetail);
+	// 회원 개인 주문정보 수정
+	public boolean modUserOrder(OrderVO order);
 	
 }

@@ -4,18 +4,108 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../includes/header.jsp"%>
 
-<div class="row formContainer AdminMenuSubtitle">
+<div class="row formContainer">
 	<div class="col-lg-10">
-		<h5>관리자 <i class="fas fa-caret-right"></i> 주문 관리 <i class="fas fa-caret-right"></i> ${order.orderid}</h5>
+		<h5>관리자 <i class="fas fa-caret-right depth-arrow"></i> 주문 관리 <i class="fas fa-caret-right depth-arrow"></i> 주문번호 ${order.orderid}</h5>
 	</div>
 	<div class="col-lg-2 text-right">
-		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/adminOrder/list'">목록</button>
+		<button type="button" class="btn btn-primary btn-sm order-list" onclick="location.href='/adminOrder/list'">목록</button>
 	</div>
 </div>
 
-<div class="row formContainer-top">
+<c:if test="${result eq 'success'}">
+	<div class="alert alert-primary alert-dismissible fade show" role="alert">
+		주문 진행 상태가 정상적으로 변경되었습니다.
+		<button class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+</c:if>
+
+<div class="row">
 	<div class="col-lg-6">
 		<h5><i class="fas fa-receipt"></i>주문 정보</h5>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12 formContainer">
+		<c:if test="${order.orderstatus != 'od06' and order.orderstatus != 'od6' and order.orderstatus != 'od07'}">
+			<ul class="order-process">
+				<c:choose>
+					<c:when test="${order.orderstatus == 'od01'}">
+						<li class="step step-on">
+							<span class="step-name step-name-on">결제완료</span>
+						</li>
+						<li class="step step-off">
+							<span class="step-name step-name-off">배송대기</span>
+						</li>
+						<li class="step step-off">
+							<span class="step-name step-name-off">배송중</span>
+						</li>
+						<li class="step step-off">
+							<span class="step-name step-name-off">배송완료</span>
+						</li>
+					</c:when>
+					<c:when test="${order.orderstatus == 'od02'}">
+						<li class="step step-on">
+							<span class="step-name step-name-on">결제완료</span>
+						</li>
+						<li class="step step-on">
+							<span class="step-name step-name-on">배송대기</span>
+						</li>
+						<li class="step step-off">
+							<span class="step-name step-name-off">배송중</span>
+						</li>
+						<li class="step step-off">
+							<span class="step-name step-name-off">배송완료</span>
+						</li>				
+					</c:when>
+					<c:when test="${order.orderstatus == 'od03'}">
+						<li class="step step-on">
+							<span class="step-name step-name-on">결제완료</span>
+						</li>
+						<li class="step step-on">
+							<span class="step-name step-name-on">배송대기</span>
+						</li>
+						<li class="step step-on">
+							<span class="step-name step-name-on">배송중</span>
+						</li>
+						<li class="step step-off">
+							<span class="step-name step-name-off">배송완료</span>
+						</li>				
+					</c:when>
+					<c:when test="${order.orderstatus == 'od04'}">
+						<li class="step step-on">
+							<span class="step-name step-name-on">결제완료</span>
+						</li>
+						<li class="step step-on">
+							<span class="step-name step-name-on">배송대기</span>
+						</li>
+						<li class="step step-on">
+							<span class="step-name step-name-on">배송중</span>
+						</li>
+						<li class="step step-on">
+							<span class="step-name step-name-on">배송완료</span>
+						</li>					
+					</c:when>
+				</c:choose>
+			</ul>
+			
+		</c:if>
+		<c:if test="${order.orderstatus == 'od05' or order.orderstatus == 'od06' or order.orderstatus == 'od07'}">
+			<ul class="order-process">
+				<li class="step step-cancel-on">
+					<span class="step-name step-name-on"> 
+						<c:choose>
+							<c:when test="${order.orderstatus == 'od05'}">결제취소</c:when>
+							<c:when test="${order.orderstatus == 'od06'}">주문취소</c:when>
+							<c:when test="${order.orderstatus == 'od07'}">교환신청</c:when>
+						</c:choose>
+					</span>
+				</li>
+			</ul>
+		</c:if>
 	</div>
 </div>
 <table class="table table-bordered">
@@ -24,13 +114,18 @@
 		<td class="order-row-group">${order.orderid}</td>
 		<th class="order-row-group">주문일</th>
 		<td class="text-right">
-			<i class="far fa-calendar-alt"></i> <fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderdate}" /><br />
+			<i class="far fa-calendar-alt"></i> <fmt:formatDate pattern="yyyy-MM-dd" value="${order.orderdate}" />　
 			<i class="far fa-clock"></i> <fmt:formatDate pattern="HH시 mm분 ss초" value="${order.orderdate}" />
 		</td>
 	</tr>
 	<tr>
+		<th>주문 요약</th>
+		<td colspan="3">${order.orderbook}</td>
+		
+	</tr>
+	<tr>
 		<th>진행 상태</th>
-		<td colspan="3">
+		<td>
 			<c:choose>
 				<c:when test="${order.orderstatus == 'od01'}"><span>결제완료</span></c:when>
 				<c:when test="${order.orderstatus == 'od02'}"><span>배송대기</span></c:when>
@@ -42,14 +137,61 @@
 				<c:otherwise>-</c:otherwise>
 			</c:choose>
 		</td>
-	</tr>
-	<tr>
-		<th>주문 요약</th>
-		<td>${order.orderbook}</td>
 		<th>총 주문 금액</th>
 		<td class="text-right"><fmt:formatNumber value="${order.totalprice}" pattern="#,###" />원</td>
 	</tr>
 </table>
+
+<div class="col-lg-12 text-right">
+	<button class="btn btn-outline-primary btn-sm btn-order-mod" type="button" data-toggle="collapse" data-target="#order-modify" aria-expanded="false" aria-controls="order-modify">주문 진행 상태 변경 <i class="fas fa-angle-double-down"></i></button>
+</div>
+<div class="collapse" id="order-modify">
+	<div class="card card-body card-order-mod">
+		<form action="/adminOrder/detail" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input type="hidden" name="orderid" value="${order.orderid}"/>
+			<div class="form-row align-items-center">
+				<div class="custom-control custom-radio custom-control-inline">
+					<input type="radio" class="custom-control-input" id="orderstatus01" name="orderstatus" value="od01" ${order.orderstatus == 'od01' ? 'checked' : ''}> 
+					<label class="custom-control-label" for="orderstatus01">결제완료</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+					<input type="radio" class="custom-control-input" id="orderstatus02" name="orderstatus" value="od02" ${order.orderstatus == 'od02' ? 'checked' : ''}> 
+					<label class="custom-control-label" for="orderstatus02">배송대기</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+					<input type="radio" class="custom-control-input" id="orderstatus03" name="orderstatus" value="od03" ${order.orderstatus == 'od03' ? 'checked' : ''}> 
+					<label class="custom-control-label" for="orderstatus03">배송중</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+					<input type="radio" class="custom-control-input" id="orderstatus04" name="orderstatus" value="od04" ${order.orderstatus == 'od04' ? 'checked' : ''}> 
+					<label class="custom-control-label" for="orderstatus04">배송완료</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+					<input type="radio" class="custom-control-input" id="orderstatus05" name="orderstatus" value="od05" ${order.orderstatus == 'od05' ? 'checked' : ''}> 
+					<label class="custom-control-label" for="orderstatus05">결제취소</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+					<input type="radio" class="custom-control-input" id="orderstatus06" name="orderstatus" value="od06" ${order.orderstatus == 'od06' ? 'checked' : ''}> 
+					<label class="custom-control-label" for="orderstatus06">주문취소</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+					<input type="radio" class="custom-control-input" id="orderstatus07" name="orderstatus" value="od07" ${order.orderstatus == 'od07' ? 'checked' : ''}> 
+					<label class="custom-control-label" for="orderstatus07">교환신청</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<small class="form-text text-muted">선택 후 저장을 눌러야 반영됩니다.</small>
+				</div>
+				<div class="col-lg-6 text-right">
+					<button class="btn btn-warning btn-sm" type="submit">저장</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
 <table class="table table-bordered">
 	<tr>
 		<th style="width:20%">주문ID</th>
@@ -82,6 +224,14 @@
 <nav aria-label="Page navigation" class="navigation">
 </nav>
 
+<form action="/adminOrder/list" id="actionForm" method="get">
+	<input type="hidden" name="pageNum" value="${cri.pageNum}"/>
+	<input type="hidden" name="amount" value="${cri.amount}"/>
+	<input type="hidden" name="kw_name" value="${cri.kw_name}"/>
+	<input type="hidden" name="kw_oderid" value="${cri.kw_orderid}"/>
+	<input type="hidden" name="kw_date_from" value="${cri.kw_date_from}"/>
+	<input type="hidden" name="kw_date_to" value="${cri.kw_date_to}"/>
+</form>
 
 <script type="text/javascript" src="/resources/js/order.js"></script>
 <script>
@@ -188,5 +338,13 @@
 		
 		orderDetailPageFooter.html(str);
 	}
+	
+	var actionForm = $("#actionForm");
+	
+	$(".order-list").on("click", function(e) {
+		e.preventDefault();
+		actionForm.attr("action", "/adminOrder/list");
+		actionForm.submit();
+	});
 </script>
 <%@ include file="../includes/footer.jsp"%>

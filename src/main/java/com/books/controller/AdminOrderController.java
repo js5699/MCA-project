@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.books.domain.Criteria;
 import com.books.domain.NoticePageDTO;
@@ -49,9 +50,13 @@ public class AdminOrderController {
 	}
 
 
-	@PostMapping("/userOrder-detail")
-	public String userOrderDetailsModify(OrderVO order) {
-
-		return "";
+	@PostMapping("/detail")
+	public String userOrderDetailsModify(@RequestParam("orderid") String orderid, @ModelAttribute("cri") Criteria cri, OrderVO oder, RedirectAttributes rttr) {
+		
+		if(service.modUserOrder(oder)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		
+		return "redirect:/adminOrder/detail" + cri.getOrderListLink(orderid);
 	}
 }

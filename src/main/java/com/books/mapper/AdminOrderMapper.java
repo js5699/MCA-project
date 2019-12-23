@@ -24,6 +24,6 @@ public interface AdminOrderMapper {
 	public UserVO getUserInformation(String userid);
 	
 	// 회원 개인 주문 상세내역 수정
-	public int modifyUserOrder(OrderDetailVO orderDetail);
+	public int modifyUserOrder(OrderVO order);
 	
 }

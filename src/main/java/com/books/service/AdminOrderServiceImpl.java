@@ -46,9 +46,9 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	}
 
 	@Override
-	public boolean modUserOrder(OrderDetailVO orderDetail) {
-		
-		return mapper.modifyUserOrder(orderDetail) == 1;
+	public boolean modUserOrder(OrderVO order) {
+		// TODO Auto-generated method stub
+		return mapper.modifyUserOrder(order) == 1;
 	}
 
 }

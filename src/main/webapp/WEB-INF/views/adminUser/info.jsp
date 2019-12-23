@@ -6,13 +6,21 @@
 
 <div class="row formContainer AdminMenuSubtitle">
 	<div class="col-lg-10">
-		<h5>관리자 <i class="fas fa-caret-right"></i> 고객 관리 <i class="fas fa-caret-right"></i> ${user.userid}님의 회원 등록 정보</h5>
+		<h5>관리자 <i class="fas fa-caret-right depth-arrow"></i> 고객 관리 <i class="fas fa-caret-right depth-arrow"></i> ${user.userid}님의 회원 등록 정보</h5>
 	</div>
 	<div class="col-lg-2 text-right">
 		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/adminUser/list'">목록</button>
 	</div>
 </div>
 
+<c:if test="${result eq 'success'}">
+	<div class="alert alert-primary alert-dismissible fade show" role="alert">
+		회원 정보가 정상적으로 수정되었습니다.
+		<button class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+</c:if>
 
 <div class="row formContainer-top">
 	<div class="col-lg-6">

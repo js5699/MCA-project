@@ -44,5 +44,11 @@
 	<select id="getUserOrderDetail" resultType="com.books.domain.OrderVO">
 		SELECT * FROM tbl_order WHERE orderid = #{orderid}
 	</select>
+	
+	<update id="modifyUserOrder">
+		UPDATE tbl_order
+		SET orderstatus = #{orderstatus}
+		WHERE orderid = #{orderid}
+	</update>
 
 </mapper>

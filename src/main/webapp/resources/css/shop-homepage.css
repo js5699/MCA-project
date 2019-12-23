@@ -51,7 +51,9 @@ h5 > i {
 	margin-Right: -30px;
 	
 }
-
+i.depth-arrow {
+	padding-left: 15px;
+}
 /* board */
 .bd_title {
 	color: #aeaeae;
@@ -109,4 +111,55 @@ p i { margin-right: 15px }
 
 span.list-orderid {
 	font-weight: bolder;
+}
+
+.order-process  {
+	padding: 0;
+	width: 100%;
+	list-style: none;
+}
+
+.order-process li {
+	float: left;
+	width: 25%;
+	text-align: right;
+}
+
+.order-process li.step {
+	border-top: 15px solid #eeeeee;
+}
+
+.order-process li.step-on {
+	border-top: 15px solid #007bff;
+}
+
+.order-process li.step-off {
+	
+}
+
+.order-process li.step-cancel-on {
+	border-top: 15px solid #ffc107;
+	width: 100%;
+}
+
+.order-process li span.step-name {
+	color: #adb5bd;
+	font-size: smaller;
+}
+	
+.order-process li span.step-name-on {
+	color: #17a2b8;
+}
+
+.order-process li span.step-name-off {
+	color: #adb5bd;
+}
+
+.btn-order-mod {
+	margin-right: -15px;
+	margin-bottom: 15px;
+}
+
+.card-order-mod {
+	margin-bottom: 25px;
 }
