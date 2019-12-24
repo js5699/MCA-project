@@ -12,6 +12,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from tbl_cid
 </select>
 
+<select id="getList" resultType="com.books.domain.ProductVO">
+	<![CDATA[
+		select productId, pimg, pTitle, price, publisher, cId, author, pubDate from
+		(select /*+ INDEX_DESC(tbl_product pk_tbl_product) */
+		rownum rn, productId, pimg, pTitle, price, publisher, cId, author, pubDate
+		from tbl_product where
+		rownum <= #{pageNum} * #{amount})
+		where rn > (#{pageNum} -1) * #{amount}
+	]]>
+</select>
+
+<select id = "getTotalCount" resultType="int">
+	<![CDATA[
+		select count(*) from tbl_product where productId > 0
+	]]>
+</select>
+
 <insert id="insertSelectKey">
 	<selectKey keyProperty="productId" order="BEFORE" resultType="String">
 		select seq_product.nextval from dual
@@ -39,5 +56,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where productId = #{productId}
 	
 </update>
+
+<delete id = "delete">
+	delete from tbl_product where productId = #{productId}
+</delete>
 
 </mapper>

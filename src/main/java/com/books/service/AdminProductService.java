@@ -3,6 +3,7 @@ package com.books.service;
 import java.util.List;
 
 import com.books.domain.CidVO;
+import com.books.domain.Criteria;
 import com.books.domain.ProductVO;
 
 public interface AdminProductService {
@@ -16,4 +17,8 @@ public interface AdminProductService {
 	public boolean remove(String productId);
 	
 	public List<CidVO> getCid();
+	
+	public List<ProductVO> list(Criteria cri);
+	
+	public int getTotal(Criteria cri);
 }

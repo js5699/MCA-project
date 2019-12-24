@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.books.domain.AdminProductPageDTO;
+import com.books.domain.Criteria;
 import com.books.domain.ProductVO;
 import com.books.service.AdminProductService;
 
@@ -46,16 +48,16 @@ public class AdminProductController {
 		
 		APservice.register(PVO);
 		
-		rttr.addFlashAttribute("result", PVO.getProductId());
+		rttr.addFlashAttribute("result", "registerSuccess");
 		
-		return "redirect:/";
+		return "redirect:/adminProduct/list";
 	}
 	
 	@GetMapping("/display")
 	@ResponseBody
-	public ResponseEntity<byte[]> getFile(String fileName) {
+	public ResponseEntity<byte[]> getFile(String fileName,int cid) {
 		
-		File file = new File("C:\\img\\" + fileName);
+		File file = new File("C:\\img\\" + cid +"\\"+ fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -75,20 +77,34 @@ public class AdminProductController {
 	@GetMapping("modify")
 	public void get(@RequestParam("productId") String productId, Model model) {
 		model.addAttribute("product", APservice.get(productId));
+		model.addAttribute("cidList", APservice.getCid());
 	}
 	
 	//상품수정
 	@PostMapping("/modify")
 	public String modify(ProductVO PVO, RedirectAttributes rttr) {
 		if(APservice.modify(PVO)) {
-			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("result", "modifySuccess");
 		}
 		return "redirect:/";
 	}
 	
 	//상품삭제
 	@PostMapping("/remove")
-	public void remove() {
+	public String remove(@RequestParam("productId") String productId, RedirectAttributes rttr) {
+		if(APservice.remove(productId)) {
+			rttr.addFlashAttribute("result", "removeSuccess");
+		}
 		
+		return "redirect:/adminProduct/list";
+	}
+	
+	@GetMapping("/list")
+	public void list(Criteria cri, Model model) {
+		model.addAttribute("list", APservice.list(cri));
+		
+		int total = APservice.getTotal(cri);
+		
+		model.addAttribute("paging", new AdminProductPageDTO(cri, total));
 	}
 }

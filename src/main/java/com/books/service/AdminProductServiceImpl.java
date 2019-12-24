@@ -5,14 +5,15 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.books.domain.CidVO;
+import com.books.domain.Criteria;
 import com.books.domain.ProductVO;
 import com.books.mapper.ProductMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@Service
 @Log4j
+@Service
 @AllArgsConstructor
 public class AdminProductServiceImpl implements AdminProductService{
 
@@ -36,8 +37,7 @@ public class AdminProductServiceImpl implements AdminProductService{
 
 	@Override
 	public boolean remove(String productId) {
-		// TODO Auto-generated method stub
-		return false;
+		return Pmapper.delete(productId) == 1;
 	}
 
 	@Override
@@ -45,6 +45,13 @@ public class AdminProductServiceImpl implements AdminProductService{
 		return Pmapper.getCid();
 	}
 
-	
+	@Override
+	public List<ProductVO> list(Criteria cri) {
+		return Pmapper.getList(cri);
+	}
 
+	@Override
+	public int getTotal(Criteria cri) {
+		return Pmapper.getTotalCount(cri);
+	}
 }

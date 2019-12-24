@@ -20,11 +20,11 @@
 					<table style = "width : 100%">
 						<tr>
 							<td>
-								<div class="col-lg-6" id = "img">
-
+								<div class="col-lg-6">
+									<img id = "img" style = 'width:250px; height:auto' src = "">
 								</div>
 								<div class="col-lg-6">
-									<input type = "file" name="pimg">
+									<input type = "file" name="pimg" id = "inputFile">
 								</div>
 							</td>
 							<td>
@@ -89,8 +89,12 @@
 					<div class="form-group">
 						<label>상세정보</label> <textarea rows = "6" class="form-control" name="bkdesc"></textarea>
 					</div>
-					<button type="submit" class="btn btn-light">상품등록</button>
-					<button type="reset" class="btn btn-light">다시쓰기</button>
+					<div class="col-lg-12 formContainer btnBox">
+						<div class="d-flex justify-content-end">
+							<button type="submit" class="btn btn-light">상품등록</button>
+							<button type="reset" class="btn btn-light">다시쓰기</button>
+						</div>
+					</div>
 				</form>
 			</div>
 			<!-- end panel-body -->
@@ -105,16 +109,14 @@
 <script>
 $(document).ready(function() {
 	$("input[type='file']").change(function(){
-		var fullname = $("input[type='file']").val().split("\\");
-		var name = "";
-		for(var i in fullname){
-			name = fullname[i];
-		}
-		
-		$("#img").html("<img style = 'width:250px; height:auto' src = '/adminProduct/display?fileName=" + name + "'>");
-		
-		
-
+		var input = document.getElementById("inputFile");
+		var fReader = new FileReader();
+		fReader.readAsDataURL(input.files[0]);
+		fReader.onloadend = function(event){
+			var img = document.getElementById("img");
+			img.src = event.target.result;
+			}
 	});
+	
 });
 </script>

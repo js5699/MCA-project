@@ -1,33 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <%@ include file="../includes/header.jsp"%>
 
 
 <div class="row formContainer">
-	<h5>상품등록</h5>
+	<h5>상품수정</h5>
 </div>
 
 <div class="row formContainer">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<form role="form" action="/adminProduct/modify" method="post">
+				<form role="form" action="/adminProduct/modify" method="post" id = "modifyForm">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<input type="hidden" name = "productId" value = "${product.productId}"/>
-				<input type="hidden" name = "regdate" value = "${product.regdate}"/>
-				<input type="hidden" name = "salecnt" value = "${product.salecnt}"/>
 				<div class = "col-lg-12">
 					<table style = "width : 100%">
 						<tr>
 							<td>
-								<div class="col-lg-6" id = "img">
-									<img style = 'width:250px; height:auto' src = '/adminProduct/display?fileName=${product.pimg}'>
+								<div class="col-lg-6">
+									<img id = "img" style = 'width:250px; height:auto' src = '/adminProduct/display?fileName=${product.pimg}&cid=${product.cid}'>
 								</div>
 								<div class="col-lg-6">
-									<input type = "file" name="pimg" value = "${product.pimg}">
+									<input type = "file" name="pimg" value = "${product.pimg}" id="inputFile">
+									
 								</div>
 							</td>
 							<td>
@@ -59,7 +59,19 @@
 									<tr>
 										<td>
 											<div class="form-group">
-												<label>카테고리</label> <input class="form-control" name="cid" value = "${product.cid}">
+												<label>카테고리</label>
+												<select name = "cid" class="form-control">
+													<c:forEach items="${cidList}" var="list">
+														<c:choose>
+															<c:when test="${product.cid == list.cid}">
+																<option value = "${list.cid}" selected="selected">${list.cname}</option>
+															</c:when>
+															<c:otherwise>
+																<option value = "${list.cid}">${list.cname}</option>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+												</select>
 											</div>
 											<div class="form-group">
 												<label>책 크기</label> <input class="form-control" name="bksize" value = "${product.bksize}">
@@ -86,7 +98,8 @@
 					<div class="form-group">
 						<label>상세정보</label> <textarea rows = "6" class="form-control" name="bkdesc">${product.bkdesc}</textarea>
 					</div>
-					<button type="submit" class="btn btn-light">상품수정</button>
+					<button type="submit" class="btn btn-warning">상품수정</button>
+					<button type="submit" class="btn btn-danger" id = "remove">삭제</button>
 					<button type="reset" class="btn btn-light">다시쓰기</button>
 				</form>
 			</div>
@@ -101,14 +114,22 @@
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script>
 $(document).ready(function() {
-	$("input[type='file']").change(function(){
-		var fullname = $("input[type='file']").val().split("\\");
-		var name = "";
-		for(var i in fullname){
-			name = fullname[i];
-		}
-		$("#img").html("<img style = 'width:250px; height:auto' src = '/adminProduct/display?fileName=" + name + "'>");
-		
+	var formObj=$("#modifyForm");
+	$("#remove").on("click", function(e){
+		e.preventDefault();
+		formObj.attr("action", "/adminProduct/remove");
+		formObj.submit();
 	});
+	
+	$("input[type='file']").change(function(){
+		var input = document.getElementById("inputFile");
+		var fReader = new FileReader();
+		fReader.readAsDataURL(input.files[0]);
+		fReader.onloadend = function(event){
+			var img = document.getElementById("img");
+			img.src = event.target.result;
+			}
+	});
+	
 });
 </script>

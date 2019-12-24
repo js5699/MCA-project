@@ -1,6 +1,6 @@
 package com.books.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ public class ProductVO {
 	private String ptitle;
 	private int price;
 	private String publisher;
-	private String pubdate;
+	private Date pubdate;
 	private String author;
 	private String bksize;
 	private int bkpage;
