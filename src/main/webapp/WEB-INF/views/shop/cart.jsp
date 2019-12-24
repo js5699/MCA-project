@@ -63,8 +63,8 @@
 												<label class="custom-control-label" for="check${product.productid}">선택</label>
 											</div>
 										</th>
-										<th><a href="#"><img class="media-object"
-												src="<c:out value="${product.pimg}"/>"><c:out value="${product.ptitle}"/></a></th>
+										<th><a href="/shop/productDetail?pid=${product.productid}"><img class="media-object"
+												src="<c:out value="${product.pimg}"/>"><a href="/shop/productDetail?pid=${product.productid}"><c:out value="${product.ptitle}"/></a></th>
 										<th><c:out value="${product.price}"/>원</th>
 										<th><div class="input-group">
 												<button type="button" class="btn btn-primary plus" id="plus${product.cartNum}" data-cartNum="${product.cartNum}" >+</button>
