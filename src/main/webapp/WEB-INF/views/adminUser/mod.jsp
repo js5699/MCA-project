@@ -9,9 +9,9 @@
 	<h5>관리자 
 	<i class="fas fa-caret-right depth-arrow"></i> 고객 관리 
 	<i class="fas fa-caret-right depth-arrow"></i> ${user.userid}님의 회원 정보 수정
-	
 	</h5>
 </div>
+
 
 <c:if test="${result eq 'userModSuccess'}">
 	<div class="alert alert-success" role="alert">
@@ -25,15 +25,53 @@
 	<input type="hidden" name="pageNum" value="${cri.pageNum}"/>
 	<input type="hidden" name="amount" value="${cri.amount}"/>
 	<input type="hidden" name="kw_name" value="${cri.kw_name}"/>
-		<input type="hidden" name="kw_date_from" value="${cri.kw_date_from}"/>
-		<input type="hidden" name="kw_date_to" value="${cri.kw_date_to}"/>
+	<input type="hidden" name="kw_date_from" value="${cri.kw_date_from}"/>
+	<input type="hidden" name="kw_date_to" value="${cri.kw_date_to}"/>
 	
+	<div class="row formContainer">
+		<h5 class="col-lg-12"><i class="fas fa-user-lock"></i> 회원 권한</h5>
+	
+		<c:forEach items="${auth}" var="auth">
+			<c:if test="${auth.auth == 'ROLE_USER'}">
+				<c:set var="auth_user" value="${auth.auth}"/>
+			</c:if>
+			<c:if test="${auth.auth == 'ROLE_ADMIN'}">
+				<c:set var="auth_admin" value="${auth.auth}"/>
+			</c:if>
+		</c:forEach>
+		
+		<div class="col-lg-12 formContainer-top">
+			<div class="form-group row ">
+				<label for="inputAddress2" class="col-sm-2">회원권한 관리</label>
+				<div class="custom-control-mypage custom-checkbox col-sm-5">
+					<input type="checkbox" class="custom-control-input" id="auth_user" value="ROLE_USER" checked disabled>
+					<label class="custom-control-label" for="auth_user">일반회원</label>
+					<p><small class="text-muted">회원가입시 기본 회원권한이며 관리자에게도 부여됩니다.</small></p>
+				</div>
+			
+				<div class="custom-control-mypage custom-checkbox col-sm-5 ">
+					<input type="checkbox" class="custom-control-input" id="auth_admin" value="ROLE_ADMIN" ${!empty auth_admin ? 'checked disabled' : ''} >
+					<label class="custom-control-label" for="auth_admin">관리자</label>
+					<p><small class="text-muted">이 회원에게 관리자 권한이 추가됩니다.</small></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12 text-right">
+			<button class="btn btn-warning btn-sm">권한 업데이트</button>
+		</div>
+	</div>
+	
+	<div class="row">
+		<h5 class="col-lg-12"><i class="fas fa-user-edit"></i> 회원 등록 정보</h5>
+	</div>
 	<div class="form-group row">
 	    <label for="inputuserid" class="col-sm-2 col-form-label">아이디</label>
 	    <div class="col-sm-3">
 	    	<input type="text" readonly class="form-control-plaintext" id="inputuserid" name="userid-display" value="${user.userid}">
 	    </div>
 	</div>
+	
+	<hr />
 	
 	<div class="form-group row">
 	    <label for="inputname" class="col-sm-2 col-form-label">이름</label>
@@ -94,7 +132,7 @@
 	    	<input type="text" class="form-control" placeholder="우편번호" id="inputzipcode" name="zipcode" value="${user.zipcode}" >
 	    </div>
 	    <div class="col-sm-5">
-	    	<button type="button" class="btn btn-info" id="buttonFindZipcode" onClick="execDaumPostcode();">우편번호찾기</button>
+	    	<span class="btn btn-info" id="buttonFindZipcode" onClick="execDaumPostcode();">우편번호찾기</span>
 	    </div>
 	</div>
 	<div class="form-group row">
@@ -109,10 +147,15 @@
 	    	<input type="text" class="form-control" placeholder="상세주소 입력" name="address2" id="inputAddress2"  value="${user.address2}" />
 	    </div>
 	</div>
-	<div class="form-group row">
-	    <label for="inputAddress2" class="col-sm-2 col-form-label">관리자 메모</label>
+	
+	<div class="row formContainer-top formContainer">
+		<h5 class="col-lg-12"><i class="fas fa-user-edit"></i> 관리자 메모</h5>
+	</div>
+	<div class="form-group row ">
+	    <label for="inputAddress2" class="col-sm-2 col-form-label">메모</label>
 	    <div class="col-sm-10"> 
 	    	<textarea class="form-control" rows="4" name="adminMemo">${fn:replace(user.adminMemo, replaceChar, "\\n")}</textarea>
+	    	<small id="emailHelp" class="form-text text-muted">관리자 메모는 관리자만 확인할 수 있으며 회원에게는 공개되지않습니다.</small>
 	    </div>
 	</div>
 	
@@ -125,7 +168,9 @@
 	    	<button type="submit" class="btn btn-primary" data-oper="mod">저장</button>
 	    </div>
 	</div>
-
+	
+	
+	
 </form>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -147,31 +192,39 @@
 		
 		$("button").on("click", function(e) {
 			
+			e.preventDefault();
+			
 			var operation = $(this).data("oper");
 			
-			e.preventDefault();
 			console.log(operation);
 			
+			var useridTag = $("input[name='userid']").clone();
+			var pageNumTag = $("input[name='pageNum']").clone();
+			var amountTag = $("input[name='amount']").clone();
+			var kw_date_fromTag = $("input[name='kw_date_from']").clone();
+			var kw_date_toTag = $("input[name='kw_date_to']").clone();
+			var kw_nameTag = $("input[name='kw_name']").clone();
+			
 			if (operation == 'list') {
-				formObj.find("#userid").remove();
+				
 				formObj.attr("action", "/adminUser/list").attr("method", "get");
 				formObj.empty();
-				formObj.append(pageNumTag);
-				formObj.append(amountTag);
 				
 			}else if(operation == 'info') {
 				
 				formObj.attr("action", "/adminUser/info").attr("method", "get");
-				var pageNumTag = $("input[name='pageNum']").clone();
-				var amountTag = $("input[name='amount']").clone();
-				var useridTag = $("input[name='userid']").clone();
-				
 				formObj.empty();
 				formObj.append(useridTag);
-				formObj.append(pageNumTag);
-				formObj.append(amountTag);
 				
+			}else if(operation == 'mod') {
+				formObj.submit();
 			}
+			
+			formObj.append(pageNumTag);
+			formObj.append(amountTag);
+			formObj.append(kw_date_fromTag);
+			formObj.append(kw_date_toTag);
+			formObj.append(kw_nameTag);
 			
 			formObj.submit();
 			

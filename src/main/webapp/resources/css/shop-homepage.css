@@ -4,8 +4,8 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
 body {
-  padding-top: 56px;
-  font-size: 0.9em;
+	padding-top: 56px;
+	font-size: 0.9em;
 }
 
 .formContainer {
@@ -25,15 +25,14 @@ body {
 	padding: 20px 0;
 }
 
-h5 > i {
-	margin-right : 15px;
+h5>i {
+	margin-right: 15px;
 }
 /* 
 .btnBox {
 	margin-left: -30px;
 	margin-Right: -30px;
 } */
-
 .sidevarName {
 	padding-top: 25px;
 	padding-bttom: 10x;
@@ -49,11 +48,24 @@ h5 > i {
 .AdminMenuSubtitle {
 	margin-left: -30px;
 	margin-Right: -30px;
-	
 }
+
 i.depth-arrow {
 	padding-left: 15px;
 }
+
+
+/*mypage*/
+
+.custom-control-mypage {
+	position: relative;
+	display: block;
+    min-height: 1.5rem;
+    padding-left: 2.5rem;
+}
+
+
+
 /* board */
 .bd_title {
 	color: #aeaeae;
@@ -61,7 +73,9 @@ i.depth-arrow {
 	border-bottom: 1px solid #dee2e6;
 }
 
-p i { margin-right: 15px }
+p i {
+	margin-right: 15px
+}
 
 .bd_container {
 	border-bottom: 1px solid #dee2e6;
@@ -70,19 +84,19 @@ p i { margin-right: 15px }
 
 .bd_information {
 	font-size: 0.8em;
-    color: #adb5bd;
+	color: #adb5bd;
 }
 
 .btnBox button {
 	margin-right: 15px;
 }
+
 .btnBox button:last-child {
 	margin-right: 0;
 }
 
-
 /* admin - user */
-.customerList th, .customerList td{
+.customerList th, .customerList td {
 	text-align: center;
 }
 
@@ -94,17 +108,19 @@ p i { margin-right: 15px }
 	vertical-align: middle;
 }
 
-
 /* admin - order */
-.orderList th, .orderList td{
+.orderList th, .orderList td {
 	vertical-align: middle;
 }
+
 .todayOrder {
 	background-color: #f6f5fa;
 }
+
 .order-row-group {
 	vertical-align: middle !important;
 }
+
 .book-title i {
 	font-size: x-small;
 }
@@ -113,7 +129,7 @@ span.list-orderid {
 	font-weight: bolder;
 }
 
-.order-process  {
+.order-process {
 	padding: 0;
 	width: 100%;
 	list-style: none;
@@ -146,7 +162,7 @@ span.list-orderid {
 	color: #adb5bd;
 	font-size: smaller;
 }
-	
+
 .order-process li span.step-name-on {
 	color: #17a2b8;
 }

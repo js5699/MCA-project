@@ -2,6 +2,7 @@ package com.books.service;
 
 import java.util.List;
 
+import com.books.domain.AuthVO;
 import com.books.domain.Criteria;
 import com.books.domain.UserVO;
 
@@ -12,6 +13,8 @@ public interface AdminUserService {
 	public void register(UserVO user);
 	
 	public UserVO get(String userid);
+	
+	public List<AuthVO> getAuth(String userid);
 	
 	public boolean modify(UserVO user);
 	

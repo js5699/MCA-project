@@ -4,12 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../includes/header.jsp"%>
 
-<div class="row formContainer AdminMenuSubtitle">
+<div class="row formContainer">
 	<div class="col-lg-10">
 		<h5>관리자 <i class="fas fa-caret-right depth-arrow"></i> 고객 관리 <i class="fas fa-caret-right depth-arrow"></i> ${user.userid}님의 회원 등록 정보</h5>
 	</div>
 	<div class="col-lg-2 text-right">
-		<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/adminUser/list'">목록</button>
+		<button class="btn btn-primary btn-sm" data-oper="list">목록</button>
 	</div>
 </div>
 
@@ -28,7 +28,7 @@
 	</div>
 	
 	<div class="col-lg-6 text-right">
-		<a href="/adminUser/mod?userid=${user.userid}" class="badge badge-warning"><i class="fas fa-user-cog"></i> 회원정보 수정</a>
+		<button class="btn badge badge-primary" data-oper="modify"><i class="fas fa-user-cog"></i> 회원정보 수정</button>
 	</div>
 </div>
 <table class="table">
@@ -75,14 +75,39 @@
 <nav aria-label="Page navigation" class="navigation">
 </nav>
 
+<form action="/adminOrder/mod" id="operForm" method="get">
+	<input type="hidden" name="userid" id="userid" value="${user.userid}"/>
+	<input type="hidden" name="pageNum" value="${cri.pageNum}"/>
+	<input type="hidden" name="amount" value="${cri.amount}"/>
+	<input type="hidden" name="kw_name" value="${cri.kw_name}"/>
+	<input type="hidden" name="kw_date_from" value="${cri.kw_date_from}"/>
+	<input type="hidden" name="kw_date_to" value="${cri.kw_date_to}"/>
+</form>
 
 <script type="text/javascript" src="/resources/js/order.js"></script>
 <script>
 	$(document).ready(function() {
 		
+		$('[data-toggle="tooltip"]').tooltip()
+		
+		
+		var operForm = $("#operForm");
+		
+		$("button[data-oper='modify']").on("click", function(e){
+			operForm.attr("action","/adminUser/mod").submit();
+		});
+		
+		$("button[data-oper='list']").on("click", function(e) {
+			operForm.find("#userid").remove();
+			operForm.attr("action", "/adminUser/list");
+			operForm.submit();
+		});
+		
+		
 		var useridValue = '<c:out value="${user.userid}"/>';
 		var orderTable = $(".orderList");
 		var totalCountSpan = $(".totalCount");
+		
 		showOrderList(1);
 		
 		function showOrderList(page) {
@@ -136,8 +161,9 @@
 			
 			showOrderList(pageNum);
 		});
-	})
+	});
 </script>
+	
 <script type="text/javascript">
 	var pageNum = 1;
 	var orderListPageFooter = $(".navigation");
@@ -183,8 +209,3 @@
 	}
 </script>
 <%@ include file="../includes/footer.jsp"%>
-<script>
-	$(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
-	})
-</script>

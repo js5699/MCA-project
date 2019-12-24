@@ -31,7 +31,7 @@
 <div class="row">
 	<div class="col-lg-12 formContainer">
 		<c:if test="${order.orderstatus != 'od06' and order.orderstatus != 'od6' and order.orderstatus != 'od07'}">
-			<ul class="order-process">
+			<ul class="order-process rounded">
 				<c:choose>
 					<c:when test="${order.orderstatus == 'od01'}">
 						<li class="step step-on">
@@ -167,6 +167,9 @@
 					<input type="radio" class="custom-control-input" id="orderstatus04" name="orderstatus" value="od04" ${order.orderstatus == 'od04' ? 'checked' : ''}> 
 					<label class="custom-control-label" for="orderstatus04">배송완료</label>
 				</div>
+			</div>
+			<hr />
+			<div class="form-row align-items-center">
 				<div class="custom-control custom-radio custom-control-inline">
 					<input type="radio" class="custom-control-input" id="orderstatus05" name="orderstatus" value="od05" ${order.orderstatus == 'od05' ? 'checked' : ''}> 
 					<label class="custom-control-label" for="orderstatus05">결제취소</label>
@@ -180,11 +183,12 @@
 					<label class="custom-control-label" for="orderstatus07">교환신청</label>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-6">
-					<small class="form-text text-muted">선택 후 저장을 눌러야 반영됩니다.</small>
+			<hr />
+			<div class="row ">
+				<div class="col-lg-6 align-middle">
+					 <small class="form-text text-muted"><i class="fas fa-exclamation-circle"></i> 선택 후 저장을 눌러야 반영됩니다.</small>
 				</div>
-				<div class="col-lg-6 text-right">
+				<div class="col-lg-6 align-middle text-right">
 					<button class="btn btn-warning btn-sm" type="submit">저장</button>
 				</div>
 			</div>
@@ -257,7 +261,7 @@
 					return;
 				}
 				
-				str = "<tr><th colspan='2' style='width:70%'>상품명</th><th style='width:10%'>수량</th><th class='text-right' style='width:20%'>금액</th></tr>";
+				str = "<tr><th colspan='2' style='width:70%'>상품명</th><th style='width:10%' class='text-center'>수량</th><th class='text-right' style='width:20%'>금액</th></tr>";
 				
 				if(list == null || list.length == 0) {
 					return;
@@ -267,7 +271,7 @@
 					
 					str += "<tr>";
 					str +=  "<td colspan='2'><a href='"+list[i].productid+"'><span class='book-title text-body'>" + list[i].ptitle + " <i class='fas fa-external-link-alt'></span></i></a></td>";
-					str +=  "<td>" + list[i].ea + "</td>";
+					str +=  "<td class='text-center'>" + list[i].ea + "</td>";
 					str +=  "<td class='text-right'>" + list[i].saleprice.toLocaleString() + "원</td>";
 					str += "</tr>";
 				}

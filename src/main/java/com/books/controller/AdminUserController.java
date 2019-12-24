@@ -16,6 +16,7 @@ import com.books.domain.UserVO;
 import com.books.service.AccountService;
 import com.books.service.AdminOrderService;
 import com.books.service.AdminUserService;
+import com.books.security.CustomUserDetailsService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -29,7 +30,7 @@ public class AdminUserController { // 관리자 권한 추가
 	private AccountService accountSVC;
 
 	private AdminUserService adminUserSVC;
-
+	
 	@GetMapping("/list")
 	public void userList(Criteria cri, Model model) {
 		
@@ -39,7 +40,6 @@ public class AdminUserController { // 관리자 권한 추가
 		model.addAttribute("total", totalCount);
 		model.addAttribute("pageMaker", new NoticePageDTO(cri,totalCount));
 	}
-
 	
 	@GetMapping("/info")
 	public void userInformation(@RequestParam("userid") String userid, @ModelAttribute("cri") Criteria cri, Model model) {
@@ -54,8 +54,9 @@ public class AdminUserController { // 관리자 권한 추가
 		UserVO user = accountSVC.get(userid);
 
 		phone.phoneSplit(user);
-
+		
 		model.addAttribute("user", user);
+		model.addAttribute("auth", adminUserSVC.getAuth(userid));
 
 	}
 
@@ -69,8 +70,8 @@ public class AdminUserController { // 관리자 권한 추가
 
 		rttr.addFlashAttribute("result", "userModSuccess");
 
-		return "redirect:/adminUser/mod?userid=" + userid;
-
+		return "redirect:/adminUser/mod" + cri.getUserListLink(userid);
+		
 	}
 
 }

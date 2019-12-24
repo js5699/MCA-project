@@ -45,5 +45,15 @@ public class Criteria {
 		return builder.toUriString();
 	}
 	 
+	
+	public String getUserListLink(String userid) {
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+				.queryParam("userid", userid)
+				.queryParam("pageNum", this.getPageNum())
+				.queryParam("kw_name", this.getKw_name())
+				.queryParam("kw_date_from", this.getKw_date_from())
+				.queryParam("kw_date_to", this.getKw_date_to());
+		return builder.toUriString();
+	}
 
 }

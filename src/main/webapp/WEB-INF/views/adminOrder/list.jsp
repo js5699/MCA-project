@@ -73,7 +73,7 @@
 	<table class="table customerList orderList table-hover">
 		<tr>
 			<th></th>
-			<th>주문자</th>
+			<th>주문 ID</th>
 			<th>
 				주문 번호<br />
 				주문 시간

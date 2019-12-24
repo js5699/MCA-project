@@ -5,7 +5,7 @@
 <%@ include file="../includes/header.jsp"%>
 
 	
-<div class="col-md-12 formContainer">
+<div class="col-lg-12 formContainer">
 	<c:if test="${result eq 'pwModSuccess'}">
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
 			<strong>비밀번호 변경 완료</strong> 비밀번호가 변경 되었습니다. 로그인시 새로운 비밀번호를 입력하세요.
@@ -15,7 +15,7 @@
 		</div>
 	</c:if>
 
-	<h5>내 정보</h5>
+	<h5><i class="fas fa-user-circle"></i>내 정보</h5>
 
 	<table class="table">
 		<tr>
@@ -43,13 +43,17 @@
 
 	</table>
 	
-	<div class="col-md-12 text-right">
-		<button type="button" class="btn btn-primary" onclick="location.href='pwConfirm'">수정</button>
+	<div class="col-lg-12 text-right">
+		<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='pwConfirm'">내 정보 수정</button>
 	</div>
 
+	<hr />
 	
-	<div class="col-md-12 formContainer">
-		<h5>회원 탈퇴</h5>
+	<div class="col-lg-12 formContainer-top">
+		<h5><i class="fas fa-user-slash"></i>회원 탈퇴</h5>
+	</div>
+	<div class="col-lg-12 ">
+		<span>고객님의 거래내역은 전자상거래 등에서의 소비자보호에 관한 법률 제6조 및 동법 시행령 제 6조에 의거하여 표시 및 광고에 관한 기록은 6월, 계약 또는 청약 철회 등에 관한 기록은 5년, 대금결제 및 재화 공급 등의 공급에 관한 기록은 5년, 소비자 불만 또는 분쟁처리에 관한 기록은 3년간 기록됩니다.</span>
 	</div>
 		
 

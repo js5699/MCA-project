@@ -45,6 +45,12 @@
  		]]>  
 	</select>
 	
+	<select id="getAuth" resultType="com.books.domain.AuthVO">
+		SELECT * 
+		FROM tbl_user_auth
+		WHERE userid = #{userid}
+	</select>
+	
 	<update id="update">
 		UPDATE tbl_user
 		SET name  = #{name},

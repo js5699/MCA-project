@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.books.domain.AuthVO;
 import com.books.domain.Criteria;
 import com.books.domain.UserVO;
 import com.books.mapper.AccountMapper;
@@ -59,6 +60,12 @@ public class AdminUserServiceImpl implements AdminUserService {
 	public List<UserVO> getList(Criteria cri) {
 		log.info("admin-user-getList " + cri);
 		return userMapper.getList(cri);
+	}
+
+	@Override
+	public List<AuthVO> getAuth(String userid) {
+		log.info("admin-user-getAuthList " + userid);
+		return userMapper.getAuth(userid);
 	}
 
 }
