@@ -1,0 +1,48 @@
+/*!
+ * Start Bootstrap - Shop Homepage (https://startbootstrap.com/template-overviews/shop-homepage)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
+ */
+
+body {
+  padding-top: 56px;
+}
+
+/* a 태그 css */
+a { 
+	text-decoration:none; 
+}
+
+a hover{ 
+	text-decoration:none; 
+}
+
+.container > .row > .col-sm{
+	background-color: rgb(162,162,162);	
+} 
+
+.container > br{
+	background-color: rgb(162,162,162);
+}
+
+/* table css */
+
+
+/* media css */	
+.media-object{
+	width: 80px;
+	height: 120px;
+}
+
+
+/* media 쿼리 */
+@media screen and (max-width: 985px) {
+	.btn btn-danger{
+		width:10px; 		 
+	}
+
+	
+.btn btn-danger dropdown-toggle dropdown-toggle-split{
+		width:10px;  		 
+	}	
+}
