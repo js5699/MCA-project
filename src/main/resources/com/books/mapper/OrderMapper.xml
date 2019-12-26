@@ -82,7 +82,7 @@
 		#{dmsg}, #{orderbook})
 </insert>
 
-<!-- 회원주문-상세 -->
+<!-- 회원주문-상세(미완) -->
 
 <insert id="insertOrderDetail">
 	insert into tbl_orderdetail(orderid, productid, ea, saleprice)

@@ -46,7 +46,7 @@ th, td{
 			<c:set var="totalprice" value="${totalprice + (cartlist.price * cartlist.productstock)}" />
 			</c:forEach>
 		</table>
-		<!-- 첫번째 책제목 가져와서 넣기 -->
+		<!-- 첫번째 책제목 가져와서 넣기(미완) -->
 		<script>
 			function firstbook(){
 				var firstTitle = document.getElementsByTagName('td')[0].childNodes[0].nodeValue;

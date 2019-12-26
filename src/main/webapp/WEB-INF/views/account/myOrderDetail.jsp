@@ -106,7 +106,7 @@ th, td{
 			<input type='hidden' id='orderid' name='orderid' value='<c:out value="${dNameinfo.orderid}" />'>
 		</form>
 	
-	<!-- Modal 추가 -->
+	<!-- Modal 추가(미완) -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">

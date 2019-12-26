@@ -63,7 +63,7 @@ public class UserOrderController {
 		return "redirect:/account/myOrderList";
 	}
 	*/
-	@PostMapping("/orderPayment")//회원주문
+	@PostMapping("/orderPayment")//회원주문-미완
 	public String insertorder(HttpSession session, OrderVO order, OrderDetailVO orderDetail, RedirectAttributes rttr) {
 		log.info("orderPayment:" + order);
 		
