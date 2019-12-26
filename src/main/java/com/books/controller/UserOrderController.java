@@ -1,5 +1,7 @@
 package com.books.controller;
 
+import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -49,7 +51,7 @@ public class UserOrderController {
 	public void insertorder() {
 		log.info("회원주문페이지");
 	}
-	
+	/*
 	@PostMapping("/orderPayment")//회원주문
 	public String insertorder(OrderVO order, RedirectAttributes rttr) {
 		log.info("orderPayment:" + order);
@@ -60,22 +62,38 @@ public class UserOrderController {
 		
 		return "redirect:/account/myOrderList";
 	}
-	/*
+	*/
 	@PostMapping("/orderPayment")//회원주문
 	public String insertorder(HttpSession session, OrderVO order, OrderDetailVO orderDetail, RedirectAttributes rttr) {
 		log.info("orderPayment:" + order);
 		
 		UserVO user = (UserVO)session.getAttribute("user");
-		String userId = user.getUserid();
+		String userid = user.getUserid();
+		
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		String subNum = "";
+		 
+		for(int i = 1; i <= 6; i ++) {
+		 subNum += (int)(Math.random() * 10);
+		}
+		
+		String orderid = ymd + "_" + subNum;
+		
+		order.setOrderid(orderid);
+		order.setUserid(userid);
 		
 		service.insertorder(order);
+		orderDetail.setOrderid(orderid);
 		service.insertorderDetail(orderDetail);
 		
 		rttr.addFlashAttribute("result", order.getOrderid());
 		
 		return "redirect:/account/myOrderList";
 	}
-	*/
+	
 	@GetMapping({"/myOrderDetail","/myOrderMod"})//주문상세조회(수령자정보,책목록,책제목)+페이지번호유지
 	public void get(@RequestParam("orderid") String orderid, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/myOrderDetail or myOrderMod");

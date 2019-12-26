@@ -75,24 +75,18 @@
 <!-- 회원주문 -->
 
 <insert id="insertOrder">
-	<selectKey keyProperty="oderid" order="BEFORE" resultType="String">
-		select seq_order.nextval from dual
-	</selectKey>
 	insert into tbl_order (orderid, userid, orderdate, quantity, totalprice,
-	dname, dtell, dzipcode, daddress1, daddress2, dmsg, orderbook)
+		dname, dtell, dzipcode, daddress1, daddress2, dmsg, orderbook)
 	values (#{orderid}, #{userid}, sysdate, #{quantity}, #{totalprice},
-	#{dname}, #{dtell}, #{dzipcode}, #{daddress1}, #{daddress2}, #{daddress2},
-	#{dmsg}, #{orderbook})
+		#{dname}, #{dtell}, #{dzipcode}, #{daddress1}, #{daddress2}, #{daddress2},
+		#{dmsg}, #{orderbook})
 </insert>
 
 <!-- 회원주문-상세 -->
 
 <insert id="insertOrderDetail">
-	<selectKey keyProperty="oderid" order="BEFORE" resultType="String">
-		select seq_order.nextval from dual
-	</selectKey>
 	insert into tbl_orderdetail(orderid, productid, ea, saleprice)
-		select #{orderid}, #{productid}, #{productstock}, #{saleprice}
+		select #{orderid}, #{productid}, #{productstock}, #{price}
 			from tbl_cart
 </insert>
 <!-- 
