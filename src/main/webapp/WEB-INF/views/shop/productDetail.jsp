@@ -40,9 +40,9 @@
 											alt="<c:out value="${product.ptitle}"/>"
 											title="<c:out value="${product.ptitle}"/>의 사진"></th>
 										<th class="col-lg-1">
-											<h4>
+											<h3 id="cnt">
 												<c:out value="${product.ptitle}" />
-											</h4> <br> <br>
+											</h3> <br> <br>
 											<p>
 												저자:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
