@@ -24,4 +24,9 @@ public interface OrderMapper {
 	
 	public int update(OrderVO order);//주문수정
 	
+	// @admin Oder
+	public int getUserOderTotalCount(String userid, Criteria cri);
+
+	public List<OrderVO> getUserOderList(Criteria cri);
+
 }

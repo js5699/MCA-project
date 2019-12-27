@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-import oracle.jdbc.proxy.annotation.Pre;
+//import oracle.jdbc.proxy.annotation.Pre;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({

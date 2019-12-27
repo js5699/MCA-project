@@ -1,6 +1,7 @@
 package com.books.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -18,6 +19,8 @@ public class OrderVO {
 	private String daddress1;
 	private String daddress2;
 	private String dmsg;
-	private String orderstatus;
-	private String orderbook;
+	private String orderstatus;//배송상태 추가
+	private String orderbook;//주문도서명 추가
+	
+	private List<UserVO> userinfo;
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.books.mapper.OrderManageMapper">
+
+	<!-- 유저 주문내역 리스트 -->
+	<select id="getUserOrderCount" resultType="int">
+		SELECT COUNT(orderid) FROM tbl_order WHERE userid = #{userid}
+	</select>
+	
+	<select id="getUserOrderListWithPaging" resultType="com.books.domain.OrderVO">
+		<![CDATA[
+			SELECT orderid, orderdate, totalprice, dtell, orderstatus
+			FROM (
+					SELECT rownum rn, orderid, orderdate, totalprice, dtell, orderstatus
+					FROM tbl_order
+					WHERE userid=#{userid} AND rownum <= #{cri.pageNum} * #{cri.amount}
+				)
+			WHERE rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<!-- 주문내역 상세정보 리스트 -->
+	<select id="getUserOrderItemsCount" resultType="int">
+		SELECT COUNT(productid) FROM tbl_orderdetail WHERE orderid = #{orderid}
+	</select>
+	
+	<select id="getUserOrderItemsListWithPaging" resultType="com.books.domain.OrderDetailVO">
+		<![CDATA[
+			SELECT orderid, productid, ptitle, ea, saleprice
+			FROM (
+					SELECT rownum rn, orderid, p.productid, p.ptitle, ea, saleprice
+					FROM tbl_orderdetail o
+					INNER JOIN tbl_product p ON o.productid = p.productid
+					WHERE orderid = #{orderid} AND rownum <= #{cri.pageNum} * #{cri.amount}
+				)
+			WHERE rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
+	
+</mapper>

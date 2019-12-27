@@ -7,15 +7,20 @@
 		VALUES(#{userid}, #{userpw}, #{name}, #{phone}, #{email}, #{zipcode}, #{address1}, #{address2})
 	</insert>
 	
-	<update id="update">
+	<update id="updateInfo">
 		UPDATE tbl_user
-		SET userpw = #{userpw},
-			name = #{name},
+		SET name = #{name},
 			phone = #{phone},
 			email = #{email},
 			zipcode = #{zipcode},
 			address1 = #{address1},
 			address2 = #{address2}
+		WHERE userid = #{userid}
+	</update>
+
+	<update id="updatePw">
+		UPDATE tbl_user
+		SET userpw = #{newUserPw1}
 		WHERE userid = #{userid}
 	</update>
 	

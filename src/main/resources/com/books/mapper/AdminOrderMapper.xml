@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.books.mapper.AdminOrderMapper">
+
+	<!-- 전체 주문내역 -->
+
+	<sql id="criteria">	
+		<if test="kw_name != null or kw_orderid != null">
+			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+				<if test="kw_name != null and kw_name != ''">
+					OR u.name LIKE '%'||#{kw_name}||'%' OR o.userid LIKE '%'||#{kw_name}||'%'
+				</if>
+				<if test="kw_orderid != null and kw_orderid != ''">
+					OR o.orderid LIKE '%'||#{kw_orderid}||'%'
+				</if>
+			</trim>
+		</if>
+		<if test="kw_date_from != null and kw_date_to != null and kw_date_from != '' and kw_date_to != ''">
+			o.orderdate BETWEEN TO_DATE(#{kw_date_from},'YYYY-MM-DD') AND TO_DATE(#{kw_date_to}, 'YYYY-MM-DD')+0.99999 AND
+		</if>
+	</sql>
+	
+	<select id="getLatestOrderListWithPaging" resultType="com.books.domain.OrderVO">
+		<![CDATA[
+			SELECT userid, orderid, orderdate, orderbook, totalprice, orderstatus 
+			FROM (
+					SELECT rownum rn, u.userid, orderid, orderdate, orderbook, totalprice, orderstatus 
+					FROM tbl_user u
+					INNER JOIN tbl_order o ON o.userid = u.userid
+					WHERE
+					]]><include refid="criteria"/><![CDATA[rownum <= #{pageNum} * #{amount}
+					ORDER BY orderdate DESC
+				)
+			WHERE rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>	
+	
+	<select id="getHasOrderCount" resultType="int">
+		SELECT count(o.orderid)
+		FROM tbl_user u INNER JOIN tbl_order o ON o.userid = u.userid
+		WHERE <include refid="criteria"/> o.orderid > 0
+	</select>
+	
+	<select id="getUserOrderDetail" resultType="com.books.domain.OrderVO">
+		SELECT * FROM tbl_order WHERE orderid = #{orderid}
+	</select>
+	
+	<update id="modifyUserOrder">
+		UPDATE tbl_order
+		SET orderstatus = #{orderstatus}
+		WHERE orderid = #{orderid}
+	</update>
+
+</mapper>

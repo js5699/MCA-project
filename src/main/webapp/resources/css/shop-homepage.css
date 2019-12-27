@@ -4,5 +4,217 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
 body {
-  padding-top: 56px;
+	padding-top: 56px;
+/* 	font-size: 0.9em; */
+}
+
+.formContainer {
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+
+.formContainer-top {
+	margin-top: 25px;
+}
+
+.fc-no-magin {
+	margin-bottom: 0;
+}
+
+.btn-submit {
+	padding: 20px 0;
+}
+
+h5>i {
+	margin-right: 15px;
+}
+/* 
+.btnBox {
+	margin-left: -30px;
+	margin-Right: -30px;
+} */
+.sidevarName {
+	padding-top: 25px;
+	padding-bttom: 10x;
+}
+
+.pageSubtitle {
+	width: 100%;
+	border-bottom: 1px solid #dee2e6;
+	padding-bottom: 10px;
+	margin-bottom: 25px;
+}
+
+.AdminMenuSubtitle {
+	margin-left: -30px;
+	margin-Right: -30px;
+}
+
+i.depth-arrow {
+	padding-left: 15px;
+}
+
+
+/*mypage*/
+
+.custom-control-mypage {
+	position: relative;
+	display: block;
+    min-height: 1.5rem;
+    padding-left: 2.5rem;
+}
+
+
+
+/* board */
+.bd_title {
+	color: #aeaeae;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #dee2e6;
+}
+
+p i {
+	margin-right: 15px
+}
+
+.bd_container {
+	border-bottom: 1px solid #dee2e6;
+	padding-top: 25px;
+}
+
+.bd_information {
+	font-size: 0.8em;
+	color: #adb5bd;
+}
+
+.btnBox button {
+	margin-right: 15px;
+}
+
+.btnBox button:last-child {
+	margin-right: 0;
+}
+
+/* admin - user */
+.customerList th, .customerList td {
+	text-align: center;
+}
+
+.customerList .cell-justify-right {
+	text-align: right;
+}
+
+.customerList td {
+	vertical-align: middle;
+}
+
+/* admin - order */
+.orderList th, .orderList td {
+	vertical-align: middle;
+}
+
+.todayOrder {
+	background-color: #f6f5fa;
+}
+
+.order-row-group {
+	vertical-align: middle !important;
+}
+
+.book-title i {
+	font-size: x-small;
+}
+
+span.list-orderid {
+	font-weight: bolder;
+}
+
+.order-process {
+	padding: 0;
+	width: 100%;
+	list-style: none;
+}
+
+.order-process li {
+	float: left;
+	width: 25%;
+	text-align: right;
+}
+
+.order-process li.step {
+	border-top: 15px solid #eeeeee;
+}
+
+.order-process li.step-on {
+	border-top: 15px solid #007bff;
+}
+
+.order-process li.step-off {
+	
+}
+
+.order-process li.step-cancel-on {
+	border-top: 15px solid #ffc107;
+	width: 100%;
+}
+
+.order-process li span.step-name {
+	color: #adb5bd;
+	font-size: smaller;
+}
+
+.order-process li span.step-name-on {
+	color: #17a2b8;
+}
+
+.order-process li span.step-name-off {
+	color: #adb5bd;
+}
+
+.btn-order-mod {
+	margin-right: -15px;
+	margin-bottom: 15px;
+}
+
+.card-order-mod {
+	margin-bottom: 25px;
+}
+
+/* a �깭洹� css */
+a { 
+	text-decoration:none; 
+}
+
+a hover{ 
+	text-decoration:none; 
+}
+
+.container > .row > .col-sm{
+	background-color: rgb(162,162,162);	
+} 
+
+.container > br{
+	background-color: rgb(162,162,162);
+}
+
+/* table css */
+
+
+/* media css */	
+.media-object{
+	width: 80px;
+	height: 120px;
+}
+
+
+/* media 荑쇰━ */
+@media screen and (max-width: 985px) {
+	.btn btn-danger{
+		width:10px; 		 
+	}
+
+	
+.btn btn-danger dropdown-toggle dropdown-toggle-split{
+		width:10px;  		 
+	}	
 }
