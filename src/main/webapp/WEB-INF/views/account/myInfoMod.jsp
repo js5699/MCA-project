@@ -13,7 +13,7 @@
 	</div>
 	</c:if>
 
-	<div class="col-lg-12 formContainer">
+	<div class="row formContainer">
 		<h5 class="pageSubtitle">비밀번호 변경</h5>
 	</div>
 	
@@ -22,23 +22,25 @@
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		
 		<div class="form-group row">
-		    <label for="inputuserid" class="col-sm-2">아이디</label>
+		    <label for="inputuserid" class="col-sm-2 col-form-label">아이디</label>
 		    <div class="col-sm-3">
 		    	<input type="text" readonly class="form-control-plaintext" id="inputuserid" name="userid" value="${user.userid}">
 		    </div>
 		</div>
 		
 		<div class="form-group row">
-		    <label for="inputuserid" class="col-sm-2">현재 비밀번호</label>
+		    <label for="inputuserid" class="col-sm-2 col-form-label">현재 비밀번호</label>
 		    <div class="col-sm-3">
 		    	<input type="password" class="form-control" id="inputuserid" name="userpw" placeholder="PASSWORD">
+		    	<small id="emailHelp" class="form-text text-muted">비밀번호 변경시 입력해야 합니다.</small>
 		    </div>
 		</div>
 		
 		<div class="form-group row">
-		    <label for="inputnewuserpw1" class="col-sm-2 ">새 비밀번호</label>
+		    <label for="inputnewuserpw1" class="col-sm-2 col-form-label">새 비밀번호</label>
 		    <div class="col-sm-3">
 		    	<input type="password" class="form-control" placeholder="NEW PASSWORD" id="inputnewuserpw1" name="newUserPw1">
+		    	<small id="emailHelp" class="form-text text-muted">새 비밀번호과 새 비밀번호 확인은 동일하게 입력하여야합니다.</small>
 		    </div>
 		    <div class="col-sm-3">
 		    	<input type="password" class="form-control" placeholder="NEW PASSWORD CONFIRM" id="inputnewuserpw1" name="newUserPw2">
@@ -57,28 +59,28 @@
 	</script>
 	
 	<!-- 상세 정보 수정 폼 -->
-	<div class="col-lg-12 formContainer">
-		<h5 class="pageSubtitle">상세 정보</h5>
+	<div class="row formContainer">
+		<h5 class="pageSubtitle">상세 정보 수정</h5>
 	</div>
 	<form action="/account/myInfoMod/info" method="post" class="form-horizontal" name="infoModForm">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<input type="hidden" name="userid" value="${user.userid}" />
 		<div class="form-group row">
-		    <label for="inputname" class="col-sm-2">이름</label>
+		    <label for="inputname" class="col-sm-2 col-form-label">이름</label>
 		    <div class="col-sm-3">
 		    	<input type="text" class="form-control" placeholder="NAME" id="inputname" name="name" value="${user.name}">
 		    </div>
 		</div>
 		
 		<div class="form-group row">
-		    <label for="inputemail" class="col-sm-2 ">이메일</label>
+		    <label for="inputemail" class="col-sm-2 col-form-label">이메일</label>
 		    <div class="col-sm-5">
 		    	<input type="email" class="form-control" placeholder="EMAIL" id="inputemail" name="email" value="${user.email}">
 		    </div>
 		</div>
 		
 		<div class="form-group row">
-		    <label for="input" class="col-sm-2 ">전화번호</label>
+		    <label for="input" class="col-sm-2 col-form-label">전화번호</label>
 		    <div class="col-sm-2">
 					<select name="phone1" class="form-control" required="required">
 						<option>선택</option>
@@ -117,7 +119,7 @@
 		</div>
 		
 		<div class="form-group row">
-		    <label for="inputzipcode" class="col-sm-2 ">우편번호</label>
+		    <label for="inputzipcode" class="col-sm-2 col-form-label">우편번호</label>
 		    <div class="col-sm-3">
 		    	<input type="text" class="form-control" placeholder="우편번호" id="inputzipcode" name="zipcode" value="${user.zipcode}" >
 		    </div>
@@ -126,13 +128,13 @@
 		    </div>
 		</div>
 		<div class="form-group row">
-		    <label for="inputAddress1" class="col-sm-2 ">주소</label>
+		    <label for="inputAddress1" class="col-sm-2 col-form-label">주소</label>
 		    <div class="col-sm-5">
 		    	<input type="text" class="form-control" name="address1" id="inputAddress1"  value="${user.address1}" />
 		    </div>
 		</div>
 		<div class="form-group row">
-		    <label for="inputAddress2" class="col-sm-2 ">상세주소</label>
+		    <label for="inputAddress2" class="col-sm-2 col-form-label">상세주소</label>
 		    <div class="col-sm-5">
 		    	<input type="text" class="form-control" placeholder="상세주소 입력" name="address2" id="inputAddress2"  value="${user.address2}" />
 		    </div>

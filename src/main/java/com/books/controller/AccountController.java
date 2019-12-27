@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.books.domain.PhoneDTO;
 import com.books.domain.UserVO;
 import com.books.service.AccountService;
 
@@ -43,7 +44,7 @@ public class AccountController {
 	
 	//회원가입 처리
 	@PostMapping("/join")
-	public String register(UserVO user, RedirectAttributes rttr) {
+	public String register(UserVO user, PhoneDTO phone, RedirectAttributes rttr) {
 		
 		log.info("회원가입 : " + user);
 		
@@ -53,7 +54,7 @@ public class AccountController {
 		
 		//전화번호 처리
 		if ( user.getPhone1() != "" && user.getPhone2() != "" && user.getPhone3() != "")
-			user.setPhone(user.getPhone1()+"-"+user.getPhone2()+"-"+user.getPhone3());
+			phone.phoneAppend(user);
 		
 		//insert
 		service.register(user);
@@ -123,7 +124,7 @@ public class AccountController {
 	
 	@Secured({"ROLE_USER"})
 	@GetMapping("/myInfoMod")
-	public void myInfoMod(Model model) {
+	public void myInfoMod(Model model, PhoneDTO phone) {
 		
 		log.info("/myInfoMod");
 		
@@ -134,10 +135,7 @@ public class AccountController {
 		// user에서 username획득하여 get처리
 		UserVO myInfo = service.get(user.getUsername());
 		
-		String[] splitPhone = myInfo.getPhone().split("-");
-		myInfo.setPhone1(splitPhone[0]);
-		myInfo.setPhone2(splitPhone[1]);
-		myInfo.setPhone3(splitPhone[2]);
+		phone.phoneSplit(myInfo);
 
 		model.addAttribute("user", myInfo);
 	}

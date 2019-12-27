@@ -1,5 +1,6 @@
 package com.books.domain;
  
+import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
@@ -24,6 +25,16 @@ public class UserVO {
 	private String address1;
 	private String address2;
 	
+	private Date regdate;
+	
+	private Date birth;
+	private String year;
+	private String month;
+	private String day;
+	
+	private String adminMemo;
+	
+	private String orderid;
 	
 	private List<AuthVO> authList;
 }

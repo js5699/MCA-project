@@ -7,6 +7,14 @@
 	<div class="col-lg-12 ">
 		<h5 class="pageSubtitle">로그인</h5>
 	</div>
+
+	<c:if test="${logout}">
+		<div class="col-lg-7">
+			<div class="alert alert-danger" role="alert">
+				로그아웃 되었습니다.
+			</div>			
+		</div>
+	</c:if>	
 	
 	<c:if test="${error}">
 		<div class="col-lg-7">
@@ -16,7 +24,7 @@
 		</div>
 	</c:if>	
 	
-	<div class="col-lg-7">
+	<div class="col-lg-7 formContainer">
 		<form role="form" method="post" action="/login">
 			<fieldset>
 				<div class="form-group">
@@ -41,7 +49,6 @@
 	</div>
 </div>
 
-<script src="/resources/vendor/jquery/jquery.min.js"></script>
 <script>
 	$(".btn-primary").on("click", function(e) {
 

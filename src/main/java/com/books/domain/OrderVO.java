@@ -1,6 +1,7 @@
 package com.books.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -11,10 +12,15 @@ public class OrderVO {
 	private Date orderdate;
 	private Long quantity;
 	private Long totalprice;
-	private String dName;
-	private String dTell;
-	private String dZipcode;
-	private String dAddress1;
-	private String dAddress2;
-	private String dMsg;
+	
+	private String dname;
+	private String dtell;
+	private String dzipcode;
+	private String daddress1;
+	private String daddress2;
+	private String dmsg;
+	private String orderstatus;//배송상태 추가
+	private String orderbook;//주문도서명 추가
+	
+	private List<UserVO> userinfo;
 }

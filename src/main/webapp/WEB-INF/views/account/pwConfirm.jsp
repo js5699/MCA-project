@@ -14,7 +14,7 @@
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<div class="row" style="margin:30px 0;">
 				<div class="col-sm-4 text-right">
-					<label for="staticEmail2">비밀번호</label>
+					<label for="staticEmail2" class="col-form-label">비밀번호</label>
 				</div>
 				<div class="col-sm-4">
 					<input type="password" class="form-control" name="userpwcf" id="inputuserpw1" placeholder="PASSWORD">
