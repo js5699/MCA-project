@@ -26,4 +26,11 @@ public interface AdminOrderMapper {
 	// 회원 개인 주문 상세내역 수정
 	public int modifyUserOrder(OrderVO order);
 	
+	// 회원 개인 주문내역 상세 - 상품 수 카운트
+	public int getUserOrderItemsCount(String orderid);
+	
+	// 회원 개인 주문 상세내역 리스트+페이지
+	public List<OrderDetailVO> getUserOrderItemsListWithPaging(@Param("orderid") String orderid, @Param("cri") Criteria cri);
+	
+	
 }

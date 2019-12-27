@@ -6,9 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.books.domain.AuthVO;
 import com.books.domain.Criteria;
+import com.books.domain.OrderPageDTO;
 import com.books.domain.UserVO;
-import com.books.mapper.AccountMapper;
-import com.books.mapper.AdminOrderMapper;
 import com.books.mapper.AdminUserMapper;
 
 import lombok.AllArgsConstructor;
@@ -19,53 +18,52 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class AdminUserServiceImpl implements AdminUserService {
 	
-	private AdminUserMapper userMapper;
-	
-	private AccountMapper accountMapper;
-	
-	private AdminOrderMapper AdminOrderMapper;
-	
-	@Override
-	public void register(UserVO user) {
-		log.info("admin-user-register"  + user);
-		accountMapper.insert(user);
-		accountMapper.insertAuth(user.getUserid());
-	}
-
-	@Override
-	public UserVO get(String userid) {
-		log.info("admin-user-get-" + userid);
-		return accountMapper.read(userid);
-	}
+	private AdminUserMapper mapper;
 
 	@Override
 	public boolean modify(UserVO user) {
 		log.info("admin-user-mod-" + user.getUserid());
-		return userMapper.update(user) == 1;
+		return mapper.update(user) == 1;
 	}
 
 	@Override
 	public boolean remove(String userid) {
 		log.info("admin-user-del-" + userid);
-		return userMapper.delete(userid) == 1;
+		return mapper.delete(userid) == 1;
 	}
 
 	@Override
 	public int getTotal(Criteria cri) {
 		log.info("admin-user-getTotal");
-		return userMapper.getTotalCount(cri);
+		return mapper.getTotalCount(cri);
 	}
 
 	@Override
 	public List<UserVO> getList(Criteria cri) {
 		log.info("admin-user-getList " + cri);
-		return userMapper.getList(cri);
+		return mapper.getList(cri);
 	}
 
 	@Override
-	public List<AuthVO> getAuth(String userid) {
-		log.info("admin-user-getAuthList " + userid);
-		return userMapper.getAuth(userid);
+	public UserVO getUserWithAuth(String userid) {
+		log.info("admin-user-get User With Auth");
+		return mapper.readUserWithAuth(userid);
+	}
+	
+	@Override
+	public OrderPageDTO getUserOrderListPage(String userid, Criteria cri) {
+
+		return new OrderPageDTO(mapper.getUserOrderCount(userid),
+								mapper.getUserOrderListWithPaging(userid, cri));
 	}
 
+	@Override
+	public int addAuth(AuthVO auth) {
+		return mapper.insertAuth(auth);
+	}
+
+	@Override
+	public int removeAuth(AuthVO auth) {
+		return mapper.deleteAuth(auth);
+	}
 }

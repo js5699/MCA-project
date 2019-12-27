@@ -1,13 +1,11 @@
-console.log("order List Module....");
-
+// 주문 내역 - 주문 상품 내역
 var orderDetailService = (function() {
-	
-	
+
 	function getList(param, callback, error) {
 		var orderid = param.orderid;
 		var page = param.page || 1;
 		
-		$.getJSON("/userOrders/orderDetail/" + orderid + "/" + page + ".json",
+		$.getJSON("/adminOrder/orderItems/" + orderid + "/" + page + ".json",
 			function(data) {
 				if(callback) {
 					callback(data.itemsCnt, data.list);
@@ -25,14 +23,15 @@ var orderDetailService = (function() {
 	};
 })();
 
-var orderListService = (function() {
+// 개인 - 주문 내역
+var adminUserService = (function() {
 	
-	function getList(param, callback, error) {
+	function getOrderList(param, callback, error) {
 		
 		var userid = param.userid;
 		var page = param.page || 1;
 		
-		$.getJSON("/userOrders/orderList/" + userid + "/" + page + ".json",
+		$.getJSON("/adminUser/orderList/" + userid + "/" + page + ".json",
 			function(data) {
 				if(callback) {
 					callback(data.orderCnt, data.list);
@@ -42,6 +41,46 @@ var orderListService = (function() {
 					error();
 				}
 			});
+	}
+	
+	function addRole(auth, callback, error){
+		console.log("add auth...");
+		$.ajax({
+			type: 'post',
+			url: '/adminUser/add-role',
+			data: JSON.stringify(auth),
+			contentType: 'application/json; charset=UTF-8',
+			success: function(result, status, xhr) {
+				if(callback) {
+					callback(result);
+				}
+			},
+			error : function(xhr, status, er) {
+				if(error) {
+					error(er);
+				}
+			}
+		})
+	}
+	
+	function removeRole(auth, callback, error) {
+		console.log("remove auth...");
+		$.ajax({
+			type: 'delete',
+			url: '/adminUser/remove-role',
+			data: JSON.stringify(auth),
+			contentType: 'application/json; charset=uf-8',
+			success: function(deleteResult, status, xhr) {
+				if (callback) {
+					callback(deleteResult);
+				}
+			},
+			error: function(xhr, status, er) {
+				if(error) {
+					error(er);
+				}
+			}
+		});
 	}
 	
 	function displayTime(timeValue) {
@@ -73,8 +112,11 @@ var orderListService = (function() {
 		}
 	};
 	
+	
 	return {
-		getList: getList,
+		getOrderList: getOrderList,
+		addRole: addRole,
+		removeRole: removeRole,
 		displayTime: displayTime
 	};
 	

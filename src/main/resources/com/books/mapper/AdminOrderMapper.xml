@@ -2,8 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.books.mapper.AdminOrderMapper">
 
-	<!-- 전체 주문내역 -->
-
 	<sql id="criteria">	
 		<if test="kw_name != null or kw_orderid != null">
 			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
@@ -45,10 +43,30 @@
 		SELECT * FROM tbl_order WHERE orderid = #{orderid}
 	</select>
 	
+	
 	<update id="modifyUserOrder">
 		UPDATE tbl_order
 		SET orderstatus = #{orderstatus}
 		WHERE orderid = #{orderid}
 	</update>
+	
+	
+	<!-- 선택 주문 내역 - 주문 상품 리스트 -->
+	<select id="getUserOrderItemsCount" resultType="int">
+		SELECT COUNT(productid) FROM tbl_orderdetail WHERE orderid = #{orderid}
+	</select>
+	
+	<select id="getUserOrderItemsListWithPaging" resultType="com.books.domain.OrderDetailVO">
+		<![CDATA[
+			SELECT orderid, productid, ptitle, ea, saleprice
+			FROM (
+					SELECT rownum rn, orderid, p.productid, p.ptitle, ea, saleprice
+					FROM tbl_orderdetail o
+					INNER JOIN tbl_product p ON o.productid = p.productid
+					WHERE orderid = #{orderid} AND rownum <= #{cri.pageNum} * #{cri.amount}
+				)
+			WHERE rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
 
 </mapper>

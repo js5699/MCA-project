@@ -114,7 +114,7 @@
 			
 			console.log("show order List " + page);
 			
-			orderListService.getList({userid:useridValue, page: page || 1}, function(orderCnt, list) {
+			adminUserService.getOrderList({userid:useridValue, page: page || 1}, function(orderCnt, list) {
 				
 				console.log("orderCount : " + orderCnt);
 				console.log("list: " + list);
@@ -135,7 +135,7 @@
 					str += "<tr>";
 					str +=  "<td></td>";
 					str +=  "<td>"+list[i].orderid+"</td>";
-					str +=  "<td>"+orderListService.displayTime(list[i].orderdate)+"</td>";
+					str +=  "<td>"+adminUserService.displayTime(list[i].orderdate)+"</td>";
 					str +=  "<td>"+list[i].totalprice.toLocaleString()+"원</td>";
 					str +=  "<td>"+list[i].dtell+"</td>";
 					str +=  "<td>"+list[i].orderstatus+"</td>";

@@ -124,7 +124,7 @@ public class AccountController {
 	
 	@Secured({"ROLE_USER"})
 	@GetMapping("/myInfoMod")
-	public void myInfoMod(Model model, PhoneDTO phone) {
+	public void myInfoMod(Model model) {
 		
 		log.info("/myInfoMod");
 		
@@ -135,6 +135,7 @@ public class AccountController {
 		// user에서 username획득하여 get처리
 		UserVO myInfo = service.get(user.getUsername());
 		
+		PhoneDTO phone = new PhoneDTO();
 		phone.phoneSplit(myInfo);
 
 		model.addAttribute("user", myInfo);

@@ -27,14 +27,12 @@ public class UserVO {
 	
 	private Date regdate;
 	
-	private Date birth;
-	private String year;
-	private String month;
-	private String day;
-	
 	private String adminMemo;
 	
+	// admin user service - getList
 	private String orderid;
 	
+	// admin user service - get user with auth
 	private List<AuthVO> authList;
+	
 }
