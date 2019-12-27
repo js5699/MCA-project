@@ -105,9 +105,8 @@
 							<script>
 								$("#cart${product.productid}").click(function(){
 									
-									var productid = ${product.productid};
-									var productstock = 1;
-									
+									var productid = '${product.productid}';
+									var productstock = 1;									
 									var data = {
 											productid : productid,
 											productstock : productstock

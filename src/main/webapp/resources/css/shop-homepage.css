@@ -25,6 +25,17 @@ a hover{
 	background-color: rgb(162,162,162);
 }
 
+#cnt{
+	text-align: center;	
+}
+ 
+
+/* font size css */
+ fs{
+ 	font-size: 20px;
+ }
+ 
+
 /* table css */
 
 
@@ -45,4 +56,5 @@ a hover{
 .btn btn-danger dropdown-toggle dropdown-toggle-split{
 		width:10px;  		 
 	}	
+		
 }

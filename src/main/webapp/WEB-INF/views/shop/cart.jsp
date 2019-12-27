@@ -35,20 +35,20 @@
 												<!-- 참고 사항 input에 id 와  label에 for 와 일치 해야 작동합니다.  -->
 												<label class="custom-control-label" for="allcheck">전체 선택</label>
 											</div></th>
-										<th style="text-align:center;" >상품명</th>
-										<th style="text-align:center;">가격</th>
-										<th style="text-align:center;">수량</th>
-										<th style="text-align:center;">삭제</th>
+										<th id="cnt" >상품명</th>
+										<th id="cnt">가격</th>
+										<th id="cnt">수량</th>
+										<th id="cnt">삭제</th>
 									</tr>
 								</thead>
 								<c:if test="${nocart eq 'nocart'}">								
 								<tbody>
 										<tr>
-											<th></th>
-											<th></th>
-											<th><div><br><br><h2>장바구니에 상품이 없습니다.</h2><br><br></div></th>											
-											<th></th>
-											<th></th>				
+											<th id="cnt"></th>
+											<th id="cnt"></th>
+											<th id="cnt"><div><br><br><h2>장바구니에 상품이 없습니다.</h2><br><br></div></th>											
+											<th id="cnt"></th>
+											<th id="cnt"></th>				
 										</tr>				
 								</tbody>
 								</c:if>
@@ -68,8 +68,9 @@
 										<th><c:out value="${product.price}"/>원</th>
 										<th><div class="input-group">
 												<button type="button" class="btn btn-primary plus" id="plus${product.cartNum}" data-cartNum="${product.cartNum}" >+</button>
-												&nbsp <input type="number" class="stock${product.cartNum}" min="1"	max="${product.stock}" value="${product.productStock}" readonly="readonly" />
+												&nbsp <input type="number" class="stock${product.cartNum}" min="1"	max="${product.stock}" value="${product.productStock}" readonly="readonly" id="cnt" />
 												&nbsp
+																								
 												<c:if test="${product.productStock != 1}">
 												<button type="button" class="btn btn-primary minus"	id="minus${product.cartNum}" data-cartNum="${product.cartNum}">-</button>																							
 												</c:if>												
@@ -80,8 +81,22 @@
 									</tr>									
 								</tbody>
 								<script>
-							     /* 수량 변경 버튼 js */							
-							     $("#plus${product.cartNum}").click(function(){								
+							     /* 수량 변경 버튼 js */
+							     while($("#plus${product.cartNum}").mousedown(function(){
+							    	 var num = $(".stock${product.cartNum}").val();									
+							    	 var plusNum = Number(num) + 1;					    	 
+									
+							    	  $("#plus${product.cartNum}").mouseup(function(){
+										alert("마우스 땜");	
+							    	   });
+									
+							    	 if(plusNum >= ${product.stock}){									
+							    		 $(".stock${product.cartNum}").val(num);										
+							    	 } else{									
+							    		 $(".stock${product.cartNum}").val(plusNum);        										
+							    	 }									
+							     }));
+							     /* $("#plus${product.cartNum}").click(function(){								
 							    	 var num = $(".stock${product.cartNum}").val();									
 							    	 var plusNum = Number(num) + 1;					    	 
 									
@@ -90,7 +105,7 @@
 							    	 } else{									
 							    		 $(".stock${product.cartNum}").val(plusNum);        										
 							    	 }									
-							     });							     
+							     });	 */						     
 								
 							     $("#minus${product.cartNum}").click(function(){								
 							    	 var num = $(".stock${product.cartNum}").val();									
@@ -113,7 +128,7 @@
 							    	 	var productstock = ${product.productStock}+1;							    		       										
 							    	 }
 								
-									 var productid = ${product.productid};
+									 var productid = '${product.productid}';
 									 										
 									 var checkArr = new Array();
 									 checkArr.push($(this).attr("data-cartNum"));
@@ -146,7 +161,7 @@
 								    		 var productstock = ${product.productStock}-1;	     
 								    	 }										
 										
-									 var productid = ${product.productid};																		
+									 var productid = '${product.productid}';																	
 									 var checkArr = new Array();
 									 checkArr.push($(this).attr("data-cartNum"));
 									 
@@ -270,7 +285,7 @@
 									<!-- 리스트에 책 값이 존재 할때 마다 값을 더해준다 -->
 									<c:choose> 
 										<c:when test="${product.price != null}">
-											<c:set var="allprice" value="${allprice + product.price * product.productStock}"/>
+											<c:set var="allprice" value="${allprice + (product.price * product.productStock)}"/>
 											<c:set var="allStock" value="${allStock + product.productStock}"/>
 										</c:when>
 									</c:choose>
@@ -303,7 +318,7 @@
 				<script>
 						$("#allcheck").click(function() {
 							<c:forEach items="${cartList}" var="product" varStatus="status">							
-							var productid = ${product.productid}							
+							var productid = '${product.productid}';							
 							 $("#check"+productid).prop("checked", $(this).prop("checked"));
 							 </c:forEach>
 						});

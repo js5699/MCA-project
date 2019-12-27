@@ -35,7 +35,7 @@
 										<th></th>
 										<th></th>
 										<th><img class="media-object-center"
-											style="width: 160px; height: 250px;"
+											style="width: 300px; height: 400px;"
 											src="<c:out value="${product.pimg}"/>"
 											alt="<c:out value="${product.ptitle}"/>"
 											title="<c:out value="${product.ptitle}"/>의 사진"></th>
@@ -46,56 +46,66 @@
 											<p>
 												저자:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												<c:out value="${product.publisher}" />
+												<c:out value="${product.author}" />
 											</p>
 											<P>출판사:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp publisher</P>
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${product.publisher}</P>
 											<P>출판일:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp pubdate</P>
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${product.PUBDATE}</P>
 											<P>
+												가격:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+												<fs><c:out value="${product.price}"/></fs>&nbsp원
+											</p> 
+											<p>
 												쪽수 및 판형:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												<c:out value="${product.bkPage}" />
 												쪽
 												<c:out value="${product.bkSize}" />
 												mm
-											</P>
+											</P><hr>
 											<div class="col-sm-8 input-group">
-												수량:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+												<span><fs>수량 :</fs></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												<button type="button" class="btn btn-primary plus" id="plus">+</button>
-												&nbsp <input type="number" class="stock" min="1"
+												&nbsp <input type="number" class="stock" min="1" id="cnt"
 													max="${product.stock}" value="1" readonly="readonly" />
 												&nbsp
 												<button type="button" class="btn btn-primary minus"
 													id="minus">-</button>
+												<br>&nbsp&nbsp&nbsp&nbsp
+												<span><button class="btn btn-primary">바로구매</button>
+											<button class="btn btn-primary" id="cart${product.productid}">장바구니</button></span>												
 											</div>
-											<p></p>
-											<button class="btn btn-primary">바로구매</button>
-											<button class="btn btn-primary" id="cart${product.productid}">장바구니</button>
+											<P><fs>																																																							
+												<span class="allprice"></span></fs>
+												</p>	
+											<p></p>											
 											<script>
+											
 											       /* 수량 변경 js */
-												  $("#plus").click(function(){
-													  
-												   var num = $(".stock").val();
-												   var plusNum = Number(num) + 1;
-												   
+												  $("#plus").click(function(){												  
+												   var num = $(".stock").val();									
+												   var ex = $(".ex").val();
+												   var plusNum = Number(num) + 1;												   
 												   if(plusNum >= ${product.stock}){
 													   alert("재고를 초과 하였습니다. 판매자에게 문의 하세요!");
-													   $(".stock").val(num);
+													   $(".stock").val(num);													   	 
 												   }else{
-												    $(".stock").val(plusNum);          
+													    $(".stock").val(plusNum);												    
+													  	$(".allprice").text('총상품가격: '+plusNum * ${product.price} +' 원');															   												    
 												   }
-												  });
-												  
+												  });												  
 												  
 												  $("#minus").click(function(){
 													   var num = $(".stock").val();
-													   var minusNum = Number(num) - 1;
-													   
-													   if(minusNum <= 0) {
-													    $(".stock").val(num);
+													   var minusNum = Number(num) - 1;													   
+													  
+													   if(minusNum <= 0) {													  
+														    $(".stock").val(num);														   
 													   } else {
-													    $(".stock").val(minusNum);          
+														    $(".stock").val(minusNum);
+														    $(".allprice").text('총상품가격: '+minusNum * ${product.price} +' 원');												    
 													   }
 													  });
 												  
@@ -116,7 +126,7 @@
 												  
 													$("#cart${product.productid}").click(function(){
 														
-														var productid = ${product.productid};
+														var productid = '${product.productid}';
 														var productstock = $(".stock").val();
 														
 														var data = {

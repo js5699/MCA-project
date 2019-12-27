@@ -5,11 +5,22 @@
 <mapper namespace="com.books.mapper.CartMapper">
 
 
-<!-- 카트 담기 --> 
-<insert id="addCart">
+<!-- 카트 담기 -->
+<!-- <insert id="addCart">
 	insert into tbl_cart(cartNum, productid, productstock)
 		values(tbl_cart_seq.nextval, #{productid}, #{productstock})
-</insert> 
+</insert>  -->
+
+<update id="addCart">
+
+<![CDATA[ MERGE INTO tbl_cart a
+ USING DUAL 
+ ON (a.productid = #{productid})
+  when matched then update set a.productstock = #{productstock} 
+  when not matched then insert (a.cartNum, a.productid, a.productstock)
+ values(tbl_cart_seq.nextval, #{productid}, #{productstock}) ]]>
+
+</update>
 
  <!-- 카트에 담긴 수량 수정 -->
 <update id="modifyCart">

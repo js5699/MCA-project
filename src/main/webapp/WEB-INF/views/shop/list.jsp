@@ -89,7 +89,7 @@
 									
 									var productid = ${product.productid};
 									var productstock = 1;
-									
+									alert(productid);
 									var data = {
 											productid : productid,
 											productstock : productstock
