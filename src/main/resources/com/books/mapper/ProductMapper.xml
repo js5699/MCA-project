@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from tbl_cid
 </select>
 
-<select id="getList" resultType="com.books.domain.ProductVO">
+<select id="getAdminList" resultType="com.books.domain.ProductVO">
 	<![CDATA[
 		select productId, pimg, pTitle, price, publisher, cId, author, pubDate from
 		(select /*+ INDEX_DESC(tbl_product pk_tbl_product) */
@@ -60,5 +60,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <delete id = "delete">
 	delete from tbl_product where productId = #{productId}
 </delete>
+
+<!-- shinyoung end -->
+
+<!-- 책정보 조회 --> 
+<select id="getProduct" resultType="com.books.domain.ProductVO">
+<![CDATA[
+	select * from tbl_product where productid = #{productid}
+ ]]>
+</select>
+
+
+<!-- 책 리스트 조회 -->
+<select id="getList" resultType="com.books.domain.ProductVO">
+<![CDATA[
+select
+productid,pimg,ptitle,price,publisher,AUTHOR,BKSIZE,BKPAGE,BKINDEX,BKDESC,ISBN,STOCK,CID,SALECNT
+	from tbl_product
+	order by productid asc
+ ]]>
+</select>
 
 </mapper>

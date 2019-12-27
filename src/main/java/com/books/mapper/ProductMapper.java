@@ -18,7 +18,11 @@ public interface ProductMapper {
 	
 	public int delete(String productId);
 	
-	public List<ProductVO> getList(Criteria cri);
+	public List<ProductVO> getAdminList(Criteria cri);
 	
 	public int getTotalCount(Criteria cri);
+	
+	public List<ProductVO> getList()throws Exception;//책 목록
+	
+	public ProductVO getProduct(String productid) throws Exception; //상세페이지
 }

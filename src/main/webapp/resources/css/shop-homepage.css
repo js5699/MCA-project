@@ -179,3 +179,42 @@ span.list-orderid {
 .card-order-mod {
 	margin-bottom: 25px;
 }
+
+/* a �깭洹� css */
+a { 
+	text-decoration:none; 
+}
+
+a hover{ 
+	text-decoration:none; 
+}
+
+.container > .row > .col-sm{
+	background-color: rgb(162,162,162);	
+} 
+
+.container > br{
+	background-color: rgb(162,162,162);
+}
+
+/* table css */
+
+
+/* media css */	
+.media-object{
+	width: 80px;
+	height: 120px;
+}
+
+
+/* media 荑쇰━ */
+@media screen and (max-width: 985px) {
+	.btn btn-danger{
+		width:10px; 		 
+	}
+
+	
+.btn btn-danger dropdown-toggle dropdown-toggle-split{
+		width:10px;  		 
+	}	
+}

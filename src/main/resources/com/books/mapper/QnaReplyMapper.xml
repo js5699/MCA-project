@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.books.mapper.QnaReplyMapper">
+
+	<insert id="insert">
+		insert into tbl_qna_rp (rno, bno, reply, replyer)
+		values (seq_qna_rp.nextval, #{bno}, #{reply}, #{replyer})	
+	</insert>
+	
+	<select id="read" resultType="com.books.domain.QnaReplyVO">
+		select * from tbl_qna_rp where rno = #{rno}	
+	</select>
+	
+	<delete id="delete">
+		delete from tbl_qna_rp where rno = #{rno}
+	</delete>
+	
+	<update id="update">
+		update tbl_qna_rp set reply = #{reply}, updatedate = sysdate where rno = #{rno}
+	</update>
+	
+	<select id="getListWithPaging"
+		resultType="com.books.domain.QnaReplyVO">
+		<![CDATA[
+		select rno, bno, reply, replyer, replyDate, updateDate
+		from 
+		(
+		select /*+INDEX(tbl_qna_rp idx_rp) */
+		rownum rn, rno, bno, reply, replyer, replyDate, updatedate
+		from tbl_qna_rp
+		where bno = #{bno}
+		and rno > 0
+		and rownum <= #{cri.pageNum} * #{cri.amount}
+		) where rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<select id="getCountByBno" resultType="int">
+		<![CDATA[
+			select count(rno) from tbl_qna_rp where bno = #{bno}
+		]]>
+	</select>
+
+</mapper>

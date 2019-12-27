@@ -5,6 +5,7 @@
 
 <%@ include file="includes/header.jsp"%>
 
+<%	response.sendRedirect("list");%>
 
 <c:if test="${result eq 'success'}">
 	<div class="alert alert-success alert-dismissible fade show" role="alert">
