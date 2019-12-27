@@ -96,7 +96,7 @@
 							    		 $(".stock${product.cartNum}").val(plusNum);        										
 							    	 }									
 							     }));
-							     /* $("#plus${product.cartNum}").click(function(){								
+							     /* $("#plus${product.cartNum}").click(function(){		 						
 							    	 var num = $(".stock${product.cartNum}").val();									
 							    	 var plusNum = Number(num) + 1;					    	 
 									
