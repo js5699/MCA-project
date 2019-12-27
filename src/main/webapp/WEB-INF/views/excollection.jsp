@@ -362,6 +362,21 @@
 
 
 
+<asd>ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</asd>
+<script>
+$("asd").on({ 
+  click: function() {
+    $("asd").append("마우스가 문장을 클릭했습니다.<br>");
+  },
+  mouseenter: function() {
+    $("asd").append("마우스가 커서가 문장 위로 들어왔습니다.<br>");
+  },
+  mouseleave: function() {
+    $("asd").append("마우스가 커서가 문장을 빠져 나갔습니다.<br>");
+  }
+});
+</script>
+
 <%@ include file="/WEB-INF/views/includes/footer.jsp"%>
 
 </body>

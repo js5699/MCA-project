@@ -57,14 +57,7 @@
 												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												<fs><c:out value="${product.price}"/></fs>&nbsp원
 											</p> 
-											<p>
-												쪽수 및 판형:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												<c:out value="${product.bkPage}" />
-												쪽
-												<c:out value="${product.bkSize}" />
-												mm
-											</P><hr>
+											<hr>
 											<div class="col-sm-8 input-group">
 												<span><fs>수량 :</fs></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												<button type="button" class="btn btn-primary plus" id="plus">+</button>
@@ -73,11 +66,11 @@
 												&nbsp
 												<button type="button" class="btn btn-primary minus"
 													id="minus">-</button>
-												<br>&nbsp&nbsp&nbsp&nbsp
+												<br>&nbsp&nbsp&nbsp
 												<span><button class="btn btn-primary">바로구매</button>
 											<button class="btn btn-primary" id="cart${product.productid}">장바구니</button></span>												
 											</div>
-											<P><fs>																																																							
+											<P><fs>&nbsp&nbsp&nbsp&nbsp																																																							
 												<span class="allprice"></span></fs>
 												</p>	
 											<p></p>											
@@ -172,17 +165,28 @@
 									</tr>
 								</thead>
 								<tbody>
+									<tr>
+										<th></th>
+										<th></th>
+										<th><h4>기본정보</h4></th>
+										<th><span><c:out value="${product.bkPage}"/> 쪽    <c:out value="${product.bkSize}"/>mm	<c:out value="${product.bkweight}"/>	ISBN : 9791196688318</span><br><br>																					
+											<h5>주제 분류</h5>										
+											국내도서 > 에세이 > 명사에세이 > 기타<br>
+											국내도서 > 에세이 > 사진/그림 에세이<br>
+											국내도서 > 에세이 > 한국에세이<br>
+											</th>										
+									</tr>
 
 									<tr>
 										<th></th>
 										<th></th>
-										<th>책 소개</th>
+										<th><h4>책 소개</h4></th>
 										<th><c:out value="${product.bkDesc}" /></th>
 									</tr>
 									<tr>
 										<th></th>
 										<th></th>
-										<th>목차</th>
+										<th><h4>목차</h4></th>
 										<th><pre>
 <c:out value="${product.bkIndex}" /> 
 <!-- <details>

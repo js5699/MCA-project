@@ -82,21 +82,8 @@
 								</tbody>
 								<script>
 							     /* 수량 변경 버튼 js */
-							     while($("#plus${product.cartNum}").mousedown(function(){
-							    	 var num = $(".stock${product.cartNum}").val();									
-							    	 var plusNum = Number(num) + 1;					    	 
-									
-							    	  $("#plus${product.cartNum}").mouseup(function(){
-										alert("마우스 땜");	
-							    	   });
-									
-							    	 if(plusNum >= ${product.stock}){									
-							    		 $(".stock${product.cartNum}").val(num);										
-							    	 } else{									
-							    		 $(".stock${product.cartNum}").val(plusNum);        										
-							    	 }									
-							     }));
-							     /* $("#plus${product.cartNum}").click(function(){		 						
+							  
+							     $("#plus${product.cartNum}").click(function(){								
 							    	 var num = $(".stock${product.cartNum}").val();									
 							    	 var plusNum = Number(num) + 1;					    	 
 									
@@ -105,7 +92,7 @@
 							    	 } else{									
 							    		 $(".stock${product.cartNum}").val(plusNum);        										
 							    	 }									
-							     });	 */						     
+							     });	 						     
 								
 							     $("#minus${product.cartNum}").click(function(){								
 							    	 var num = $(".stock${product.cartNum}").val();									

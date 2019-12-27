@@ -47,4 +47,5 @@ public class ProductVO {
 	private String cid;
 	private int salecnt;
 	private Date PUBDATE;	
+	private String bkweight;
 }
