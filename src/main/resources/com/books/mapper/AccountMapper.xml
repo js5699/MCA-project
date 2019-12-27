@@ -39,4 +39,8 @@
 	<insert id="insertAuth">
 		INSERT INTO tbl_user_auth(userid, auth) VALUES(#{userid}, 'ROLE_USER') 
 	</insert>
+	
+	<select id="readId" resultType="int">
+		SELECT count(*) FROM tbl_user WHERE userid = #{newUserid} 
+	</select>
 </mapper>

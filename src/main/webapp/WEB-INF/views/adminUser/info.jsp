@@ -125,17 +125,17 @@
 					return;
 				}
 				
-				var str = "<tr><th></th><th>주문번호</th><th>주문일</th><th>주문금액</th><th>연락처</th><th>상태</th><th class='text-center'>상세보기</th></tr>";
+				var str = "<tr><th></th><th>주문일</th><th>주문번호</th><th>주문금액</th><th>연락처</th><th>상태</th><th class='text-center'>상세보기</th></tr>";
 				
 				if(list == null || list.length == 0) {
 					return;
 				}
 				
-				for (var i = 0, len = list.length || 0; i<len; i++) {
+				for (var i = 0, len = list.length || 0 ; i < len ; i++) {
 					str += "<tr>";
 					str +=  "<td></td>";
-					str +=  "<td>"+list[i].orderid+"</td>";
 					str +=  "<td>"+adminUserService.displayTime(list[i].orderdate)+"</td>";
+					str +=  "<td>"+list[i].orderid+"</td>";
 					str +=  "<td>"+list[i].totalprice.toLocaleString()+"원</td>";
 					str +=  "<td>"+list[i].dtell+"</td>";
 					str +=  "<td>"+list[i].orderstatus+"</td>";

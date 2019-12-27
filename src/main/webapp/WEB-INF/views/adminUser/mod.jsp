@@ -152,13 +152,13 @@
 	</div>
 	<div class="form-group row">
 	    <label for="inputAddress1" class="col-sm-2 col-form-label">주소</label>
-	    <div class="col-sm-5">
+	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" name="address1" id="inputAddress1"  value="${user.address1}" />
 	    </div>
 	</div>
 	<div class="form-group row">
 	    <label for="inputAddress2" class="col-sm-2 col-form-label">상세주소</label>
-	    <div class="col-sm-5">
+	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" placeholder="상세주소 입력" name="address2" id="inputAddress2"  value="${user.address2}" />
 	    </div>
 	</div>

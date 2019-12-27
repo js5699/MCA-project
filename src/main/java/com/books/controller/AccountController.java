@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.books.domain.PhoneDTO;
@@ -41,10 +42,15 @@ public class AccountController {
 		log.info("회원가입 페이지");
 	}
 	
+	@GetMapping(value="/idCheck")
+	@ResponseBody
+	public boolean idCheck(@RequestParam("newUserid") String newUserid) {
+		return service.idDupCheck(newUserid);
+	}
 	
 	//회원가입 처리
 	@PostMapping("/join")
-	public String register(UserVO user, PhoneDTO phone, RedirectAttributes rttr) {
+	public String register(UserVO user, RedirectAttributes rttr) {
 		
 		log.info("회원가입 : " + user);
 		
@@ -53,8 +59,8 @@ public class AccountController {
 		user.setUserpw(BCPEncoder.encode(user.getUserpw()));
 		
 		//전화번호 처리
-		if ( user.getPhone1() != "" && user.getPhone2() != "" && user.getPhone3() != "")
-			phone.phoneAppend(user);
+		PhoneDTO phone = new PhoneDTO();
+		phone.phoneAppend(user);
 		
 		//insert
 		service.register(user);
@@ -177,7 +183,8 @@ public class AccountController {
 		} else if ( modType.equals("info") ){	
 			
 			//전화번호 세팅
-			user.setPhone(user.getPhone1()+"-"+user.getPhone2()+"-"+user.getPhone3());
+			PhoneDTO phone = new PhoneDTO();
+			phone.phoneAppend(user);
 			
 			//정보 변경 
 			if( service.modifyInfo(user) )

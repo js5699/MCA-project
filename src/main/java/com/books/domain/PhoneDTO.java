@@ -23,7 +23,9 @@ public class PhoneDTO {
 		return user;
 	}
 	
-	public String phoneAppend(UserVO user) {
-		return phone = user.getPhone1() + "-" + user.getPhone2() + "-" + user.getPhone3();
+	public UserVO phoneAppend(UserVO user) {
+		String phone = user.getPhone1() + "-" + user.getPhone2() + "-" + user.getPhone3();
+		user.setPhone(phone);
+		return user;
 	}
 }

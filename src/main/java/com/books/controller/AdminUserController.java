@@ -66,7 +66,7 @@ public class AdminUserController { // 관리자 권한 추가
 	public String userModifyPost(@RequestParam("userid") String userid, @ModelAttribute("cri") Criteria cri, UserVO user, RedirectAttributes rttr) {
 		
 		PhoneDTO PDTO = new PhoneDTO();
-		user.setPhone(PDTO.phoneAppend(user));
+		PDTO.phoneAppend(user);
 		service.modify(user);
 		
 		rttr.addFlashAttribute("result", "userModSuccess");

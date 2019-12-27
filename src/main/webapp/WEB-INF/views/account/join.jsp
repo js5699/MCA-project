@@ -11,8 +11,11 @@
 		
 		<div class="form-group row">
 		    <label for="inputuserid" class="col-sm-2 ">아이디</label>
-		    <div class="col-sm-3">
+		    <div class="col-sm-5">
 		    	<input type="text" class="form-control" placeholder="ID" id="inputuserid" name="userid">
+		    	<div class="invalid-feedback">
+			    	이미 사용중인 아이디입니다.
+			    </div>
 		    </div>
 		</div>
 		
@@ -90,14 +93,14 @@
 		</div>
 		<div class="form-group row">
 		    <label for="input" class="col-sm-2 ">주소</label>
-		    <div class="col-sm-5">
-		    	<input type="text" class="form-control" name="address1" id="inputAddress1" />
+		    <div class="col-sm-7">
+		    	<input type="text" class="form-control" placeholder="ADDRESS 1" name="address1" id="inputAddress1" />
 		    </div>
 		</div>
 		<div class="form-group row">
 		    <label for="input" class="col-sm-2 ">상세주소</label>
-		    <div class="col-sm-5">
-		    	<input type="text" class="form-control" placeholder="상세주소 입력" name="address2" id="inputAddress1" />
+		    <div class="col-sm-7">
+		    	<input type="text" class="form-control" placeholder="ADDRESS 2" name="address2" id="inputAddress1" />
 		    </div>
 		</div>
 		
@@ -122,6 +125,22 @@ function execDaumPostcode() {
         }
     }).open();
 }
+</script>
+<script>
+	$("#inputuserid").blur(function() {
+		
+		var newUserid = $("#inputuserid").val();
+		$.ajax({
+			url: '/account/idCheck?userid=' + newUserid,
+			type: 'get',
+			success: function(data) {
+				console.log("1-중복/0-사용가능 ==> : " + data);
+				if(data == 1) {
+					
+				}
+			}
+		});
+	});
 </script>
 <script type="text/javascript">
 function formCheck() {
