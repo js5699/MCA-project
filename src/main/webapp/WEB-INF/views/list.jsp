@@ -84,13 +84,13 @@
 					<c:forEach items="${list}" var="product">
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
-								<a href="/shop/productDetail?pid=${product.productid}"><img
-									class="card-img-top" src='<c:out value="${product.pimg}"/>'
+								<a href="/shop/productDetail?pid=${product.productId}"><img
+									class="card-img-top" src="/adminProduct/display?fileName=${product.pimg}&cid=${product.cid}"
 									alt="<c:out value="${product.ptitle}"/>"
 									title="<c:out value="${product.ptitle}"/>"></a>
 								<div class="card-body">
 									<h4 class="card-title">
-										<a href="/shop/productDetail?pid=${product.productid}"> <c:out
+										<a href="/shop/productDetail?pid=${product.productId}"> <c:out
 												value="${product.ptitle}" /></a>
 									</h4>
 									<h5>
@@ -101,15 +101,15 @@
 								</div>
 								<div class="card-footer">
 									<button type="button"
-											class="btn btn-primary" id="cart${product.productid}">장바구니</button>
+											class="btn btn-primary" id="cart${product.productId}">장바구니</button>
 							<script>
-								$("#cart${product.productid}").click(function(){
+								$("#cart${product.productId}").click(function(){
 									
-									var productid = ${product.productid};
+									var productId = ${product.productId};
 									var productstock = 1;
 									
 									var data = {
-											productid : productid,
+											productId : productId,
 											productstock : productstock
 											};
 									alert("장바구니에  담겨습니다.");

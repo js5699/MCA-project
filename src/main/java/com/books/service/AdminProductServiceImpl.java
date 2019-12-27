@@ -47,7 +47,7 @@ public class AdminProductServiceImpl implements AdminProductService{
 
 	@Override
 	public List<ProductVO> list(Criteria cri) {
-		return Pmapper.getList(cri);
+		return Pmapper.getAdminList(cri);
 	}
 
 	@Override

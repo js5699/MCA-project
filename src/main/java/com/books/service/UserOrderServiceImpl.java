@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.books.domain.Criteria;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
+import com.books.domain.ProductVO;
 import com.books.mapper.OrderMapper;
 
 import lombok.AllArgsConstructor;
