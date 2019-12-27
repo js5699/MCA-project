@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.books.domain.QnaBoardVO;
+
 import com.books.domain.Criteria;
-import com.books.domain.QnaPageDTO;
+import com.books.domain.PageDTO;
+import com.books.domain.QnaBoardVO;
 import com.books.service.QnaBoardService;
 
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class QnaBoardController {
 		int total = service.getTotal(cri);
 		log.info("total: " + total);
 		
-		model.addAttribute("pageMaker", new QnaPageDTO(cri, total));
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	@PostMapping("/register")
 	@PreAuthorize("isAuthenticated()")

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.books.domain.Criteria;
 import com.books.domain.NoticeBoardVO;
-import com.books.domain.NoticePageDTO;
+import com.books.domain.PageDTO;
 import com.books.service.AccountService;
 import com.books.service.NoticeBoardService;
 
@@ -44,7 +44,7 @@ public class NoticeBoardController {
 		
 		log.info("total : " + total);
 		
-		model.addAttribute("paging", new NoticePageDTO(cri, total));
+		model.addAttribute("paging", new PageDTO(cri, total));
 	}
 	
 	@PostMapping("/noticeRegister")

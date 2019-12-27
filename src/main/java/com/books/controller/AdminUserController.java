@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.books.domain.Criteria;
-import com.books.domain.NoticePageDTO;
+import com.books.domain.PageDTO;
 import com.books.domain.PhoneDTO;
 import com.books.domain.UserVO;
 import com.books.service.AccountService;
@@ -38,7 +38,7 @@ public class AdminUserController { // 관리자 권한 추가
 		model.addAttribute("list", adminUserSVC.getList(cri));
 		int totalCount = adminUserSVC.getTotal(cri);
 		model.addAttribute("total", totalCount);
-		model.addAttribute("pageMaker", new NoticePageDTO(cri,totalCount));
+		model.addAttribute("pageMaker", new PageDTO(cri,totalCount));
 	}
 	
 	@GetMapping("/info")

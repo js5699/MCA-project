@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.books.domain.Criteria;
-import com.books.domain.NoticePageDTO;
+import com.books.domain.PageDTO;
 import com.books.domain.OrderVO;
 import com.books.domain.UserVO;
 import com.books.service.AccountService;
@@ -37,7 +37,7 @@ public class AdminOrderController {
 		model.addAttribute("list", service.getLatestOrderListWithPaging(cri));
 		int totalCount = service.getHasOrderCount(cri);
 		model.addAttribute("total", totalCount);
-		model.addAttribute("pageMaker", new NoticePageDTO(cri, totalCount));
+		model.addAttribute("pageMaker", new PageDTO(cri, totalCount));
 		
 	}
 

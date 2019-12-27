@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.books.domain.Criteria;
-import com.books.domain.NoticePageDTO;
+import com.books.domain.PageDTO;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
 import com.books.domain.UserVO;
@@ -43,7 +43,7 @@ public class UserOrderController {
 		
 		log.info("total : " + total);
 		
-		model.addAttribute("paging", new NoticePageDTO(cri, total));
+		model.addAttribute("paging", new PageDTO(cri, total));
 		
 	}
 	
