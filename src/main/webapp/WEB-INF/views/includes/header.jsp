@@ -41,6 +41,9 @@
 							<a class="nav-link logoutbtn" href="/">로그아웃</a>
 						</form>
 					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li class="nav-item"><a class="nav-link" href="/adminProduct/list">관리자전용</a></li>
+					</sec:authorize>
 				</ul>
 			</div>
 		</div>

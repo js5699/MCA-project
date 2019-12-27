@@ -10,13 +10,7 @@
 
 		<div class="row">
 
-			<div class="col-lg-2">
-
-				<h2>상세페이지</h2>
-
-			</div>
-
-			<div class="col-lg-9">
+			<div class="col-lg-12">
 
 				<!-- 상세페이지 구현 -->
 				<div class="container">
@@ -36,7 +30,7 @@
 										<th></th>
 										<th><img class="media-object-center"
 											style="width: 160px; height: 250px;"
-											src="<c:out value="${product.pimg}"/>"
+											src="/adminProduct/display?fileName=${product.pimg}&cid=${product.cid}"
 											alt="<c:out value="${product.ptitle}"/>"
 											title="<c:out value="${product.ptitle}"/>의 사진"></th>
 										<th class="col-lg-1">
@@ -46,18 +40,18 @@
 											<p>
 												저자:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												<c:out value="${product.publisher}" />
+												<c:out value="${product.author}" />
 											</p>
 											<P>출판사:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp publisher</P>
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${product.publisher}</P>
 											<P>출판일:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp pubdate</P>
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <fmt:formatDate pattern="yyyy-MM-dd" value="${product.pubdate}" /></P>
 											<P>
 												쪽수 및 판형:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												<c:out value="${product.bkPage}" />
+												<c:out value="${product.bkpage}" />
 												쪽
-												<c:out value="${product.bkSize}" />
+												<c:out value="${product.bksize}" />
 												mm
 											</P>
 											<div class="col-sm-8 input-group">
@@ -71,7 +65,7 @@
 											</div>
 											<p></p>
 											<button class="btn btn-primary">바로구매</button>
-											<button class="btn btn-primary" id="cart${product.productid}">장바구니</button>
+											<button class="btn btn-primary" id="cart${product.productId}">장바구니</button>
 											<script>
 											       /* 수량 변경 js */
 												  $("#plus").click(function(){
@@ -114,9 +108,9 @@
 									
 										                }); */
 												  
-													$("#cart${product.productid}").click(function(){
+													$("#cart${product.productId}").click(function(){
 														
-														var productid = ${product.productid};
+														var productid = ${product.productId};
 														var productstock = $(".stock").val();
 														
 														var data = {
@@ -167,14 +161,14 @@
 										<th></th>
 										<th></th>
 										<th>책 소개</th>
-										<th><c:out value="${product.bkDesc}" /></th>
+										<th><c:out value="${product.bkdesc}" /></th>
 									</tr>
 									<tr>
 										<th></th>
 										<th></th>
 										<th>목차</th>
 										<th><pre>
-<c:out value="${product.bkIndex}" /> 
+<c:out value="${product.bkindex}" /> 
 <!-- <details>
     <summary>펼치기</summary>
 </details> -->

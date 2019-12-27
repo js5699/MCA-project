@@ -5,41 +5,39 @@
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
 <body>
-	<!-- Page Content -->
-	<div class="container">
 
 		<div class="row">
 
-			<div class="col-lg-3">
-				<h1 class="my-4">Book 스토어</h1>
-				<div class="btn-group dropright">
-  				<input  value="도서" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly="readonly"> 	
-		  			<div class="dropdown-menu dropright">
-	  				  <ul class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly="readonly"> 		  
-  			 	 		가정살림  
-  			 	 		<div class="dropdown-menu">
-					  	      <li><a href="#"> 메뉴 1</a><li>
-							  <li><a href="#"> 메뉴 2</a><li>
-							  <li><a href="#"> 메뉴 3</a><li>				
-			  		    </div>
-			  		    </ul>			  		    			  		  			  			    			  		 
-			  		    <ul class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly="readonly">
-			  		   	 건강 취미  		  
-  			 	 		<div class="dropdown-menu">
-					  	     <li><a href="#"> 메뉴 4</a><li>
-							 <li><a href="#"> 메뉴 5</a><li>
-							 <li><a href="#"> 메뉴 6</a><li>		
-			  		    </div>
-			  		    </ul>
-			  		</div>		  						
-  				</div>
-  				<input  value="해외도서" class="dropdown-toggle1" data-toggle="dropdown1" aria-haspopup="true" aria-expanded="false" readonly="readonly">
-  				<input  value="CD음반" class="dropdown-toggle2" data-toggle="dropdown2" aria-haspopup="true" aria-expanded="false" readonly="readonly">
-			</div>
+<!-- 			<div class="col-lg-3"> -->
+<!-- 				<h1 class="my-4">Book 스토어</h1> -->
+<!-- 				<div class="btn-group dropright"> -->
+<!--   				<input  value="도서" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly="readonly"> 	 -->
+<!-- 		  			<div class="dropdown-menu dropright"> -->
+<!-- 	  				  <ul class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly="readonly"> 		   -->
+<!--   			 	 		가정살림   -->
+<!--   			 	 		<div class="dropdown-menu"> -->
+<!-- 					  	      <li><a href="#"> 메뉴 1</a><li> -->
+<!-- 							  <li><a href="#"> 메뉴 2</a><li> -->
+<!-- 							  <li><a href="#"> 메뉴 3</a><li>				 -->
+<!-- 			  		    </div> -->
+<!-- 			  		    </ul>			  		    			  		  			  			    			  		  -->
+<!-- 			  		    <ul class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly="readonly"> -->
+<!-- 			  		   	 건강 취미  		   -->
+<!--   			 	 		<div class="dropdown-menu"> -->
+<!-- 					  	     <li><a href="#"> 메뉴 4</a><li> -->
+<!-- 							 <li><a href="#"> 메뉴 5</a><li> -->
+<!-- 							 <li><a href="#"> 메뉴 6</a><li>		 -->
+<!-- 			  		    </div> -->
+<!-- 			  		    </ul> -->
+<!-- 			  		</div>		  						 -->
+<!--   				</div> -->
+<!--   				<input  value="해외도서" class="dropdown-toggle1" data-toggle="dropdown1" aria-haspopup="true" aria-expanded="false" readonly="readonly"> -->
+<!--   				<input  value="CD음반" class="dropdown-toggle2" data-toggle="dropdown2" aria-haspopup="true" aria-expanded="false" readonly="readonly"> -->
+<!-- 			</div> -->
 
 
 
-			<div class="col-lg-9">
+			<div class="col-lg-12">
 
 				<div id="carouselExampleIndicators" class="carousel slide my-4"
 					data-ride="carousel">
