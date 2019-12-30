@@ -5,7 +5,7 @@
  */
 body {
 	padding-top: 56px;
-/* 	font-size: 0.9em; */
+	font-size: 0.9em;
 }
 
 .formContainer {
@@ -180,7 +180,7 @@ span.list-orderid {
 	margin-bottom: 25px;
 }
 
-/* a �깭洹� css */
+/* a 占쎄묶域뱄옙 css */
 a { 
 	text-decoration:none; 
 }
@@ -207,7 +207,7 @@ a hover{
 }
 
 
-/* media 荑쇰━ */
+/* media �뜎�눖�봺 */
 @media screen and (max-width: 985px) {
 	.btn btn-danger{
 		width:10px; 		 
