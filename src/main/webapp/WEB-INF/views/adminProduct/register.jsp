@@ -22,7 +22,7 @@
 							&nbsp;&nbsp;상세페이지 
 					</h3>
 				</div>
-				<table class="table" style = "max-width: 50%">
+				<table class="table">
 					<thead>
 						<tr>
 							<th><img class="media-object-center"
@@ -34,19 +34,19 @@
 								<h4>
 									<c:out value="${product.ptitle}" />
 								</h4> <br> <br>
-								<p>
+								<div class = "form-group">
 									저자:
 									<c:out value="${product.author}" />
-								</p>
-								<P>출판사: ${product.publisher}</P>
-								<P>출판일: <fmt:formatDate pattern="yyyy-MM-dd" value="${product.pubdate}" /></P>
-								<P>
+								</div>
+								<div class = "form-group">출판사: ${product.publisher}</div>
+								<div class = "form-group">출판일: <fmt:formatDate pattern="yyyy-MM-dd" value="${product.pubdate}" /></div>
+								<div class = "form-group">
 									쪽수 및 판형:
 									<c:out value="${product.bkpage}" />
 									쪽
 									<c:out value="${product.bksize}" />
 									mm
-								</P>
+								</div>
 								
 							</th>
 							<th></th>
@@ -60,15 +60,14 @@
 						</tr>
 						<tr>
 							<th>목차</th>
-							<th><pre>
+							<th><div class = "form-group">
 									<c:out value="${product.bkindex}" /> 
 									<!-- <details>
 									    <summary>펼치기</summary>
 									</details> -->
-								</pre>
+								</div></th>
+						</tr>
 					</tbody>
-					</th>
-					</tr>
 				</table>
 			</div>
 			<div class="modal-footer">
