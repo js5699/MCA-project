@@ -2,7 +2,10 @@ package com.books.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.books.domain.Criteria;
+import com.books.domain.OrderDetailPageDTO;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderPageDTO;
 import com.books.domain.OrderVO;
@@ -20,5 +23,9 @@ public interface AdminOrderService {
 	
 	// 회원 개인 주문정보 수정
 	public boolean modUserOrder(OrderVO order);
+	
+	// 회원 개인 주문 상세내역 리스트+페이지
+	public OrderDetailPageDTO getUserOrderItemsListPage(String orderid, Criteria cri);
+		
 	
 }

@@ -117,7 +117,7 @@ p i {
 	background-color: #f6f5fa;
 }
 
-.order-row-group {
+.order-row-group, .order-row-group td {
 	vertical-align: middle !important;
 }
 

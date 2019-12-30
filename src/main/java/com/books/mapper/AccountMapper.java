@@ -24,4 +24,5 @@ public interface AccountMapper {
 
 	public int updatePw(UserVO user);
 	
+	public int readId(String newUserid);
 }

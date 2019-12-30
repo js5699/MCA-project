@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.books.mapper.AdminUserMapper">
 	
+	<!-- list화면 회원 목록 -->
 	<sql id="criteria">
 		<if test="kw_name != null and kw_name != ''">
 			<trim prefix="(" suffix=") AND" >
@@ -45,12 +46,52 @@
  		]]>  
 	</select>
 	
-	<select id="getAuth" resultType="com.books.domain.AuthVO">
-		SELECT * 
-		FROM tbl_user_auth
-		WHERE userid = #{userid}
+	
+	<!-- 선택 유저 회원정보+권한정보 -->
+	<resultMap type="com.books.domain.UserVO" id="userMap">
+		<id property="userid" column="userid"/>
+		<result property="name" column="name"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="zipcode" column="zipcode"/>
+		<result property="address1" column="address1"/>
+		<result property="address2" column="address2"/>
+		<result property="regdate" column="regdate"/>
+		<result property="adminMemo" column="adminmemo"/>
+		<collection property="authList" resultMap="authMap"/>
+	</resultMap>
+	
+	<resultMap type="com.books.domain.AuthVO" id="authMap">
+		<result property="userid" column="userid"></result>
+		<result property="auth" column="auth"></result>
+	</resultMap>
+	
+	<select id="readUserWithAuth" resultMap="userMap">
+		SELECT u.userid, name, phone, email, zipcode, address1, address2, regdate, adminmemo, auth
+		FROM tbl_user u LEFT OUTER JOIN tbl_user_auth ua ON u.userid = ua.userid
+		WHERE ua.userid = #{userid} 
 	</select>
 	
+	
+	<!-- 선택 유저 주문내역 리스트 to JSON -->
+	<select id="getUserOrderCount" resultType="int">
+		SELECT COUNT(orderid) FROM tbl_order WHERE userid = #{userid}
+	</select>
+	
+	<select id="getUserOrderListWithPaging" resultType="com.books.domain.OrderVO">
+		<![CDATA[
+			SELECT orderid, orderdate, totalprice, dtell, orderstatus
+			FROM (
+					SELECT rownum rn, orderid, orderdate, totalprice, dtell, orderstatus
+					FROM tbl_order
+					WHERE userid=#{userid} AND rownum <= #{cri.pageNum} * #{cri.amount}
+				)
+			WHERE rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
+	
+	
+	<!-- 선택 유저 업데이트 & 삭제 -->
 	<update id="update">
 		UPDATE tbl_user
 		SET name  = #{name},
@@ -66,5 +107,20 @@
 	<delete id="delete">
 		DELETE FROM tbl_user WHERE userid = #{userid}
 	</delete>
-
+	
+	
+	<insert id="insertAuth">
+		INSERT INTO tbl_user_auth(USERID, AUTH)
+		SELECT #{userid}, #{auth} 
+		FROM DUAL 
+		WHERE NOT EXISTS(
+			SELECT userid, auth 
+			FROM tbl_user_auth
+			WHERE userid = #{userid} AND auth = #{auth}
+		)
+	</insert>
+	
+	<delete id="deleteAuth">
+		DELETE FROM tbl_user_auth WHERE userid = #{userid} AND auth = #{auth}
+	</delete>
 </mapper>

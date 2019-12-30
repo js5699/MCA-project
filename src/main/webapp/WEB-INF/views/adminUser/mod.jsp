@@ -31,34 +31,49 @@
 	<div class="row formContainer">
 		<h5 class="col-lg-12"><i class="fas fa-user-lock"></i> 회원 권한</h5>
 	
-		<c:forEach items="${auth}" var="auth">
+		<c:forEach items="${user.authList}" var="auth">
 			<c:if test="${auth.auth == 'ROLE_USER'}">
 				<c:set var="auth_user" value="${auth.auth}"/>
 			</c:if>
 			<c:if test="${auth.auth == 'ROLE_ADMIN'}">
 				<c:set var="auth_admin" value="${auth.auth}"/>
 			</c:if>
+			<c:if test="${auth.auth == 'ROLE_WITHDRAW'}">
+				<c:set var="auth_withdraw" value="${auth.auth}"/>
+			</c:if>
 		</c:forEach>
 		
-		<div class="col-lg-12 formContainer-top">
-			<div class="form-group row ">
-				<label for="inputAddress2" class="col-sm-2">회원권한 관리</label>
-				<div class="custom-control-mypage custom-checkbox col-sm-5">
-					<input type="checkbox" class="custom-control-input" id="auth_user" value="ROLE_USER" checked disabled>
-					<label class="custom-control-label" for="auth_user">일반회원</label>
-					<p><small class="text-muted">회원가입시 기본 회원권한이며 관리자에게도 부여됩니다.</small></p>
-				</div>
-			
-				<div class="custom-control-mypage custom-checkbox col-sm-5 ">
-					<input type="checkbox" class="custom-control-input" id="auth_admin" value="ROLE_ADMIN" ${!empty auth_admin ? 'checked disabled' : ''} >
-					<label class="custom-control-label" for="auth_admin">관리자</label>
-					<p><small class="text-muted">이 회원에게 관리자 권한이 추가됩니다.</small></p>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-12 text-right">
-			<button class="btn btn-warning btn-sm">권한 업데이트</button>
-		</div>
+		<table class="table">
+			<tr>
+				<th>권한</th>
+				<th>권한 여부</th>
+				<th>권한 추가</th>
+				<th></th>
+			</tr>
+			<tr class="order-row-group">
+				<td>유저권한</td>
+				<td>
+					<c:if test="${!empty auth_user}">
+			    		일반 회원
+			    	</c:if>
+				</td>
+				<td><a href="#" class="btn btn-outline-secondary btn-sm disabled" tabindex="-1" role="button" aria-disabled="true">기본 권한</a></td>
+				<td><small class="text-muted">모든 회원이 기본적으로 가지는 권한입니다.</small></td>
+			</tr>
+			<tr class="order-row-group">
+				<td>관리자권한</td>
+				<c:if test="${empty auth_admin}">
+					<td>권한 없음</td>
+					<td><a href="" class="btn btn-outline-warning btn-sm add-auth-admin">관리자 권한 추가</a></td>
+					<td><small class="text-muted">이 회원에게 관리자 권한이 추가됩니다.</small></td>
+		    	</c:if>
+		    	<c:if test="${!empty auth_admin}">
+					<td>권한 있음</td>
+					<td><a href="" class="btn btn-outline-warning btn-sm remove-auth-admin">관리자 권한 삭제</a></td>
+					<td><small class="text-muted">이 회원의 관리자 권한을 삭제합니다.</small></td>
+		    	</c:if>
+			</tr>
+		</table>
 	</div>
 	
 	<div class="row">
@@ -70,7 +85,7 @@
 	    	<input type="text" readonly class="form-control-plaintext" id="inputuserid" name="userid-display" value="${user.userid}">
 	    </div>
 	</div>
-	
+
 	<hr />
 	
 	<div class="form-group row">
@@ -137,19 +152,19 @@
 	</div>
 	<div class="form-group row">
 	    <label for="inputAddress1" class="col-sm-2 col-form-label">주소</label>
-	    <div class="col-sm-5">
+	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" name="address1" id="inputAddress1"  value="${user.address1}" />
 	    </div>
 	</div>
 	<div class="form-group row">
 	    <label for="inputAddress2" class="col-sm-2 col-form-label">상세주소</label>
-	    <div class="col-sm-5">
+	    <div class="col-sm-7">
 	    	<input type="text" class="form-control" placeholder="상세주소 입력" name="address2" id="inputAddress2"  value="${user.address2}" />
 	    </div>
 	</div>
 	
 	<div class="row formContainer-top formContainer">
-		<h5 class="col-lg-12"><i class="fas fa-user-edit"></i> 관리자 메모</h5>
+		<h5 class="col-lg-12"><i class="fas fa-user-tag"></i> 관리자 메모</h5>
 	</div>
 	<div class="form-group row ">
 	    <label for="inputAddress2" class="col-sm-2 col-form-label">메모</label>
@@ -185,6 +200,7 @@
 	    }).open();
 	}
 </script>
+<script type="text/javascript" src="/resources/js/order.js"></script>
 <script>
 	$(document).ready(function() {
 		
@@ -209,27 +225,64 @@
 				
 				formObj.attr("action", "/adminUser/list").attr("method", "get");
 				formObj.empty();
+				formObj.append(pageNumTag);
+				formObj.append(amountTag);
+				formObj.append(kw_date_fromTag);
+				formObj.append(kw_date_toTag);
+				formObj.append(kw_nameTag);
 				
 			}else if(operation == 'info') {
 				
 				formObj.attr("action", "/adminUser/info").attr("method", "get");
 				formObj.empty();
 				formObj.append(useridTag);
+				formObj.append(pageNumTag);
+				formObj.append(amountTag);
+				formObj.append(kw_date_fromTag);
+				formObj.append(kw_date_toTag);
+				formObj.append(kw_nameTag);
 				
-			}else if(operation == 'mod') {
-				formObj.submit();
 			}
-			
-			formObj.append(pageNumTag);
-			formObj.append(amountTag);
-			formObj.append(kw_date_fromTag);
-			formObj.append(kw_date_toTag);
-			formObj.append(kw_nameTag);
 			
 			formObj.submit();
 			
 		});
-
+		
+		var csrfHeaderName = "${_csrf.headerName}";
+		var csrfTokenValue = "${_csrf.token}";
+		
+		var userid = "${user.userid}";
+		var adminAuth = "ROLE_ADMIN";
+		
+		var addAuthBtn = $(".add-auth-admin");
+		var removeAuthBtn = $(".remove-auth-admin");
+		
+		$(document).ajaxSend(function(e, xhr, options){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		});
+		
+		addAuthBtn.on("click", function(e) {
+			if(confirm("관리자 권한을 추가하시겠습니까?")) {
+				var auth = { userid: userid, auth: adminAuth };
+				adminUserService.addRole(auth, function(result) {
+					if (result=="success") {
+						alert("관리자 권한이 추가되었습니다.")		
+					}
+				});
+			}
+		});
+		
+		removeAuthBtn.on("click", function(e) {
+			if(confirm("관리자 권한을 제거하시겠습니까?")) {
+				var auth = { userid: userid, auth: adminAuth };
+				adminUserService.removeRole(auth, function(result) {
+					if (result=="success") {
+						alert("관리자 권한이 삭제되었습니다.")		
+					}
+				});
+			} 
+		});
+		
 	});
 </script>
 
