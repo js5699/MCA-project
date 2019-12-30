@@ -4,6 +4,16 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.books.mapper.ProductMapper">
 
+<!--전체 리스트-->
+<select id="allList" resultType="com.books.domain.ProductVO">
+<![CDATA[
+select
+productid,pimg,ptitle,price,publisher,AUTHOR,BKSIZE,BKPAGE,BKINDEX,BKDESC,ISBN,STOCK,CID,SALECNT
+	from tbl_product
+	order by productid asc
+ ]]>
+</select>
+
 <!--상세페이지 --> 
 <select id="getProduct" resultType="com.books.domain.ProductVO">
 <![CDATA[
@@ -11,14 +21,22 @@
  ]]>
 </select>
 
-
-<!--책 리스트-->
-<select id="getList" resultType="com.books.domain.ProductVO">
+<!-- 카테고리별 리스트 -->
+<select id="cidList" resultType="com.books.domain.ProductVO">
 <![CDATA[
 select
-productid,pimg,ptitle,price,publisher,AUTHOR,BKSIZE,BKPAGE,BKINDEX,BKDESC,ISBN,STOCK,CID,SALECNT
-	from tbl_product
-	order by productid asc
+    p.ptitle, p.cid, c.cidref, c.cname, c.cid, Price, Stock, bkdesc, pimg, productid
+        from tbl_product p
+            inner join tbl_cid c
+                on p.cid = c.cid           
+            where p.cid = #{cid}
+ ]]>
+</select>
+
+<!-- 카테고리 리스트 -->
+<select id="cid" resultType="com.books.domain.CidVO">
+<![CDATA[
+	select * from tbl_cid    
  ]]>
 </select>
 

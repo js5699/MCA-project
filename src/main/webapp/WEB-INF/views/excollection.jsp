@@ -375,7 +375,33 @@ $("asd").on({
     $("asd").append("마우스가 커서가 문장을 빠져 나갔습니다.<br>");
   }
 });
+
+
 </script>
+
+<button id="btn1">div1로 이동</button>
+
+<div id="div1">div1</div>
+
+<script>
+
+	$(document).ready(function(){
+
+		$('#btn1').click(function(){
+
+			var offset = $('#div1').offset(); //선택한 태그의 위치를 반환                
+
+	        $('html').animate({scrollTop : offset.top}, 400);
+
+		});
+
+	});
+
+</script>
+
+
+
+
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp"%>
 

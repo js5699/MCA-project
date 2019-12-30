@@ -17,23 +17,20 @@
   <title>Shop Homepage - Start Bootstrap Template</title>
 
 	 
-  <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  
-<!--   <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-  
-  <!-- <link href="/resources/css/shop-homepage.css" rel="stylesheet"> -->
+  <!-- Bootstrap core CSS -->
+	<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->	 
+	<!-- Custom styles for this template -->
+	<link href="/resources/css/shop-homepage.css" rel="stylesheet" type = "text/css">	
+
  
  	 <!-- Bootstrap core CSS -->
 	<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
 	<!-- Custom styles for this template -->
 	<link href="/resources/css/shop-homepage.css" rel="stylesheet" type = "text/css">	
-<!-- 
-	Table CSS 
-	<link href="/resources/css/table.css" rel="stylesheet" type = "text/css">
-  		 -->
+
+ 	
  
 </head>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -74,24 +71,25 @@
 		</div>
 	</nav>
 
-
+    
  <!-- 전체도서 구현 -->
-<!-- <div class="logo">
-        </div>
-        <div class="topMenu">
-            <ul class="menu01">
+ 	
+         <div class="topMenu">         	
+            <ul class="menu01">                   
+                <li>
+                <c:forEach items="${cid}" var="cid" varStatus="status" begin="${status.begin}" end="3" >
+  		             <ul class="dept01">
+                      	<span><a href="/shop/list?cid=${cid.cid} !!! ${status.count}">가정 살림</a></span>
+                        <li id="nop"><a href="/shop/list?cid=${cid.cid} !!! ${status.count}&ref=">육아</a></li>
+                        <li id="nop"><a href="/shop/list?cid=${cid.cid} !!! ${status.count}&ref=">요리</a></li>
+                    </ul>               	
+    			</c:forEach>
+                </li>               
                 <li>
                     <ul class="dept01">
-                      	<span><a href="/shop/list?c=11000&l=1">가정 살림</a></span>
-                        <li id="nop"><a href="/shop/list?c=11001&l=2">육아</a></li>
-                        <li id="nop"><a href="/shop/list?c=11002&l=2">요리</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="dept01">
-                    	<span><a href="/shop/list?c=11100&l=1">건강 취미</a></span>
-                        <li id="nop"><a href="/shop/list?c=11101&l=2">스포츠</a></li>
-                        <li id="nop"><a href="/shop/list?c=11102&l=2">퍼즐</a></li>
+                    	<span><a href="/shop/list?cid=&l=1">건강 취미</a></span>
+                        <li id="nop"><a href="/shop/list?cid=11101&l=2">스포츠</a></li>
+                        <li id="nop"><a href="/shop/list?cid=11102&l=2">퍼즐</a></li>
                     </ul>
                 </li>
                 <li>
@@ -209,19 +207,35 @@
                     </ul>
                 </li>
                 <li>
-                	<ul class="dept01">
+                	<ul class="dept01">                	
                 		<br><br><br><p></p>
                     </ul>
-                </li>
+                </li>                
             </ul>
-        </div>
- -->
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script>
-	$('#allbk').click(function() {
-    $('.dept01').slideDown(300).focus();
+        </div>     
+   
+		
+<script  src="//code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+
+	 $('#allbk').click(function() {
+   		$('.dept01').slideDown(300);
+   		
+	});	 
+
+	$(document).ready(function(){
+
+			$('#allbk').click(function(){
+
+				var offset = $('body').offset();             
+
+		        $('html').animate({scrollTop : offset.top}, 400);
+
+			});
+
 	});
-	
+
 	
 $(document).on('mouseover', 'div', function () {
     if (!$(this).hasClass('topMenu')) {

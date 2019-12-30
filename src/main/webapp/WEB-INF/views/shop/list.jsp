@@ -73,7 +73,7 @@
 									title="<c:out value="${product.ptitle}"/>"></a>
 								<div class="card-body">
 									<h4 class="card-title">
-										<a href="/shop/productDetail?pid=${product.productid}"> <c:out
+										<a href="/shop/productDetail?pid=${product.productid}"><c:out
 												value="${product.ptitle}" /></a>
 									</h4>
 									<h5>
@@ -83,7 +83,7 @@
 								</div>
 								<div class="card-footer">
 									<button type="button"
-											class="btn btn-primary" id="cart${product.productid}">장바구니</button>
+										class="btn btn-primary" id="cart${product.productid}">장바구니</button>
 							<script>
 								$("#cart${product.productid}").click(function(){
 									
