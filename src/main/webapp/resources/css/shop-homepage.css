@@ -5,9 +5,12 @@
  */
 body {
 	padding-top: 56px;
-/* 	font-size: 0.9em; */
+ 	font-size: 0.9em;
 }
 
+.join-textarea {
+	font-size: 0.8em;
+}
 .formContainer {
 	padding-top: 25px;
 	padding-bottom: 25px;
@@ -28,11 +31,7 @@ body {
 h5>i {
 	margin-right: 15px;
 }
-/* 
-.btnBox {
-	margin-left: -30px;
-	margin-Right: -30px;
-} */
+
 .sidevarName {
 	padding-top: 25px;
 	padding-bttom: 10x;
@@ -180,7 +179,7 @@ span.list-orderid {
 	margin-bottom: 25px;
 }
 
-/* a �깭洹� css */
+/* a 占쎄묶域뱄옙 css */
 a { 
 	text-decoration:none; 
 }
@@ -207,7 +206,7 @@ a hover{
 }
 
 
-/* media 荑쇰━ */
+/* media �뜎�눖�봺 */
 @media screen and (max-width: 985px) {
 	.btn btn-danger{
 		width:10px; 		 

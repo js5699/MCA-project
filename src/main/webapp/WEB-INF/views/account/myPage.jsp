@@ -14,7 +14,11 @@
 			</button>
 		</div>
 	</c:if>
-
+<ul class="list-group list-group-horizontal">
+  <li class="list-group-item">내정보조회</li>
+  <li class="list-group-item">주문내역</li>
+  <li class="list-group-item">교환/취소내역</li>
+</ul>
 	<h5><i class="fas fa-user-circle"></i>내 정보</h5>
 
 	<table class="table">

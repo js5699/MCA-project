@@ -17,9 +17,17 @@
 	<c:choose>
 		<c:when test="${sideNavName eq 'account'}">
 			<h4 class="sidevarName">마이페이지</h4>
-			<div class="list-group">
-				<a href="/account/myPage" class="list-group-item">내 정보 수정</a>
-				<a href="#"	class="list-group-item">주문 내역</a>
+			<div class="list-group mb-3">
+				<a href="/account/myPage" class="list-group-item">내 정보</a>
+				<a href="/account/myPage" class="list-group-item">내가 쓴 글</a>
+			</div>
+			<div class="list-group mb-3">
+				<a href="/account/myPage" class="list-group-item">주문 내역</a>
+				<a href="#"	class="list-group-item">교환내역</a>
+				<a href="#"	class="list-group-item">취소내역</a>
+			</div>
+			<div class="list-group mb-3">
+				<a href="/account/withdraw" class="list-group-item">회원탈퇴</a>
 			</div>
 		</c:when>
 		<c:when test="${sideNavName eq 'NoticeBoard' or sideNavName eq 'QnaBoard'}">

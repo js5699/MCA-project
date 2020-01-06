@@ -62,9 +62,9 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public boolean idDupCheck(String newUserid) {
+	public int idDupCheck(String newUserid) {
 		log.info(" service - 아이디 중복 체크 : " + newUserid);
-		return mapper.readId(newUserid) == 1;
+		return mapper.readId(newUserid);
 	}
 
 }

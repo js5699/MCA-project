@@ -16,5 +16,5 @@ public interface AccountService {
 
 	public boolean modPw(UserVO user);
 	
-	public boolean idDupCheck(String newUserid);
+	public int idDupCheck(String newUserid);
 }

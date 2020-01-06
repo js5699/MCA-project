@@ -35,6 +35,12 @@ public class AccountController {
 		
 	}
 	
+	//회원탈퇴 페이지
+	@Secured({"ROLE_USER"})
+	@GetMapping("/withdraw")
+	public void withdraw() {
+		log.info("회원탈퇴 페이지");
+	}
 	
 	//회원가입 폼
 	@GetMapping("/join")
@@ -44,7 +50,8 @@ public class AccountController {
 	
 	@GetMapping(value="/idCheck")
 	@ResponseBody
-	public boolean idCheck(@RequestParam("newUserid") String newUserid) {
+	public int idCheck(@RequestParam("newUserid") String newUserid) {
+		log.warn("dub check id : " + newUserid);
 		return service.idDupCheck(newUserid);
 	}
 	

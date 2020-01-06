@@ -1,5 +1,10 @@
 package com.books.domain;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString
 public class PageDTO {
 
 	private int startPage;
