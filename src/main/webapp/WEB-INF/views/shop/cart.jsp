@@ -293,7 +293,7 @@
 					<div class="row">
 						<div class="col-lg-12">
 						<c:if test="${nocart != 'nocart'}">
-							<button class="btn btn-primary float-right">선택상품주문</button>
+							<button type="submit" data-oper='order' class="btn btn-primary float-right">선택상품주문</button>
 						</c:if>	
 						</div>
 					</div>
@@ -322,5 +322,18 @@
 	</div>
 	<!-- /.container -->
 
-
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	var operForm = $("#operForm");
+	
+	$("button[data-oper='order']").on("click", function(e){
+	    
+		operForm.attr("action","/account/orderPayment");
+		operForm.submit();
+	    
+	  });
+	
+});
+</script>
 	<%@ include file="/WEB-INF/views/includes/footer.jsp"%>

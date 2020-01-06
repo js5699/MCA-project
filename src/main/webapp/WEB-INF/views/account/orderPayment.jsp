@@ -37,13 +37,13 @@ th, td{
 			<c:forEach items="${cartList}" var="cartList">
 			<tr>
 				<td>${cartList.ptitle}</td>
-				<td id="productid">${cartList.productid}</td>
-				<td>${cartList.productstock}</td>
+				<td id="productid-2">${cartList.productid}</td>
+				<td>${cartList.productStock}</td>
 				<td>${cartList.price}</td>
-				<td><fmt:formatNumber pattern="###,###,###" value="${cartList.price * cartList.productstock}" />원</td>
+				<td><fmt:formatNumber pattern="###,###,###" value="${cartList.price * cartList.productStock}" />원</td>
 			</tr>
-			<c:set var="quantity" value="${quantity + cartList.productstock}" />
-			<c:set var="totalprice" value="${totalprice + (cartList.price * cartList.productstock)}" />
+			<c:set var="quantity" value="${quantity + cartList.productStock}" />
+			<c:set var="totalprice" value="${totalprice + (cartList.price * cartList.productStock)}" />
 			</c:forEach>
 		</table>
 		<!-- 첫번째 책제목 가져와서 넣기(미완) -->
@@ -103,6 +103,8 @@ th, td{
 $(document).ready(function(){
 	
 	$('#productid').attr('style',"display:none;");
+	
+	$('#productid-2').attr('style',"display:none;");
 	
 	var formObj = $("form");
 	
