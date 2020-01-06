@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.books.domain.CartListVO;
 import com.books.domain.Criteria;
 import com.books.domain.PageDTO;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
 import com.books.domain.UserVO;
+import com.books.service.CartService;
 import com.books.service.UserOrderService;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +33,9 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class UserOrderController {
 	
-	private UserOrderService service; 
+	private UserOrderService service;
+	
+	private CartService cartservice;
 	
 	@GetMapping("/myOrderList")//주문목록+페이징
 	public void list(@RequestParam("userid") String userid, Criteria cri, Model model) {
@@ -48,8 +52,12 @@ public class UserOrderController {
 	}
 	
 	@GetMapping("/orderPayment")//회원주문폼
-	public void insertorder() {
+	public void insertorder(Model model)throws Exception {
 		log.info("회원주문페이지");
+		
+		List<CartListVO> cartList = cartservice.cartList();
+		
+		model.addAttribute("cartList",cartList);
 	}
 	/*
 	@PostMapping("/orderPayment")//회원주문
@@ -76,8 +84,8 @@ public class UserOrderController {
 		String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
 		String subNum = "";
 		 
-		for(int i = 1; i <= 6; i ++) {
-		 subNum += (int)(Math.random() * 10);
+		for(int i = 1; i <= 999; i ++) {
+			subNum += (int)1;
 		}
 		
 		String orderid = ymd + "_" + subNum;

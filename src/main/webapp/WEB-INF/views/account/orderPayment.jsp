@@ -34,16 +34,16 @@ th, td{
 			</tr>
 			<c:set var="quantity" value="0" />
 			<c:set var="totalprice" value="0" />
-			<c:forEach items="${cartlist}" var="cartlist">
+			<c:forEach items="${cartList}" var="cartList">
 			<tr>
-				<td>${cartlist.ptitle}</td>
-				<td id="productid">${cartlist.productid}</td>
-				<td>${cartlist.productstock}</td>
-				<td>${cartlist.price}</td>
-				<td><fmt:formatNumber pattern="###,###,###" value="${cartlist.price * cartlist.productstock}" />원</td>
+				<td>${cartList.ptitle}</td>
+				<td id="productid">${cartList.productid}</td>
+				<td>${cartList.productstock}</td>
+				<td>${cartList.price}</td>
+				<td><fmt:formatNumber pattern="###,###,###" value="${cartList.price * cartList.productstock}" />원</td>
 			</tr>
-			<c:set var="quantity" value="${quantity + cartlist.productstock}" />
-			<c:set var="totalprice" value="${totalprice + (cartlist.price * cartlist.productstock)}" />
+			<c:set var="quantity" value="${quantity + cartList.productstock}" />
+			<c:set var="totalprice" value="${totalprice + (cartList.price * cartList.productstock)}" />
 			</c:forEach>
 		</table>
 		<!-- 첫번째 책제목 가져와서 넣기(미완) -->
