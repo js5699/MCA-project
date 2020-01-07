@@ -77,7 +77,7 @@
          <div class="topMenu">         	
             <ul class="menu01">
             	<c:forEach var="i" begin="0" end="51" step="3">                   
-                <li>                
+                <li>             
   		             <ul class="dept01">
   		             <c:forEach items="${cid}" var="cid" varStatus="status" begin="${i}" end="${i}" >
                       	<span><a href="/shop/list?cid=${cid.cid} !!! ${cid.cidref}">${cid.cname}</a></span>
