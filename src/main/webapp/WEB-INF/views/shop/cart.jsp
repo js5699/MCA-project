@@ -89,7 +89,7 @@
 									
 							    	 if(plusNum >= ${product.stock}){									
 							    		 $(".stock${product.cartNum}").val(num);										
-							    	 } else{									
+							    	 }else{									
 							    		 $(".stock${product.cartNum}").val(plusNum);        										
 							    	 }									
 							     });	 						     
@@ -142,11 +142,11 @@
 							     
 									$("#minus${product.cartNum}").click(function(){
 									
-									 	 if( ${product.productStock} < 1){			
+									 	 if(${product.productStock} < 1){			
 									 		 var productstock =${product.productStock}+1;								    		 
 								    	 } else{							    										
 								    		 var productstock = ${product.productStock}-1;	     
-								    	 }										
+								    	 }									
 										
 									 var productid = '${product.productid}';																	
 									 var checkArr = new Array();

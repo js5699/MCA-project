@@ -108,10 +108,9 @@ public class CartController {
 			service.delectCart(cart);
 			log.warn(chArr);
 			log.warn(cart);
-
 		}
 		log.warn(result);
 		return result;
-	}
+	}	
 
 }

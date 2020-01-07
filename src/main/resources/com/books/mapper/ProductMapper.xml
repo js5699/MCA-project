@@ -30,6 +30,7 @@ select
             inner join tbl_cid c
                 on p.cid = c.cid           
             where p.cid = #{cid}
+             or c.cidref = #{cidref}
  ]]>
 </select>
 

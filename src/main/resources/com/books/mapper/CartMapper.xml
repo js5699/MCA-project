@@ -6,10 +6,12 @@
 
 
 <!-- 카트 담기 -->
-<!-- <insert id="addCart">
+<!--
+ <insert id="addCart">
 	insert into tbl_cart(cartNum, productid, productstock)
 		values(tbl_cart_seq.nextval, #{productid}, #{productstock})
-</insert>  -->
+</insert>
+  -->
 
 <update id="addCart">
 
