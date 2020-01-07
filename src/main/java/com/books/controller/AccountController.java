@@ -1,11 +1,18 @@
 package com.books.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
+
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,19 +42,13 @@ public class AccountController {
 		
 	}
 	
-	//회원탈퇴 페이지
-	@Secured({"ROLE_USER"})
-	@GetMapping("/withdraw")
-	public void withdraw() {
-		log.info("회원탈퇴 페이지");
-	}
-	
 	//회원가입 폼
 	@GetMapping("/join")
 	public void register() {
 		log.info("회원가입 페이지");
 	}
 	
+	//아이디 중복체크
 	@GetMapping(value="/idCheck")
 	@ResponseBody
 	public int idCheck(@RequestParam("newUserid") String newUserid) {
@@ -209,5 +210,40 @@ public class AccountController {
 		
 	}
 	
+	
+	//회원탈퇴 폼
+	@Secured({"ROLE_USER"})
+	@GetMapping("/withdraw")
+	public void withdraw() {
+		log.info("회원탈퇴 페이지");
+	}
+	
+	
+	//회원탈퇴 처리
+	@Secured({"ROLE_USER"})
+	@PostMapping("/withdraw")
+	public String withdrawConfirm(@RequestParam("userpwcf") String userpwcf, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) {
+		log.warn(userpwcf);
+		String redirectUrl = "pwConfirm";
+		
+		BCryptPasswordEncoder BCPEncoder = new BCryptPasswordEncoder();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User   user   = (User) auth.getPrincipal(); //유저정보
+		String userid = user.getUsername(); // userid
+		
+		if ( BCPEncoder.matches(userpwcf, service.getUserpw(userid)) ) {
+			service.remove(userid);
+			service.removeAuth(userid);
+			if (auth != null)
+				new SecurityContextLogoutHandler().logout(request, response, auth);
+			rttr.addFlashAttribute("result","success");
+		} else {
+			log.info("비밀번호 일치하지 않음");
+			rttr.addFlashAttribute("result","error");
+		}
+		
+		return "redirect:/login";
+		
+	}
 	
 }

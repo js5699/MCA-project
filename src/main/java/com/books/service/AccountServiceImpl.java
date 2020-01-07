@@ -39,6 +39,13 @@ public class AccountServiceImpl implements AccountService {
 		log.info("service - remove 회원 정보 삭제 : " + userid);
 		return mapper.delete(userid) == 1;
 	}
+	
+	@Override
+	public boolean removeAuth(String userid) {
+		log.info("service - remove 회원 권한 삭제 : " + userid);
+		return mapper.deleteAuth(userid) == 1;
+	}
+
 
 	@Override
 	public String getUserpw(String userid) {
@@ -66,5 +73,6 @@ public class AccountServiceImpl implements AccountService {
 		log.info(" service - 아이디 중복 체크 : " + newUserid);
 		return mapper.readId(newUserid);
 	}
+
 
 }

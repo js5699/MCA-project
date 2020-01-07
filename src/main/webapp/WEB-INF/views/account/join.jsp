@@ -573,48 +573,55 @@
 	<p><strong>회원가입 정보 입력</strong></p>
 </div>
 
-<form action="/account/join" method="post" class="form-horizontal " name="joinForm" >
+<form action="/account/join" method="post" class="form-horizontal " name="joinForm" onsubmit="return checkz()">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	
 	<div class="form-group row">
 	    <label for="inputuserid" class="col-sm-2 ">아이디</label>
 	    <div class="col-sm-5">
-	    	<input type="text" class="form-control" placeholder="ID" id="inputuserid" name="userid">
-	    	<div class="invalid-feedback">
-		    	이미 사용중인 아이디입니다.
-		    </div>
+	    	<input type="text" class="form-control" placeholder="ID" id="inputuserid" name="userid" required="required">
+	    	<small class="idcheck idcheck-null text-danger">아이디는 6~12자리로 입력하세요.</small>
+	    	<small class="idcheck idcheck-error text-danger">이미 사용중인 아이디입니다.</small>
+	    	<small class="idcheck idcheck-pass text-primary">사용가능한 아이디입니다.</small>
+	    </div>
+	    <div class="col-sm-9 offset-sm-2">
+	    	<small id="pwHelp" class="form-text text-muted">아이디는 6~12자, 영어대소문자+숫자로 설정해야합니다.</small>
 	    </div>
 	</div>
 	
 	<div class="form-group row mb-5"">
 	    <label for="inputuserpw1" class="col-sm-2 ">비밀번호</label>
 	    <div class="col-sm-3">
-	    	<input type="password" class="form-control" placeholder="PASSWORD" id="inputuserpw1" name="userpw">
+	    	<input type="password" class="form-control" placeholder="PASSWORD" id="inputuserpw1" name="userpw" required="required">
 	    </div>
 	    <div class="col-sm-3">
-	    	<input type="password" class="form-control" placeholder="PASSWORD CONFIRM" id="inputuserpw2" name="userpw2">
+	    	<input type="password" class="form-control" placeholder="PASSWORD CONFIRM" id="inputuserpw2" name="re-userpw" required="required">
 	    </div>
+	    <div class="col-sm-9 offset-sm-2">
+	    	<small id="pwHelp" class="form-text text-muted">비밀번호는 6~20자리로 입력해야하며 영어대소문자+숫자로 입력해야합니다.</small>
+	    </div>
+	    
 	</div>
 
 	<div class="form-group row">
 	    <label for="inputname" class="col-sm-2 ">이름</label>
 	    <div class="col-sm-3">
-	    	<input type="text" class="form-control" placeholder="NAME" id="inputname" name="name">
+	    	<input type="text" class="form-control" placeholder="NAME" id="inputname" name="name" required="required">
 	    </div>
 	</div>
 	
 	<div class="form-group row">
 	    <label for="inputemail" class="col-sm-2 ">이메일</label>
 	    <div class="col-sm-5">
-	    	<input type="email" class="form-control" placeholder="EMAIL" id="inputemail" name="email">
+	    	<input type="email" class="form-control" placeholder="email@emailaddress.com" id="inputemail" name="email" required="required">
 	    </div>
+	    <small id="pwHelp" class="form-text text-muted">이메일은 유효한 형식으로 입력해야합니다.</small>
 	</div>
 	
 	<div class="form-group row mb-5">
 	    <label for="input" class="col-sm-2 ">전화번호</label>
 	    <div class="col-sm-2">
 			<select name="phone1" class="form-control" required="required">
-				<option>선택</option>
 				<option value="010">010</option>
 				<option value="011">011</option>
 				<option value="016">016</option>
@@ -661,7 +668,7 @@
 	<div class="form-group row">
 	    <label for="input" class="col-sm-2 ">주소</label>
 	    <div class="col-sm-7">
-	    	<input type="text" class="form-control" placeholder="ADDRESS 1" name="address1" id="inputAddress1" />
+	    	<input type="text" class="form-control" placeholder="ADDRESS 1" name="address1" id="inputAddress1"/>
 	    </div>
 	</div>
 	<div class="form-group row">
@@ -684,8 +691,8 @@
 	    </div>
 	</div>
 	
-	
 </form>
+
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -699,49 +706,51 @@ function execDaumPostcode() {
     }).open();
 }
 </script>
+
+<script src="/resources/js/joinFormCheck.js"></script>
 <script>
 	$("#inputuserid").blur(function() {
+		var idck = false;
 		
+		var getIdCheck = RegExp(/^[a-zA-Z0-9]{6,12}$/);
 		var newUserid = $("#inputuserid").val();
-		$.ajax({
-			url: '/account/idCheck?userid=' + newUserid,
-			type: 'get',
-			success: function(data) {
-				console.log("1-중복/0-사용가능 ==> : " + data);
-				if(data == 1) {
-					
-				}
-			}
-		});
+		
+		if(!getIdCheck.test(newUserid) || newUserid == "") {
+			$("#inputuserid").addClass("is-invalid");
+			$("#inputuserid").removeClass("is-valid");
+            $(".idcheck-error").css("display", "none");
+            $(".idcheck-pass").css("display", "none");
+            $(".idcheck-null").css("display", "block");
+            idck = false;
+		} else {
+			$.ajax({
+				url: "/account/idCheck?newUserid=" + newUserid,
+				type: "get",
+				dataType : "json",
+		        contentType: "application/json; charset=UTF-8",
+		        success : function(data) {
+	                if (data > 0) {
+	                	$("#inputuserid").addClass("is-invalid");
+	                    $("#inputuserid").removeClass("is-valid");
+	                    $(".idcheck-error").css("display", "block");
+	                    $(".idcheck-pass").css("display", "none");
+	                    $(".idcheck-null").css("display", "none");
+	                    idck = false;
+	                } else {
+	                	$("#inputuserid").addClass("is-valid");
+	                	$("#inputuserid").removeClass("is-invalid");
+	                	$(".idcheck-pass").css("display", "block");
+	                	$(".idcheck-error").css("display", "none");
+	                	$(".idcheck-null").css("display", "none");
+	                    idck = true;
+	                }
+	            },
+	            error : function(error) {
+	                alert("error : " + error);
+	            }
+			});
+		}
 	});
 </script>
-<script type="text/javascript">
-function formCheck() {
-	jf = document.joinForm;
-	
-	if(jf.userid.value=="") {
-        alert("아이디를 입력해 주세요");
-        jf.userid.focus();
-        return false;
-    } else if(jf.userpw.value != jf.userpw2.value) {
-        alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
-        jf.userpw.value = "";
-        jf.userpw2.value = "";
-        jf.userpw.focus();
-        return false;
-    } else if(jf.email.value=="") {
-        alert("이메일을 입력해 주세요");
-        jf.email.focus();
-        return false;
-    } else if(jf.name.value=="") {
-        alert("이름을 입력해 주세요");
-        jf.name.focus();
-        return false;
-    } else{
-    	return true;
-    }
-}
-</script>
-
 
 <%@ include file="../includes/footer.jsp"%>

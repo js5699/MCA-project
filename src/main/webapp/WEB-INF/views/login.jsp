@@ -8,10 +8,17 @@
 		<h5 class="pageSubtitle">로그인</h5>
 	</div>
 
-	<c:if test="${logout}">
+	<c:if test="${wd eq 'success'}">
 		<div class="col-lg-7">
 			<div class="alert alert-danger" role="alert">
-				로그아웃 되었습니다.
+				회원탈퇴가 완료되었습니다.
+			</div>			
+		</div>
+	</c:if>	
+	<c:if test="${result eq 'success'}">
+		<div class="col-lg-7">
+			<div class="alert alert-danger" role="alert">
+				회원탈퇴가 완료되었습니다. result-success
 			</div>			
 		</div>
 	</c:if>	
