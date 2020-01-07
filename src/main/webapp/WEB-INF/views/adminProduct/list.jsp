@@ -96,7 +96,22 @@ $(document).ready(function(){
 		}
 	});
 	
-	
+	$("button[name='chkRemove']").on("click", function(){
+		var chkProductId = [];
+		$("input[name='chk']:checked").each(function(){
+			chkProductId.push($(this).val());
+        });
+		$.ajax({
+			url : "/adminProduct/chkRemove",
+			type : "post",
+			data : chkProductId,
+			
+			success : function(data){
+				alert("통신성공");
+			}
+		});
+		
+	});
 	
 });
 </script>

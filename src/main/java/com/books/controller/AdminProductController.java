@@ -33,13 +33,13 @@ public class AdminProductController {
 
 	private AdminProductService APservice;
 	
-	//상품등록 페이지 이동
+	//�긽�뭹�벑濡� �럹�씠吏� �씠�룞
 	@GetMapping("/register")
 	public void register(Model model) {
 		model.addAttribute("cidList", APservice.getCid());
 	}
 	
-	//상품 등록
+	//�긽�뭹 �벑濡�
 	@PostMapping("/register")
 	public String register(ProductVO PVO, RedirectAttributes rttr) {
 		
@@ -70,14 +70,14 @@ public class AdminProductController {
 		return result;
 	}
 	
-	//상품수정페이지 이동
+	//�긽�뭹�닔�젙�럹�씠吏� �씠�룞
 	@GetMapping("modify")
 	public void get(@RequestParam("productId") String productId, Model model) {
 		model.addAttribute("product", APservice.get(productId));
 		model.addAttribute("cidList", APservice.getCid());
 	}
 	
-	//상품수정
+	//�긽�뭹�닔�젙
 	@PostMapping("/modify")
 	public String modify(ProductVO PVO, RedirectAttributes rttr) {
 		if(APservice.modify(PVO)) {
@@ -86,11 +86,21 @@ public class AdminProductController {
 		return "redirect:/";
 	}
 	
-	//상품삭제
+	//�긽�뭹�궘�젣
 	@PostMapping("/remove")
 	public String remove(@RequestParam("productId") String productId, RedirectAttributes rttr) {
 		if(APservice.remove(productId)) {
 			rttr.addFlashAttribute("result", "removeSuccess");
+		}
+		
+		return "redirect:/adminProduct/list";
+	}
+	
+	@PostMapping("/chkRemove")
+	public String chkRemove(String[] chkProductId, RedirectAttributes rttr) {
+		
+		for(String productId : chkProductId) {
+			APservice.remove(productId);
 		}
 		
 		return "redirect:/adminProduct/list";
