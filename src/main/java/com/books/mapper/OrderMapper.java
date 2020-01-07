@@ -2,6 +2,7 @@ package com.books.mapper;
 
 import java.util.List;
 
+import com.books.domain.CartListVO;
 import com.books.domain.Criteria;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;

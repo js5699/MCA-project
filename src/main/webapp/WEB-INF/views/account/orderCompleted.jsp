@@ -45,7 +45,11 @@ th, td{
 	주소 : ${dNameinfo.daddress1}<br>
 	상세주소 : ${dNameinfo.daddress2}<br>
 	배송메세지 : ${dNameinfo.dmsg}<br>
-
-</div>
+	
+	<div class="col-lg-12"></div>
+	<div style="margin-top:20px;"></div>
+	<button type="submit" data-oper='list' class="btn btn-info">주문목록</button>
+	
+	</div>
 </div>
 <c:import url="../includes/footer.jsp"/>

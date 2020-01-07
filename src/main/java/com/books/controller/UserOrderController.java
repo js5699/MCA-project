@@ -11,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.books.domain.CartListVO;
@@ -76,14 +79,12 @@ public class UserOrderController {
 		
 		return "redirect:/account/myOrderList";
 	}
-	*/
+	
 	@PostMapping("/orderPayment")//회원주문-미완
-	public String insertorder(/*HttpSession session, */OrderVO order, OrderDetailVO orderDetail, RedirectAttributes rttr) {
+	public String insertorder(OrderVO order, OrderDetailVO orderDetail, RedirectAttributes rttr) {
 		log.info("orderPayment:" + order);
 		
-		//UserVO user = (UserVO)session.getAttribute("user");
-		//String userid = user.getUserid();
-		
+
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
 		String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
@@ -95,9 +96,10 @@ public class UserOrderController {
 		}
 		
 		String orderid = ymd + "_" + subNum;
+
 		
 		order.setOrderid(orderid);
-		//order.setUserid(userid);
+		order.setUserid(userid);
 		
 		service.insertorder(order);
 		orderDetail.setOrderid(orderid);
@@ -107,6 +109,23 @@ public class UserOrderController {
 		
 		return "redirect:/account/orderCompleted";
 	}
+	*/
+	@RequestMapping(value = "/orderPayment", method = RequestMethod.POST,
+			consumes = "application/json")
+	@ResponseBody
+	public String insertorder(@RequestBody OrderVO order, @RequestBody OrderDetailVO orderDetail, RedirectAttributes rttr)throws Exception {
+		log.info("orderPayment");
+		
+		List<CartListVO> cartList = cartservice.cartList();
+		log.warn(cartList);
+		service.insertorder(order);
+		orderDetail.setList(cartList);
+		service.insertorderDetail(orderDetail);
+		rttr.addFlashAttribute("result", order.getOrderid());
+		
+		return "redirect:/account/orderCompleted";
+	}
+	
 	
 	@GetMapping({"/myOrderDetail","/myOrderMod","/orderCompleted"})//주문상세조회(수령자정보,책목록,책제목)+페이지번호유지
 	public void get(@RequestParam("orderid") String orderid, @ModelAttribute("cri") Criteria cri, Model model) {

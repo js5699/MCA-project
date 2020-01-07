@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 
+import com.books.domain.CartListVO;
 import com.books.domain.Criteria;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
@@ -29,7 +30,7 @@ public class UserOrderServiceImpl implements UserOrderService{
 	
 	@Override//회원주문-상세
 	public void insertorderDetail(OrderDetailVO orderDetail) {
-		log.info("insert orderDetail............."+orderDetail);
+		log.info("insert orderDetail.............");
 		
 		mapper.insertOrderDetail(orderDetail);
 	}

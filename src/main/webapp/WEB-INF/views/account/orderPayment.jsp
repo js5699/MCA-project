@@ -51,8 +51,13 @@ th, td{
 			function firstbook(){
 				//var firstTitle = document.getElementsByTagName('td')[0].childNodes[0].nodeValue;
 				//$('#orderbook').val(firstTitle);
-				var firstTitle = td.eq(1).text();
-				$('#orderbook').val(firstTitle);
+				
+				//var firstTitle = td.eq(1).text();
+				//$('#orderbook').val(firstTitle);
+				
+				var firstTitle = $('tr:eq(1)>td:eq(0)').html(); //특정 셀의 테이블 데이터 받아오기
+				var result = firstTitle;
+				$("#orderbook").val(result); //result값을 input에 넣기
 			}
 			</script>
 		</table>

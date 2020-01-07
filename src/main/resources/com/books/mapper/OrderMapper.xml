@@ -74,6 +74,9 @@
 <!-- 회원주문 -->
 
 <insert id="insertOrder">
+	<selectKey keyProperty="orderid" order="BEFORE" resultType="long">
+		select to_char(sysdate, 'yyyyMMdd')||seq_order.nextval from dual
+	</selectKey>
 	insert into tbl_order (orderid, userid, orderdate, quantity, totalprice,
 		dname, dtell, dzipcode, daddress1, daddress2, dmsg, orderbook)
 	values (#{orderid}, #{userid}, sysdate, #{quantity}, #{totalprice},
@@ -81,13 +84,24 @@
 		#{dmsg}, #{orderbook})
 </insert>
 
-<!-- 회원주문-상세(미완) -->
+<!-- 회원주문-상세(미완)
 
 <insert id="insertOrderDetail">
 	insert into tbl_orderdetail(orderid, productid, ea, saleprice)
 		select #{orderid}, #{productid}, #{productstock}, #{price}
-			from tbl_cartlist
+			from tbl_ 
+	
 </insert>
+ -->
+<update id="insertOrderDetail">
+	<foreach collection="list" separator=";" open="insert all" close="select * from dual">
+		into tbl_orderdetail(
+			orderid, productid, ea, saleprice 
+		) values(
+			#{orderid}, #{productid}, #{productstock}, #{price}
+		)
+	</foreach>
+</update>
 
 
 <!-- 주문하기 한번에
