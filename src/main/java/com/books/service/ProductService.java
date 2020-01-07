@@ -14,5 +14,5 @@ public interface ProductService {
 	
 	public List<ProductVO> cidList(String cid)throws Exception;
 
-	public List<CidVO> cid()throws Exception;
+	/* public List<CidVO> cid()throws Exception; */
 }

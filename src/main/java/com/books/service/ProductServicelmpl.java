@@ -42,12 +42,12 @@ public class ProductServicelmpl implements ProductService {
 		return mapper.cidList(cid);
 	
 	}
-	
-	public List<CidVO> cid()throws Exception{
-		
-		log.info("cidList.........");
-		
-		return mapper.cid();
-	}
+	/*
+	 * public List<CidVO> cid()throws Exception{
+	 * 
+	 * log.info("cidList.........");
+	 * 
+	 * return mapper.cid(); }
+	 */
 
 }

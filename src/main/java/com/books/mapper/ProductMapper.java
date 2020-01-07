@@ -14,5 +14,5 @@ public interface ProductMapper {
 	
 	public List<ProductVO> cidList(String cid)throws Exception; //카테고리별 리스트 
 	
-	public List<CidVO> cid()throws Exception;
+	/* public List<CidVO> cid()throws Exception; */
 }

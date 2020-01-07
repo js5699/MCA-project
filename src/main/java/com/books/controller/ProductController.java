@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.books.service.ProductService;
-import com.books.domain.CidVO;
 import com.books.domain.ProductVO;
 
 import lombok.AllArgsConstructor;
@@ -34,11 +33,12 @@ public class ProductController {
 		
 		List<ProductVO> productlist = service.allList();
 		
-		log.info("get cid");
-		List<CidVO> cidlist = service.cid();
-		log.warn("cidlist: "+ cidlist);
-		
-		model.addAttribute("cid", cidlist);
+		/*
+		 * log.info("get cid"); List<CidVO> cidlist = service.cid();
+		 * log.warn("cidlist: "+ cidlist);
+		 * 
+		 * model.addAttribute("cid", cidlist);
+		 */
 		model.addAttribute("list", productlist);  		
 	}
 	

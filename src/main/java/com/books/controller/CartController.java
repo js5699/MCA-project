@@ -77,7 +77,7 @@ public class CartController {
 		log.warn("get cart list");
 
 		List<CartListVO> cartList = service.cartList();
-		if (cartList.isEmpty()) {
+		if (cartList.isEmpty()) { //cartList null값 확인 통해 장바구니 없음 표시
 			String notice = "nocart";
 			model.addAttribute("nocart", notice);
 			log.warn("model:" + model);
