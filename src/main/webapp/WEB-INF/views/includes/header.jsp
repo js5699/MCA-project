@@ -75,128 +75,23 @@
  <!-- 전체도서 구현 -->
  	
          <div class="topMenu">         	
-            <ul class="menu01">                   
-                <li>
-                <c:forEach items="${cid}" var="cid" varStatus="status" begin="${status.begin}" end="3" >
+            <ul class="menu01">
+            	<c:forEach var="i" begin="0" end="51" step="3">                   
+                <li>                
   		             <ul class="dept01">
-                      	<span><a href="/shop/list?cid=${cid.cid} !!! ${status.count}">가정 살림</a></span>
-                        <li id="nop"><a href="/shop/list?cid=${cid.cid} !!! ${status.count}&ref=">육아</a></li>
-                        <li id="nop"><a href="/shop/list?cid=${cid.cid} !!! ${status.count}&ref=">요리</a></li>
-                    </ul>               	
-    			</c:forEach>
-                </li>               
+  		             <c:forEach items="${cid}" var="cid" varStatus="status" begin="${i}" end="${i}" >
+                      	<span><a href="/shop/list?cid=${cid.cid} !!! ${cid.cidref}">${cid.cname}</a></span>
+                      </c:forEach>	
+                      <c:forEach items="${cid}" var="cid" varStatus="status" begin="${i + 1}" end="${i + 1}">
+                        <li id="nop"><a href="/shop/list?cid=${cid.cid} !!! ${cid.cidref}&ref=">${cid.cname}</a></li>
+                      </c:forEach>
+                      <c:forEach items="${cid}" var="cid" varStatus="status" begin="${i + 2}" end="${i + 2}" >
+                        <li id="nop"><a href="/shop/list?cid=${cid.cid}  ${cid.cidref}&ref=">${cid.cname}</a></li>
+                      </c:forEach> 
+                    </ul>		
+                </li>
+               </c:forEach>              
                 <li>
-                    <ul class="dept01">
-                    	<span><a href="/shop/list?cid=&l=1">건강 취미</a></span>
-                        <li id="nop"><a href="/shop/list?cid=11101&l=2">스포츠</a></li>
-                        <li id="nop"><a href="/shop/list?cid=11102&l=2">퍼즐</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="dept01">
-                    	<span><a href="/shop/list?c=11200&l=1">경제 경영</a></span>
-                         <li id="nop"><a href="/shop/list?c=11201&l=2">경제</a></li>
-                        <li id="nop"><a href="/shop/list?c=11202&l=2">마케팅</a></li>                    </ul>
-                </li>
-                <li>
-                    <ul class="dept01">
-                    	<span><a href="/shop/list?c=11300&l=1">사회정치</a></span>
-                         <li id="nop"><a href="/shop/list?c=11301&l=2">정치/외교</a></li>
-                        <li id="nop"><a href="/shop/list?c=11302&l=2">사회학</a></li>
-                    </ul>
-                </li>
-                <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=11400&l=1">소설시희곡</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=11401&l=2">한국소설</a></li>
-                        <li id="nop"><a href="/shop/list?c=11402&l=2">영미소설</a></li>
-                    </ul>
-                </li>
-                 <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=11500&l=1">수험서자격증</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=11501&l=2">공무원</a></li>
-                        <li id="nop"><a href="/shop/list?c=11502&l=2">교원임용시험</a></li>
-                    </ul>
-                </li>
-                <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=11600&l=1">어린이</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=11601&l=2">어린이 교양</a></li>
-                        <li id="nop"><a href="/shop/list?c=11602&l=2">어린이 문학</a></li>
-                    </ul>
-                </li>
-                 <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=11700&l=1">에세이</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=11701&l=2">한국 에세이</a></li>
-                        <li id="nop"><a href="/shop/list?c=11702&l=2">외국 에세이</a></li>
-                    </ul>
-                </li>
-                <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=11800&l=1">여행</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=11801&l=2">국내여행</a></li>
-                        <li id="nop"><a href="/shop/list?c=11802&l=2">해외여행</a></li>
-                    </ul>
-                </li>
-                <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=11900&l=1">역사</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=11901&l=2">한국사</a></li>
-                        <li id="nop"><a href="/shop/list?c=11902&l=2">서양사</a></li>
-                    </ul>
-                </li>
-                <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=12000&l=1">예술</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=12001&l=2">건축</a></li>
-                        <li id="nop"><a href="/shop/list?c=12002&l=2">음악</a></li>
-                    </ul>
-                </li>
-                 <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=12100&l=1">유아</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=12101&l=2">0-3세</a></li>
-                        <li id="nop"><a href="/shop/list?c=12102&l=2">4-6세</a></li>
-                    </ul>
-                </li>
-                <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=12200&l=1">청소년</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=12201&l=2">인문 일반</a></li>
-                        <li id="nop"><a href="/shop/list?c=12202&l=2">기호학/언어학</a></li>
-                    </ul>
-                </li>
-                <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=12300&l=1">자기계발</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=12301&l=2">처세술/삶의 자세</a></li>
-                        <li id="nop"><a href="/shop/list?c=12302&l=2">성공학/경력관리</a></li>
-                    </ul>
-                </li>
-                 <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=12400&l=1">자연과학</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=12401&l=2">과학</a></li>
-                        <li id="nop"><a href="/shop/list?c=12402&l=2">수학</a></li>
-                    </ul>
-                </li>
-                <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=12500&l=1">종교</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=12501&l=2">천주교</a></li>
-                        <li id="nop"><a href="/shop/list?c=12502&l=2">기독교(개신교)</a></li>
-                    </ul>
-                </li>
-                <li>
-                	<ul class="dept01">
-                		<span><a href="/shop/list?c=12600&l=1">it모바일</a></span>                    
-                         <li id="nop"><a href="/shop/list?c=12601&l=2">컴퓨터공학</a></li>
-                        <li id="nop"><a href="/shop/list?c=12602&l=2">OS/데이터베이스</a></li>
-                    </ul>
-                </li>
-               <li>
                   	<ul class="dept01">
                 		<br><br><br>
                     </ul>
@@ -206,11 +101,7 @@
                 		<br><br><br><p></p>
                     </ul>
                 </li>
-                <li>
-                	<ul class="dept01">                	
-                		<br><br><br><p></p>
-                    </ul>
-                </li>                
+                           
             </ul>
         </div>     
    
