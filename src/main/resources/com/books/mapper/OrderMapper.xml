@@ -71,7 +71,6 @@
 	where userid = #{userid}
 </update>
 
-
 <!-- 회원주문 -->
 
 <insert id="insertOrder">
@@ -87,8 +86,30 @@
 <insert id="insertOrderDetail">
 	insert into tbl_orderdetail(orderid, productid, ea, saleprice)
 		select #{orderid}, #{productid}, #{productstock}, #{price}
-			from tbl_cart
+			from tbl_cartlist
 </insert>
+
+
+<!-- 주문하기 한번에
+<insert id="insertOrder">
+	<selectKey keyProperty="orderid" order="BEFORE" resultType="long">
+		select seq_board.nextval from dual
+	</selectKey>
+
+	insert all
+	
+	into tbl_order (orderid, userid, orderdate, quantity, totalprice,
+		dname, dtell, dzipcode, daddress1, daddress2, dmsg, orderbook)
+	values (#{orderid}, #{userid}, sysdate, #{quantity}, #{totalprice},
+		#{dname}, #{dtell}, #{dzipcode}, #{daddress1}, #{daddress2}, #{daddress2},
+		#{dmsg}, #{orderbook})
+		
+	into tbl_orderdetail(orderid, productid, ea, saleprice)
+		select #{orderid}, #{productid}, #{productstock}, #{price}
+			from tbl_cartlist
+</insert>
+ -->
+
 <!-- 
 <insert id="insert">
 	insert into tbl_board (bno, title, content, writer)

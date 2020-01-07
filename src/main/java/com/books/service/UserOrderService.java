@@ -21,4 +21,5 @@ public interface UserOrderService {
 	public boolean modify(OrderVO order);//주문수정
 	
 	public int getTotal(Criteria cri);//전체데이터 개수
+	
 }

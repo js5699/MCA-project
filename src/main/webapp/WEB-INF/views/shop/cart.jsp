@@ -68,9 +68,9 @@
 										<th><c:out value="${product.price}"/>원</th>
 										<th><div class="input-group">
 												<button type="button" class="btn btn-primary plus" id="plus${product.cartNum}" data-cartNum="${product.cartNum}" >+</button>
-												&nbsp <input type="number" class="stock${product.cartNum}" min="1"	max="${product.stock}" value="${product.productStock}" readonly="readonly" />
+												&nbsp <input type="number" class="stock${product.cartNum}" min="1"	max="${product.stock}" value="${product.productstock}" readonly="readonly" />
 												&nbsp
-												<c:if test="${product.productStock != 1}">
+												<c:if test="${product.productstock != 1}">
 												<button type="button" class="btn btn-primary minus"	id="minus${product.cartNum}" data-cartNum="${product.cartNum}">-</button>																							
 												</c:if>												
 											</div>
@@ -106,11 +106,11 @@
 							     /* 개별수량 변경 js */			
 								 $("#plus${product.cartNum}").click(function(){
 										
-								  	 if( ${product.productStock} >= ${product.stock}-1){	
-								  		var productstock = ${product.productStock};								  		 
+								  	 if( ${product.productstock} >= ${product.stock}-1){	
+								  		var productstock = ${product.productstock};								  		 
 								  		alert("재고를 초과 하였습니다. 판매자에게 문의 하세요");							    		 										
 							    	 }else{			
-							    	 	var productstock = ${product.productStock}+1;							    		       										
+							    	 	var productstock = ${product.productstock}+1;							    		       										
 							    	 }
 								
 									 var productid = ${product.productid};
@@ -140,10 +140,10 @@
 							     
 									$("#minus${product.cartNum}").click(function(){
 									
-									 	 if( ${product.productStock} < 1){			
-									 		 var productstock =${product.productStock}+1;								    		 
+									 	 if( ${product.productstock} < 1){			
+									 		 var productstock =${product.productstock}+1;								    		 
 								    	 } else{							    										
-								    		 var productstock = ${product.productStock}-1;	     
+								    		 var productstock = ${product.productstock}-1;	     
 								    	 }										
 										
 									 var productid = ${product.productid};																		
@@ -270,8 +270,8 @@
 									<!-- 리스트에 책 값이 존재 할때 마다 값을 더해준다 -->
 									<c:choose> 
 										<c:when test="${product.price != null}">
-											<c:set var="allprice" value="${allprice + product.price * product.productStock}"/>
-											<c:set var="allStock" value="${allStock + product.productStock}"/>
+											<c:set var="allprice" value="${allprice + product.price * product.productstock}"/>
+											<c:set var="allStock" value="${allStock + product.productstock}"/>
 										</c:when>
 									</c:choose>
 									<c:choose>	

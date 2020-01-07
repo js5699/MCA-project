@@ -50,7 +50,13 @@ public class UserOrderController {
 		model.addAttribute("paging", new PageDTO(cri, total));
 		
 	}
-	
+	/*
+	@GetMapping("/orderCompleted")//주문완료
+	public void completed(@RequestParam("orderid") String orderid, Model model) {
+		log.info("주문완료");
+		model.addAttribute("orderCompleted", service.orderCompleted(orderid));
+	}
+	*/
 	@GetMapping("/orderPayment")//회원주문폼
 	public void insertorder(Model model)throws Exception {
 		log.info("회원주문페이지");
@@ -72,11 +78,11 @@ public class UserOrderController {
 	}
 	*/
 	@PostMapping("/orderPayment")//회원주문-미완
-	public String insertorder(HttpSession session, OrderVO order, OrderDetailVO orderDetail, RedirectAttributes rttr) {
+	public String insertorder(/*HttpSession session, */OrderVO order, OrderDetailVO orderDetail, RedirectAttributes rttr) {
 		log.info("orderPayment:" + order);
 		
-		UserVO user = (UserVO)session.getAttribute("user");
-		String userid = user.getUserid();
+		//UserVO user = (UserVO)session.getAttribute("user");
+		//String userid = user.getUserid();
 		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
@@ -91,7 +97,7 @@ public class UserOrderController {
 		String orderid = ymd + "_" + subNum;
 		
 		order.setOrderid(orderid);
-		order.setUserid(userid);
+		//order.setUserid(userid);
 		
 		service.insertorder(order);
 		orderDetail.setOrderid(orderid);
@@ -99,10 +105,10 @@ public class UserOrderController {
 		
 		rttr.addFlashAttribute("result", order.getOrderid());
 		
-		return "redirect:/account/myOrderList";
+		return "redirect:/account/orderCompleted";
 	}
 	
-	@GetMapping({"/myOrderDetail","/myOrderMod"})//주문상세조회(수령자정보,책목록,책제목)+페이지번호유지
+	@GetMapping({"/myOrderDetail","/myOrderMod","/orderCompleted"})//주문상세조회(수령자정보,책목록,책제목)+페이지번호유지
 	public void get(@RequestParam("orderid") String orderid, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/myOrderDetail or myOrderMod");
 		
