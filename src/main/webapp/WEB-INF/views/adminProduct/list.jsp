@@ -7,9 +7,17 @@
 <%@ include file="../includes/header.jsp"%>
 
 
-<c:if test="${result eq 'removeSuccess'}">
+<c:if test="${result != null}">
 	<div class="alert alert-success alert-dismissible fade show" role="alert">
-		<strong>삭제 완료</strong>
+		<c:if test="${result eq 'remove'}">
+			<strong>삭제 완료</strong>
+		</c:if>
+		<c:if test="${result eq 'register'}">
+			<strong>등록 완료</strong>
+		</c:if>
+		<c:if test="${result eq 'modify'}">
+			<strong>수정 완료</strong>
+		</c:if>
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
@@ -55,7 +63,11 @@
 	</c:forEach>
 	<div class="col-lg-12 formContainer btnBox">
 		<div class="d-flex justify-content-end">
-			<button name = "chkRemove" class = "btn btn-danger">선택 삭제</button>
+			<form action="/adminProduct/chkRemove" method="post" id = "chkForm">
+				<input type = "hidden" name = "chkProductId" value = "">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<button type = "submit" name = "chkRemove" class = "btn btn-danger">선택 삭제</button>
+			</form>
 		</div>
 	</div>
 </div>
@@ -72,7 +84,8 @@
 <script>
 $(document).ready(function(){
 	var form = $("#form");
-	$("button[name='remove']").on("click", function(){
+	$("button[name='remove']").on("click", function(e){
+		e.preventDefault();
 		form.attr("method", "post");
 		form.attr("action", "/adminProduct/remove");
 		form.submit();
@@ -96,20 +109,19 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("button[name='chkRemove']").on("click", function(){
-		var chkProductId = [];
-		$("input[name='chk']:checked").each(function(){
-			chkProductId.push($(this).val());
-        });
-		$.ajax({
-			url : "/adminProduct/chkRemove",
-			type : "post",
-			data : chkProductId,
-			
-			success : function(data){
-				alert("통신성공");
-			}
-		});
+	$("button[name='chkRemove']").on("click", function(e){
+		e.preventDefault();
+		var result = confirm("정말로 삭제하시겠습니까?");
+		if(result){
+			var chkForm = $("#chkForm");
+			var chkProductId = [];
+			$("input[name='chk']:checked").each(function(){
+				chkProductId.push($(this).val());
+	        });
+			$("input[name=chkProductId]").prop("value", chkProductId);
+			chkForm.submit();
+		}
+		
 		
 	});
 	

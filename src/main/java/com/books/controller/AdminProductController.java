@@ -45,7 +45,7 @@ public class AdminProductController {
 		
 		APservice.register(PVO);
 		
-		rttr.addFlashAttribute("result", "registerSuccess");
+		rttr.addFlashAttribute("result", "register");
 		
 		return "redirect:/adminProduct/list";
 	}
@@ -81,16 +81,16 @@ public class AdminProductController {
 	@PostMapping("/modify")
 	public String modify(ProductVO PVO, RedirectAttributes rttr) {
 		if(APservice.modify(PVO)) {
-			rttr.addFlashAttribute("result", "modifySuccess");
+			rttr.addFlashAttribute("result", "modify");
 		}
-		return "redirect:/";
+		return "redirect:/adminProduct/list";
 	}
 	
 	//�긽�뭹�궘�젣
 	@PostMapping("/remove")
 	public String remove(@RequestParam("productId") String productId, RedirectAttributes rttr) {
 		if(APservice.remove(productId)) {
-			rttr.addFlashAttribute("result", "removeSuccess");
+			rttr.addFlashAttribute("result", "remove");
 		}
 		
 		return "redirect:/adminProduct/list";
@@ -102,7 +102,7 @@ public class AdminProductController {
 		for(String productId : chkProductId) {
 			APservice.remove(productId);
 		}
-		
+		rttr.addFlashAttribute("result", "remove");
 		return "redirect:/adminProduct/list";
 	}
 	
