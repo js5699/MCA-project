@@ -22,9 +22,8 @@
 				<a href="/account/myPage" class="list-group-item">내가 쓴 글</a>
 			</div>
 			<div class="list-group mb-3">
-				<a href="/account/myPage" class="list-group-item">주문 내역</a>
-				<a href="#"	class="list-group-item">교환내역</a>
-				<a href="#"	class="list-group-item">취소내역</a>
+				<a href="/account/myPage" class="list-group-item">주문내역</a>
+				<a href="#"	class="list-group-item">교환/취소 내역</a>
 			</div>
 			<div class="list-group mb-3">
 				<a href="/account/withdraw" class="list-group-item">회원탈퇴</a>
@@ -37,12 +36,12 @@
 				<a href="/QnaBoard/list" class="list-group-item">Q&A게시판</a>
 			</div>
 		</c:when>
-		<c:when test="${sideNavName eq 'adminProduct' or sideNavName eq 'adminUser'}">
+		<c:when test="${sideNavName eq 'adminProduct' or sideNavName eq 'adminUser' or sideNavName eq 'adminOrder'}">
 			<h4 class="sidevarName">관리자 전용</h4>
 			<div class="list-group">
 				<a href="/adminProduct/register" class="list-group-item">물품 등록</a>
-				<a href="/adminUser/info" class="list-group-item">회원 관리</a>
-				<a href="/adminUser/list" class="list-group-item">주문 정보</a>
+				<a href="/adminUser/list" class="list-group-item">회원 관리</a>
+				<a href="/adminOrder/list" class="list-group-item">주문 정보</a>
 			</div>
 		</c:when>
 		<c:otherwise>

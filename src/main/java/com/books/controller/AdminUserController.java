@@ -36,6 +36,8 @@ public class AdminUserController { // 관리자 권한 추가
 
 	private AdminUserService service;
 	
+	
+	//유저 목록
 	@GetMapping("/list")
 	public void userList(Criteria cri, Model model) {
 		
@@ -45,6 +47,7 @@ public class AdminUserController { // 관리자 권한 추가
 		model.addAttribute("pageMaker", new PageDTO(cri,totalCount));
 	}
 	
+	// 유저 정보
 	@GetMapping("/info")
 	public void userInformation(@RequestParam("userid") String userid, @ModelAttribute("cri") Criteria cri, Model model) {
 		

@@ -26,8 +26,8 @@ public class UserVO {
 	private String address2;
 	
 	private Date regdate;
-	
 	private String adminMemo;
+	private int enable;
 	
 	// admin user service - getList
 	private String orderid;

@@ -234,7 +234,7 @@ public class AccountController {
 		if ( BCPEncoder.matches(userpwcf, service.getUserpw(userid)) ) {
 			service.remove(userid);
 			service.removeAuth(userid);
-			if (auth != null)
+			if (auth != null)	//로그아웃 처리
 				new SecurityContextLogoutHandler().logout(request, response, auth);
 			rttr.addFlashAttribute("result","success");
 		} else {

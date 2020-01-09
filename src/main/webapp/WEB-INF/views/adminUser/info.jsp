@@ -22,16 +22,32 @@
 	</div>
 </c:if>
 
+<c:forEach items="${user.authList}" var="auth">
+	<c:if test="${auth.auth == 'ROLE_USER'}">
+		<c:set var="auth_user" value="${auth.auth}"/>
+	</c:if>
+	<c:if test="${auth.auth == 'ROLE_ADMIN'}">
+		<c:set var="auth_admin" value="${auth.auth}"/>
+	</c:if>
+	<c:if test="${auth.auth == 'ROLE_DROP'}">
+		<c:set var="auth_withdraw" value="${auth.auth}"/>
+	</c:if>
+</c:forEach>
+		
+		
 <div class="row formContainer-top">
 	<div class="col-lg-6">
 		<h5><i class="far fa-user"></i>회원 정보</h5>
 	</div>
 	
-	<div class="col-lg-6 text-right">
-		<button class="btn badge badge-primary" data-oper="modify"><i class="fas fa-user-cog"></i> 회원정보 수정</button>
-	</div>
+	
 </div>
 <table class="table">
+	<c:if test="${!empty auth_withdraw}">
+		<tr>
+			<td colspan="4" class="bg-warning text-dark"><i class="fas fa-times"></i> 탈퇴한 회원입니다.</td>
+		</tr>
+	</c:if>
 	<tr>
 		<td colspan="4"><i class="far fa-calendar-alt"></i> 회원가입일 : <fmt:formatDate pattern="yyyy년 MM월 dd일 오후 h시 mm분 ss초" value="${user.regdate}" /></td>
 	</tr>
@@ -58,7 +74,11 @@
 		<td colspan="3">${!empty user.adminMemo ? user.adminMemo : "-"}</td>
 	</tr>
 </table>
-
+<c:if test="${empty auth_withdraw}">
+	<div class="row col-lg-12 text-right">
+		<button type="button" class="btn btn-sm btn-primary" data-oper="modify" ><i class="fas fa-user-cog"></i> 회원정보 수정</button>
+	</div>
+</c:if>
 
 <div class="row formContainer-top">
 	<div class="col-lg-6">
@@ -128,7 +148,9 @@
 				var str = "<tr><th></th><th>주문일</th><th>주문번호</th><th>주문금액</th><th>연락처</th><th>상태</th><th class='text-center'>상세보기</th></tr>";
 				
 				if(list == null || list.length == 0) {
-					return;
+					str += "<tr>";
+					str += "<td colspan='7' class='text-center'>주문 내역이 없습니다.</td>";
+					str += "</tr>";
 				}
 				
 				for (var i = 0, len = list.length || 0 ; i < len ; i++) {
