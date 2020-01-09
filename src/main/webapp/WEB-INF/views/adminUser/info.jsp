@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../includes/header.jsp"%>
-
+ 
 <div class="row formContainer">
 	<div class="col-lg-10">
 		<h5>관리자 <i class="fas fa-caret-right depth-arrow"></i> 고객 관리 <i class="fas fa-caret-right depth-arrow"></i> ${user.userid}님의 회원 등록 정보</h5>
