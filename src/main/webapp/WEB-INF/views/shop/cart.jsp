@@ -322,5 +322,10 @@
 	</div>
 	<!-- /.container -->
 
+<script>
+
+var checkitem = 
+
+</script>
 
 	<%@ include file="/WEB-INF/views/includes/footer.jsp"%>

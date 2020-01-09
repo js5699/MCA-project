@@ -173,4 +173,21 @@
 
  -->
 
+<!-- dy] 카트->주문페이지로 불러오기 -->
+<select id="getCheckedCart" resultType="com.books.CartVO">
+	SELECT 	cartnum
+			, c.productid
+			, productstock
+			, p.PIMG
+			, p.price
+			, p.ptitle
+	FROM    tbl_cart c
+		  , tbl_product p
+	WHERE c.PRODUCTID = p.PRODUCTID 
+		  AND cartnum IN
+		  <foreach collection="array" item="cartIdx" open="(" separator="," close=")">
+			  #{cartIdx}
+		  </foreach>  
+</select>
+
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 
+import com.books.domain.CartVO;
 import com.books.domain.Criteria;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
@@ -67,5 +68,12 @@ public class UserOrderServiceImpl implements UserOrderService{
 		log.info("get total count");
 		return mapper.getTotalCount(cri);
 
+	}
+
+	
+	//dy
+	@Override //카트목록 가져오기 
+	public List<CartVO> getCheckedCartList(String[] cartIdx) {
+		return mapper.getCheckedCartItems(cartIdx);
 	}
 }

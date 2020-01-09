@@ -2,7 +2,6 @@ package com.books.controller;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,14 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.books.domain.Criteria;
-import com.books.domain.PageDTO;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
+import com.books.domain.PageDTO;
 import com.books.domain.UserVO;
 import com.books.service.UserOrderService;
 
@@ -94,6 +94,7 @@ public class UserOrderController {
 		return "redirect:/account/myOrderList";
 	}
 	
+	
 	@GetMapping({"/myOrderDetail","/myOrderMod"})//주문상세조회(수령자정보,책목록,책제목)+페이지번호유지
 	public void get(@RequestParam("orderid") String orderid, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/myOrderDetail or myOrderMod");
@@ -116,4 +117,19 @@ public class UserOrderController {
 		
 		return "redirect:/account/myOrderDetail";
 	}
+	
+	
+	// dy
+	@PostMapping("/orderPayment2")
+	public void orderPaymentProcess1(@RequestBody String checkedItems, RedirectAttributes rttr) {
+		String[] cartIdx = checkedItems.split(",");
+		rttr.addAttribute("items" ,service.getCheckedCartList(cartIdx));
+	}
+	
+	@PostMapping("/ordered")
+	public String orderPaymentProcess2(OrderVO order) {
+		
+		return "redirect://account/order_ok";
+	}
+	
 }

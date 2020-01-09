@@ -2,6 +2,7 @@ package com.books.service;
 
 import java.util.List;
 
+import com.books.domain.CartVO;
 import com.books.domain.Criteria;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
@@ -21,4 +22,7 @@ public interface UserOrderService {
 	public boolean modify(OrderVO order);//주문수정
 	
 	public int getTotal(Criteria cri);//전체데이터 개수
+	
+	//dy
+	public List<CartVO> getCheckedCartList(String[] cartIdx); //주문페이지에 카트목록가져오기
 }

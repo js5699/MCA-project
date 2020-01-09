@@ -2,10 +2,10 @@ package com.books.mapper;
 
 import java.util.List;
 
+import com.books.domain.CartVO;
 import com.books.domain.Criteria;
 import com.books.domain.OrderDetailVO;
 import com.books.domain.OrderVO;
-import com.books.domain.ProductVO;
 
 public interface OrderMapper {
 	public List<OrderVO> getList(String userid);//주문목록
@@ -28,5 +28,9 @@ public interface OrderMapper {
 	public int getUserOderTotalCount(String userid, Criteria cri);
 
 	public List<OrderVO> getUserOderList(Criteria cri);
+	
+	
+	//dy
+	public List<CartVO> getCheckedCartItems(String[] cartIdx);
 
 }
