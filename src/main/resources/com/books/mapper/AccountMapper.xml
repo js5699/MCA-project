@@ -24,8 +24,14 @@
 		WHERE userid = #{userid}
 	</update>
 	
-	<delete id="delete">
-		DELETE FROM tbl_user WHERE userid = #{userid}
+	<update id="delete">
+		UPDATE tbl_user
+		SET enable = 1
+		WHERE userid = #{userid}
+	</update>
+	
+	<delete id="deleteAuth">
+		DELETE FROM tbl_user_auth WHERE userid = #{userid}
 	</delete>
 	
 	<select id="read" resultType="com.books.domain.UserVO">
@@ -43,4 +49,6 @@
 	<select id="readId" resultType="int">
 		SELECT count(*) FROM tbl_user WHERE userid = #{newUserid} 
 	</select>
+	
+
 </mapper>

@@ -12,9 +12,11 @@ public interface AccountService {
 	
 	public boolean remove(String userid);
 	
+	public boolean removeAuth(String userid);
+	
 	public String getUserpw(String userid);
 
 	public boolean modPw(UserVO user);
 	
-	public boolean idDupCheck(String newUserid);
+	public int idDupCheck(String newUserid);
 }

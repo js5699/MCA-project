@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.books.domain.Criteria;
-import com.books.domain.PageDTO;
 import com.books.domain.OrderDetailPageDTO;
 import com.books.domain.OrderVO;
+import com.books.domain.PageDTO;
 import com.books.service.AdminOrderService;
 
 import lombok.AllArgsConstructor;
@@ -35,7 +35,6 @@ public class AdminOrderController {
 	
 	@GetMapping("/list")
 	public void userOrderList(Criteria cri, Model model) {
-		log.warn("list" + cri);
 		
 		model.addAttribute("list", service.getLatestOrderListWithPaging(cri));
 		int totalCount = service.getHasOrderCount(cri);

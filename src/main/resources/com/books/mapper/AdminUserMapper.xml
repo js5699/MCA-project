@@ -58,6 +58,7 @@
 		<result property="address2" column="address2"/>
 		<result property="regdate" column="regdate"/>
 		<result property="adminMemo" column="adminmemo"/>
+		<result property="enable" column="enable"/>
 		<collection property="authList" resultMap="authMap"/>
 	</resultMap>
 	
@@ -67,7 +68,7 @@
 	</resultMap>
 	
 	<select id="readUserWithAuth" resultMap="userMap">
-		SELECT u.userid, name, phone, email, zipcode, address1, address2, regdate, adminmemo, auth
+		SELECT u.userid, name, phone, email, zipcode, address1, address2, regdate, adminmemo, enable, auth
 		FROM tbl_user u LEFT OUTER JOIN tbl_user_auth ua ON u.userid = ua.userid
 		WHERE ua.userid = #{userid} 
 	</select>

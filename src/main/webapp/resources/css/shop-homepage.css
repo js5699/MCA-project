@@ -8,6 +8,9 @@ body {
 	font-size: 0.9em;
 }
 
+.join-textarea {
+	font-size: 0.8em;
+}
 .formContainer {
 	padding-top: 25px;
 	padding-bottom: 25px;
@@ -25,14 +28,10 @@ body {
 	padding: 20px 0;
 }
 
-h5>i {
+h5>i, .alert>i {
 	margin-right: 15px;
 }
-/* 
-.btnBox {
-	margin-left: -30px;
-	margin-Right: -30px;
-} */
+
 .sidevarName {
 	padding-top: 25px;
 	padding-bttom: 10x;
@@ -53,6 +52,12 @@ h5>i {
 i.depth-arrow {
 	padding-left: 15px;
 }
+
+/* join */
+.idcheck {
+	display: none;
+}
+
 
 
 /*mypage*/
@@ -180,7 +185,7 @@ span.list-orderid {
 	margin-bottom: 25px;
 }
 
-/* a 占쎄묶域뱄옙 css */
+/* a ?��?��묶域뱄옙 css */
 a { 
 	text-decoration:none; 
 }

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-	
+	 
 	<c:set var="path" value="${requestScope['javax.servlet.forward.servlet_path']}" /> 
 	
 	<c:set var="pageUrl" value="${fn:split(path, '/')}"/>
@@ -17,9 +17,16 @@
 	<c:choose>
 		<c:when test="${sideNavName eq 'account'}">
 			<h4 class="sidevarName">마이페이지</h4>
-			<div class="list-group">
-				<a href="/account/myPage" class="list-group-item">내 정보 수정</a>
-				<a href="#"	class="list-group-item">주문 내역</a>
+			<div class="list-group mb-3">
+				<a href="/account/myPage" class="list-group-item">내 정보</a>
+				<a href="/account/myPage" class="list-group-item">내가 쓴 글</a>
+			</div>
+			<div class="list-group mb-3">
+				<a href="/account/myPage" class="list-group-item">주문내역</a>
+				<a href="#"	class="list-group-item">교환/취소 내역</a>
+			</div>
+			<div class="list-group mb-3">
+				<a href="/account/withdraw" class="list-group-item">회원탈퇴</a>
 			</div>
 		</c:when>
 		<c:when test="${sideNavName eq 'NoticeBoard' or sideNavName eq 'QnaBoard'}">
@@ -29,12 +36,12 @@
 				<a href="/QnaBoard/list" class="list-group-item">Q&A게시판</a>
 			</div>
 		</c:when>
-		<c:when test="${sideNavName eq 'adminProduct' or sideNavName eq 'adminUser'}">
+		<c:when test="${sideNavName eq 'adminProduct' or sideNavName eq 'adminUser' or sideNavName eq 'adminOrder'}">
 			<h4 class="sidevarName">관리자 전용</h4>
 			<div class="list-group">
 				<a href="/adminProduct/register" class="list-group-item">물품 등록</a>
-				<a href="/adminUser/info" class="list-group-item">회원 관리</a>
-				<a href="/adminUser/list" class="list-group-item">주문 정보</a>
+				<a href="/adminUser/list" class="list-group-item">회원 관리</a>
+				<a href="/adminOrder/list" class="list-group-item">주문 정보</a>
 			</div>
 		</c:when>
 		<c:otherwise>

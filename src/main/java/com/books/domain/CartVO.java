@@ -12,4 +12,5 @@ public class CartVO {
 	private int cartNum;
 	private Date addDate;
 	
+	private String checkedItems;
 }

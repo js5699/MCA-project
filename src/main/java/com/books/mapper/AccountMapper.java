@@ -16,6 +16,8 @@ public interface AccountMapper {
 
 	public int delete(String userid);
 	
+	public int deleteAuth(String userid);
+	
 	public UserVO read(String userid);
 	
 	public String getUserpw(String userid);
