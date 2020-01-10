@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.books.mapper.OrderMapper">
 
 <!-- 주문목록조회 -->
@@ -209,7 +209,7 @@
  -->
 
 <!-- dy] 카트->주문페이지로 불러오기 -->
-<select id="getCheckedCart" resultType="com.books.CartVO">
+<select id="getCheckedCart" resultType="com.books.domain.CartVO">
 	SELECT 	cartnum
 			, c.productid
 			, productstock

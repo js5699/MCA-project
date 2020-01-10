@@ -35,7 +35,7 @@ public class CartController {
 
 	private CartService service;
 
-	// ì¹´íŠ¸ ë‹´ê¸°
+	// ì¹´íŠ¸ ?‹´ê¸?
 	@ResponseBody
 	@RequestMapping(value = "/addCart", method = RequestMethod.POST)
 	public int addCart(CartVO cart /* HttpSession session */) throws Exception {
@@ -48,7 +48,7 @@ public class CartController {
 		return result;
 	}
 
-	// ì¹´íŠ¸ ìˆ˜ëŸ‰ ìˆ˜ì •
+	// ì¹´íŠ¸ ?ˆ˜?Ÿ‰ ?ˆ˜? •
 	@ResponseBody
 	@RequestMapping(value = "/modifyCart", method = RequestMethod.POST)
 	public int modifyCart(@RequestParam(value = "chbox[]") List<String> chArr, CartVO cart /* HttpSession session */)
@@ -71,13 +71,13 @@ public class CartController {
 		return result;
 	}
 
-	// ì¹´íŠ¸ ë¦¬ìŠ¤íŠ¸
+	// ì¹´íŠ¸ ë¦¬ìŠ¤?Š¸
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
 	public void cartList(Model model/* HttpSession session */) throws Exception {
 		log.warn("get cart list");
 
 		List<CartListVO> cartList = service.cartList();
-		if (cartList.isEmpty()) {
+		if (cartList.isEmpty()) { //cartList nullê°? ?™•?¸ ?†µ?•´ ?¥ë°”êµ¬?‹ˆ ?—†?Œ ?‘œ?‹œ
 			String notice = "nocart";
 			model.addAttribute("nocart", notice);
 			log.warn("model:" + model);
@@ -89,7 +89,7 @@ public class CartController {
 
 	}
 
-	// ì¹´íŠ¸ ì‚­ì œ
+	// ì¹´íŠ¸ ?‚­? œ
 	@ResponseBody
 	@RequestMapping(value = "/deleteCart", method = RequestMethod.POST)
 	public int delectCart(@RequestParam(value = "chbox[]") List<String> chArr, CartVO cart) throws Exception {
@@ -108,10 +108,9 @@ public class CartController {
 			service.delectCart(cart);
 			log.warn(chArr);
 			log.warn(cart);
-
 		}
 		log.warn(result);
 		return result;
-	}
+	}	
 
 }

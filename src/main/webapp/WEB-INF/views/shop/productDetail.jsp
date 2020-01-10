@@ -10,7 +10,13 @@
 
 		<div class="row">
 
-			<div class="col-lg-12">
+			<div class="col-lg-2">
+
+				<h2>상세페이지</h2>
+
+			</div>
+
+			<div class="col-lg-9">
 
 				<!-- 상세페이지 구현 -->
 				<div class="container">
@@ -29,14 +35,14 @@
 										<th></th>
 										<th></th>
 										<th><img class="media-object-center"
-											style="width: 160px; height: 250px;"
-											src="/adminProduct/display?fileName=${product.pimg}&cid=${product.cid}"
+											style="width: 300px; height: 400px;"
+											src="<c:out value="${product.pimg}"/>"
 											alt="<c:out value="${product.ptitle}"/>"
 											title="<c:out value="${product.ptitle}"/>의 사진"></th>
 										<th class="col-lg-1">
-											<h4>
+											<h3 id="cnt">
 												<c:out value="${product.ptitle}" />
-											</h4> <br> <br>
+											</h3> <br> <br>
 											<p>
 												저자:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -45,51 +51,54 @@
 											<P>출판사:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${product.publisher}</P>
 											<P>출판일:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <fmt:formatDate pattern="yyyy-MM-dd" value="${product.pubdate}" /></P>
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${product.PUBDATE}</P>
 											<P>
-												쪽수 및 판형:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+												가격:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												<c:out value="${product.bkpage}" />
-												쪽
-												<c:out value="${product.bksize}" />
-												mm
-											</P>
+												<fs><c:out value="${product.price}"/></fs>&nbsp원
+											</p> 
+											<hr>
 											<div class="col-sm-8 input-group">
-												수량:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+												<span><fs>수량 :</fs></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												<button type="button" class="btn btn-primary plus" id="plus">+</button>
-												&nbsp <input type="number" class="stock" min="1"
+												&nbsp <input type="number" class="stock" min="1" id="cnt"
 													max="${product.stock}" value="1" readonly="readonly" />
 												&nbsp
 												<button type="button" class="btn btn-primary minus"
 													id="minus">-</button>
+												<br>&nbsp&nbsp&nbsp
+												<span><button class="btn btn-primary">바로구매</button>
+											<button class="btn btn-primary" id="cart${product.productid}">장바구니</button></span>												
 											</div>
-											<p></p>
-											<button class="btn btn-primary">바로구매</button>
-											<button class="btn btn-primary" id="cart${product.productId}">장바구니</button>
+											<P><fs>&nbsp&nbsp&nbsp&nbsp																																																							
+												<span class="allprice"></span></fs>
+												</p>	
+											<p></p>											
 											<script>
+											
 											       /* 수량 변경 js */
-												  $("#plus").click(function(){
-													  
-												   var num = $(".stock").val();
-												   var plusNum = Number(num) + 1;
-												   
+												  $("#plus").click(function(){												  
+												   var num = $(".stock").val();									
+												   var ex = $(".ex").val();
+												   var plusNum = Number(num) + 1;												   
 												   if(plusNum >= ${product.stock}){
 													   alert("재고를 초과 하였습니다. 판매자에게 문의 하세요!");
-													   $(".stock").val(num);
+													   $(".stock").val(num);													   	 
 												   }else{
-												    $(".stock").val(plusNum);          
+													    $(".stock").val(plusNum);												    
+													  	$(".allprice").text('총상품가격: '+plusNum * ${product.price} +' 원');															   												    
 												   }
-												  });
-												  
+												  });												  
 												  
 												  $("#minus").click(function(){
 													   var num = $(".stock").val();
-													   var minusNum = Number(num) - 1;
-													   
-													   if(minusNum <= 0) {
-													    $(".stock").val(num);
+													   var minusNum = Number(num) - 1;													   
+													  
+													   if(minusNum <= 0) {													  
+														    $(".stock").val(num);														   
 													   } else {
-													    $(".stock").val(minusNum);          
+														    $(".stock").val(minusNum);
+														    $(".allprice").text('총상품가격: '+minusNum * ${product.price} +' 원');												    
 													   }
 													  });
 												  
@@ -108,9 +117,9 @@
 									
 										                }); */
 												  
-													$("#cart${product.productId}").click(function(){
+													$("#cart${product.productid}").click(function(){
 														
-														var productid = ${product.productId};
+														var productid = '${product.productid}';
 														var productstock = $(".stock").val();
 														
 														var data = {
@@ -156,19 +165,30 @@
 									</tr>
 								</thead>
 								<tbody>
+									<tr>
+										<th></th>
+										<th></th>
+										<th><h4>기본정보</h4></th>
+										<th><span><c:out value="${product.bkPage}"/> 쪽    <c:out value="${product.bkSize}"/>mm	<c:out value="${product.bkweight}"/>	ISBN : 9791196688318</span><br><br>																					
+											<h5>주제 분류</h5>										
+											국내도서 > 에세이 > 명사에세이 > 기타<br>
+											국내도서 > 에세이 > 사진/그림 에세이<br>
+											국내도서 > 에세이 > 한국에세이<br>
+											</th>										
+									</tr>
 
 									<tr>
 										<th></th>
 										<th></th>
-										<th>책 소개</th>
-										<th><c:out value="${product.bkdesc}" /></th>
+										<th><h4>책 소개</h4></th>
+										<th><c:out value="${product.bkDesc}" /></th>
 									</tr>
 									<tr>
 										<th></th>
 										<th></th>
-										<th>목차</th>
+										<th><h4>목차</h4></th>
 										<th><pre>
-<c:out value="${product.bkindex}" /> 
+<c:out value="${product.bkIndex}" /> 
 <!-- <details>
     <summary>펼치기</summary>
 </details> -->

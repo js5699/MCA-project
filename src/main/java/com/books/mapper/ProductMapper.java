@@ -8,6 +8,7 @@ import com.books.domain.ProductVO;
 
 public interface ProductMapper {
 
+	//신영
 	public ProductVO read(String productId);
 	
 	public void insertSelectKey(ProductVO PVO);
@@ -22,7 +23,12 @@ public interface ProductMapper {
 	
 	public int getTotalCount(Criteria cri);
 	
-	public List<ProductVO> getList()throws Exception;//책 목록
+	//상우
+	public List<ProductVO> allList()throws Exception;//전체 목록
 	
-	public ProductVO getProduct(String productid) throws Exception; //상세페이지
+	public ProductVO getProduct(String productid) throws Exception; //상세페이지 
+	
+	public List<ProductVO> cidList(String cid)throws Exception; //카테고리별 리스트 
+	
+	/* public List<CidVO> cid()throws Exception; */
 }

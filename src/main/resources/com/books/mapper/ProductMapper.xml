@@ -63,16 +63,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- shinyoung end -->
 
-<!-- 책정보 조회 --> 
-<select id="getProduct" resultType="com.books.domain.ProductVO">
-<![CDATA[
-	select * from tbl_product where productid = #{productid}
- ]]>
-</select>
-
-
-<!-- 책 리스트 조회 -->
-<select id="getList" resultType="com.books.domain.ProductVO">
+<!--전체 리스트-->
+<select id="allList" resultType="com.books.domain.ProductVO">
 <![CDATA[
 select
 productid,pimg,ptitle,price,publisher,AUTHOR,BKSIZE,BKPAGE,BKINDEX,BKDESC,ISBN,STOCK,CID,SALECNT
@@ -80,5 +72,32 @@ productid,pimg,ptitle,price,publisher,AUTHOR,BKSIZE,BKPAGE,BKINDEX,BKDESC,ISBN,S
 	order by productid asc
  ]]>
 </select>
+
+<!--상세페이지 --> 
+<select id="getProduct" resultType="com.books.domain.ProductVO">
+<![CDATA[
+	select * from tbl_product where productid = #{productid}
+ ]]>
+</select>
+
+<!-- 카테고리별 리스트 -->
+<select id="cidList" resultType="com.books.domain.ProductVO">
+<![CDATA[
+select
+    p.ptitle, p.cid, c.cidref, c.cname, c.cid, Price, Stock, bkdesc, pimg, productid
+        from tbl_product p
+            inner join tbl_cid c
+                on p.cid = c.cid           
+            where p.cid = #{cid}
+             or c.cidref = #{cidref}
+ ]]>
+</select>
+
+<!-- 카테고리 리스트 -->
+<!-- <select id="cid" resultType="com.books.domain.CidVO">
+<![CDATA[
+	select * from tbl_cid    
+ ]]>
+</select> -->
 
 </mapper>

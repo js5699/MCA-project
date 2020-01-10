@@ -23,20 +23,38 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class ProductController {
 	
-	
-	
 	private ProductService service; 
 	
 	//책 리스트
 	@RequestMapping(value ="/list", method = RequestMethod.GET)
-	public void getList(Model model) throws Exception {
+	public void allList(Model model) throws Exception {
 		
 		log.info("get product list");
 		
-		List<ProductVO> productlist = service.getList();  
+		List<ProductVO> productlist = service.allList();
+		
+		/*
+		 * log.info("get cid"); List<CidVO> cidlist = service.cid();
+		 * log.warn("cidlist: "+ cidlist);
+		 * 
+		 * model.addAttribute("cid", cidlist);
+		 */
+		model.addAttribute("list", productlist);  		
+	}
+	
+	//카테고리별 리스트
+	@RequestMapping(value ="/shop/list", method = RequestMethod.GET)
+	public void cidList(@RequestParam("cid") String cid, Model model) throws Exception {
+		
+		log.info("get cidlist");
+		
+		List<ProductVO> productlist = null; 
+		
+		productlist = service.cidList(cid);
 		
 		model.addAttribute("list", productlist);  		
 	}
+	
 	
 	
 	//책 상세정보
