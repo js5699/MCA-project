@@ -130,6 +130,7 @@
 											<div class="form-group">
 												<label>카테고리</label>
 												<select name = "cid" class="form-control">
+													<option value = "">카테고리</option>
 													<c:forEach items="${cidList}" var="list">
 														<option value = "${list.cid}">${list.cname}</option>
 													</c:forEach>
@@ -163,7 +164,7 @@
 					</div>
 					<div class="col-lg-12 formContainer btnBox">
 						<div class="d-flex justify-content-end">
-							<button type="submit" class="btn btn-light">상품등록</button>
+							<button type="submit" class="btn btn-light" id = "register">상품등록</button>
 							<button type="button" class="btn btn-light" id = "display" data-toggle="modal" data-target="#myModal">미리보기</button>
 						</div>
 					</div>
@@ -180,6 +181,52 @@
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script>
 $(document).ready(function() {
+	function check(){
+		if($("input[name='pimg']").val().length == 0){
+			alert("이미지를 입력해 주세요.");
+			return false;
+		}else if($("input[name='ptitle']").val().length == 0){
+			alert("제목을 입력해 주세요.");
+			return false;
+		}else if($("input[name='publisher']").val().length == 0){
+			alert("출판사를 입력해 주세요.");
+			return false;
+		}else if($("input[name='pubdate']").val().length == 0){
+			alert("출간일을 입력해 주세요.");
+			return false;
+		}else if($("input[name='author']").val().length == 0){
+			alert("저자를 입력해 주세요.");
+			return false;
+		}else if($("input[name='price']").val().length == 0){
+			alert("가격을 입력해 주세요.");
+			return false;
+		}else if($("select[name='cid']").val().length == 0){
+			alert("카테고리를 선택해 주세요.");
+			return false;
+		}else if($("input[name='isbn']").val().length == 0){
+			alert("ISBN을 입력해 주세요.");
+			return false;
+		}else if($("input[name='stock']").val().length == 0){
+			alert("재고수량을 입력해 주세요.");
+			return false;
+		}else if($("textarea[name='bkindex']").val().length == 0){
+			alert("목차를 입력해 주세요.");
+			return false;
+		}else if($("textarea[name='bkdesc']").val().length == 0){
+			alert("상세정보를 입력해 주세요.");
+			return false;
+		}
+		return true;
+	}
+	var form = $("#form");
+	$("#register").on("click", function(e){
+		e.preventDefault();
+		if(check()){
+			form.submit();
+		}
+	});
+	
+	
 	$("input[type='file']").change(function(){
 		var input = document.getElementById("inputFile");
 		var fReader = new FileReader();
@@ -190,7 +237,7 @@ $(document).ready(function() {
 			}
 	});
 	
-	var form = $("#form");
+	
 	$("#display").on("click", function(){
 		var input = document.getElementById("inputFile");
 		if(input.value.length == 0){
