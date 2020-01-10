@@ -57,6 +57,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 </update>
 
+<update id="noImgUpdate">
+	update tbl_product set
+	ptitle = #{ptitle},
+	price = #{price},
+	publisher = #{publisher},
+	pubdate = #{pubdate},
+	author = #{author},
+	bksize = #{bksize},
+	bkindex = #{bkindex},
+	bkpage = #{bkpage},
+	bkdesc = #{bkdesc},
+	isbn = #{isbn},
+	stock = #{stock},
+	cid = #{cid},
+	updatedate = sysdate
+	where productId = #{productId}
+	
+</update>
+
 <delete id = "delete">
 	delete from tbl_product where productId = #{productId}
 </delete>

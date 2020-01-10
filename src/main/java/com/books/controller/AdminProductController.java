@@ -80,9 +80,12 @@ public class AdminProductController {
 	//�긽�뭹�닔�젙
 	@PostMapping("/modify")
 	public String modify(ProductVO PVO, RedirectAttributes rttr) {
-		if(APservice.modify(PVO)) {
-			rttr.addFlashAttribute("result", "modify");
+		if(PVO.getPimg() == "") {
+			APservice.noImgModify(PVO);
+		}else {
+			APservice.modify(PVO);
 		}
+		rttr.addFlashAttribute("result", "modify");
 		return "redirect:/adminProduct/list";
 	}
 	

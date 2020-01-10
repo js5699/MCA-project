@@ -15,6 +15,8 @@ public interface ProductMapper {
 	
 	public int update(ProductVO PVO);
 	
+	public int noImgUpdate(ProductVO PVO);
+	
 	public List<CidVO> getCid();
 	
 	public int delete(String productId);

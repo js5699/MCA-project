@@ -54,4 +54,9 @@ public class AdminProductServiceImpl implements AdminProductService{
 	public int getTotal(Criteria cri) {
 		return Pmapper.getTotalCount(cri);
 	}
+
+	@Override
+	public boolean noImgModify(ProductVO PVO) {
+		return Pmapper.noImgUpdate(PVO) == 1;
+	}
 }

@@ -24,74 +24,94 @@
 						<div class="col-lg-12">
 							<div class="panel panel-primary">
 								<h3 class="panel-title">
-									<span class="glyphicon glyphicon-tags"></span> &nbsp;&nbsp;장바구니									
+									<span class="glyphicon glyphicon-tags"></span> &nbsp;&nbsp;장바구니
 								</h3>
-							</div>										
+							</div>
 							<table class="table">
 								<thead class="bg-primary">
 									<tr>
-										<th style="text-align:center;" ><div class="custom-control custom-checkbox">
-												<input type="checkbox" id="allcheck" class="custom-control-input">
+										<th style="text-align: center;"><div
+												class="custom-control custom-checkbox">
+												<input type="checkbox" id="allcheck"
+													class="custom-control-input">
 												<!-- 참고 사항 input에 id 와  label에 for 와 일치 해야 작동합니다.  -->
-												<label class="custom-control-label" for="allcheck">전체 선택</label>
+												<label class="custom-control-label" for="allcheck">전체
+													선택</label>
 											</div></th>
-										<th id="cnt" >상품명</th>
+										<th id="cnt">상품명</th>
 										<th id="cnt">가격</th>
 										<th id="cnt">수량</th>
 										<th id="cnt">삭제</th>
 									</tr>
 								</thead>
-								<c:if test="${nocart eq 'nocart'}">								
-								<tbody>
+								<c:if test="${nocart eq 'nocart'}">
+									<tbody>
 										<tr>
 											<th id="cnt"></th>
 											<th id="cnt"></th>
-											<th id="cnt"><div><br><br><h2>장바구니에 상품이 없습니다.</h2><br><br></div></th>											
+											<th id="cnt"><div>
+													<br>
+													<br>
+													<h2>장바구니에 상품이 없습니다.</h2>
+													<br>
+													<br>
+												</div></th>
 											<th id="cnt"></th>
-											<th id="cnt"></th>				
-										</tr>				
-								</tbody>
+											<th id="cnt"></th>
+										</tr>
+									</tbody>
 								</c:if>
-								<c:forEach items="${cartList}" var="product" varStatus="status">																																																																		
-								<tbody>
-									<tr>
-										<th>
-											<div class="custom-control custom-checkbox">
-												<input type="checkbox" id="check${product.productid}" class="custom-control-input"
-												data-cartNum="${product.cartNum}"/>
-												<!-- 참고 사항 input에 id 와  label에 for 와 일치 해야 작동합니다.  -->
-												<label class="custom-control-label" for="check${product.productid}">선택</label>
-											</div>
-										</th>
-										<th><a href="/shop/productDetail?pid=${product.productid}"><img class="media-object"
-												src="<c:out value="${product.pimg}"/>"><a href="/shop/productDetail?pid=${product.productid}"><c:out value="${product.ptitle}"/></a></th>
-										<th><c:out value="${product.price}"/>원</th>
-										<th><div class="input-group">
-												<button type="button" class="btn btn-primary plus" id="plus${product.cartNum}" data-cartNum="${product.cartNum}" >+</button>
-												&nbsp <input type="number" class="stock${product.cartNum}" min="1"	max="${product.stock}" value="${product.productStock}" readonly="readonly" id="cnt" />
-												&nbsp
-																								
-												<c:if test="${product.productStock != 1}">
-												<button type="button" class="btn btn-primary minus"	id="minus${product.cartNum}" data-cartNum="${product.cartNum}">-</button>																							
-												</c:if>												
-											</div>
-											
+								<c:forEach items="${cartList}" var="product" varStatus="status">
+									<tbody>
+										<tr>
+											<th>
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" id="check${product.productid}"
+														class="custom-control-input"
+														data-cartNum="${product.cartNum}" />
+													<!-- 참고 사항 input에 id 와  label에 for 와 일치 해야 작동합니다.  -->
+													<label class="custom-control-label"
+														for="check${product.productid}">선택</label>
+												</div>
 											</th>
-										<th><button class="btn btn-primary" data-cartNum="${product.cartNum}" id="delete_btn${product.cartNum}">삭제</button></th>
-									</tr>									
-								</tbody>
-								<script>
+											<th><a
+												href="/shop/productDetail?pid=${product.productid}"><img
+													class="media-object" src="<c:out value="${product.pimg}"/>"><a
+													href="/shop/productDetail?pid=${product.productid}"><c:out
+															value="${product.ptitle}" /></a></th>
+											<th><c:out value="${product.price}" />원</th>
+											<th><div class="input-group">
+													<button type="button" class="btn btn-primary plus"
+														id="plus${product.cartNum}"
+														data-cartNum="${product.cartNum}">+</button>
+													&nbsp <input type="number" class="stock${product.cartNum}"
+														min="1" max="${product.stock}"
+														value="${product.productStock}" readonly="readonly"
+														id="cnt" /> &nbsp
+
+													<c:if test="${product.productStock != 1}">
+														<button type="button" class="btn btn-primary minus"
+															id="minus${product.cartNum}"
+															data-cartNum="${product.cartNum}">-</button>
+													</c:if>
+												</div></th>
+											<th><button class="btn btn-primary"
+													data-cartNum="${product.cartNum}"
+													id="delete_btn${product.cartNum}">삭제</button></th>
+										</tr>
+									</tbody>
+									<script>
 							     /* 수량 변경 버튼 js */
 							  
 							     $("#plus${product.cartNum}").click(function(){								
 							    	 var num = $(".stock${product.cartNum}").val();									
 							    	 var plusNum = Number(num) + 1;					    	 
 									
-							    	 if(plusNum >= ${product.stock}){									
+							    	 if(plusNum >= ${product.stock}){
 							    		 $(".stock${product.cartNum}").val(num);										
-							    	 }else{									
+							    	 }else{
 							    		 $(".stock${product.cartNum}").val(plusNum);        										
-							    	 }									
+							    	 }
 							     });	 						     
 								
 							     $("#minus${product.cartNum}").click(function(){								
@@ -197,19 +217,20 @@
 								   });
 								  } 
 								 });
-								</script>								
+								</script>
 								</c:forEach>
 							</table>
 							<div class="container">
 								<div class="row">
 									<div class="col-lg-12">
-									<c:if test="${nocart != 'nocart'}">							
-										<button class="btn btn-primary float-right" id="selectdel" data-cartNum="${product.cartNum}">선택 삭제</button>
-									</c:if>	
+										<c:if test="${nocart != 'nocart'}">
+											<button class="btn btn-primary float-right" id="selectdel"
+												data-cartNum="${product.cartNum}">선택 삭제</button>
+										</c:if>
 									</div>
 								</div>
 							</div>
-								<script>
+							<script>
 								 /* 선택삭제 js */
 								 $("#selectdel").click(function(){
 									 var confirm_val = confirm("정말 삭제하시겠습니까?");
@@ -268,40 +289,42 @@
 								<div class="row">
 									<div class="col-sm"></div>
 									<c:forEach items="${cartList}" var="product" varStatus="status">
-									<!-- 총 책 값을 구하기 위한 변수 선언 후 값 더하기 -->
-									<!-- 리스트에 책 값이 존재 할때 마다 값을 더해준다 -->
-									<c:choose> 
-										<c:when test="${product.price != null}">
-											<c:set var="allprice" value="${allprice + (product.price * product.productStock)}"/>
-											<c:set var="allStock" value="${allStock + product.productStock}"/>
-										</c:when>
-									</c:choose>
-									<c:choose>	
-										<c:when test="${status.last}">											
-											<div class="col-sm">${allprice}원</div>
-											<div class="col-sm">배송비 원</div>
-											<div class="col-sm"></div>
-											<div class="col-sm">${status.count}종   총 ${allStock} 권(개)</div>
-										</c:when>
-									</c:choose>
+										<!-- 총 책 값을 구하기 위한 변수 선언 후 값 더하기 -->
+										<!-- 리스트에 책 값이 존재 할때 마다 값을 더해준다 -->
+										<c:choose>
+											<c:when test="${product.price != null}">
+												<c:set var="allprice"
+													value="${allprice + (product.price * product.productStock)}" />
+												<c:set var="allStock"
+													value="${allStock + product.productStock}" />
+											</c:when>
+										</c:choose>
+										<c:choose>
+											<c:when test="${status.last}">
+												<div class="col-sm">${allprice}원</div>
+												<div class="col-sm">배송비 원</div>
+												<div class="col-sm"></div>
+												<div class="col-sm">${status.count}종총 ${allStock} 권(개)</div>
+											</c:when>
+										</c:choose>
 									</c:forEach>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-12">
-						<c:if test="${nocart != 'nocart'}">
-							<button class="btn btn-primary float-right">선택상품주문</button>
-						</c:if>	
+							<c:if test="${nocart != 'nocart'}">
+								<button class="btn btn-primary float-right">선택상품주문</button>
+							</c:if>
 						</div>
 					</div>
 				</div>
-				
-				<!-- 전체 선택  js  -->				
+
+				<!-- 전체 선택  js  -->
 				<script>
 						$("#allcheck").click(function() {
 							<c:forEach items="${cartList}" var="product" varStatus="status">							
@@ -310,8 +333,8 @@
 							 </c:forEach>
 						});
 				</script>
-				
-				
+
+
 
 				<!-- /.row -->
 

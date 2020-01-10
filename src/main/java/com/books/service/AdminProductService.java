@@ -14,6 +14,8 @@ public interface AdminProductService {
 	
 	public boolean modify(ProductVO PVO);
 	
+	public boolean noImgModify(ProductVO PVO);
+	
 	public boolean remove(String productId);
 	
 	public List<CidVO> getCid();

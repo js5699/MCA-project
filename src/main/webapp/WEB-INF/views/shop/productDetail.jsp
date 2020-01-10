@@ -5,10 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <body>
-	<!-- Page Content -->
-	<div class="container">
-
-		<div class="row">
 
 			<div class="col-lg-2">
 
@@ -16,7 +12,6 @@
 
 			</div>
 
-			<div class="col-lg-9">
 
 				<!-- 상세페이지 구현 -->
 				<div class="container">
@@ -24,7 +19,7 @@
 						<div class="col-lg-12">
 							<div class="panel panel-primary">
 								<h3 class="panel-title">
-									<span class="glyphicon glyphicon-tags"></sapn>
+									<span class="glyphicon glyphicon-tags"></span>
 										&nbsp;&nbsp;상세페이지 
 								</h3>
 							</div>
@@ -36,7 +31,7 @@
 										<th></th>
 										<th><img class="media-object-center"
 											style="width: 300px; height: 400px;"
-											src="<c:out value="${product.pimg}"/>"
+											src="/adminProduct/display?fileName=${product.pimg}&cid=${product.cid}"
 											alt="<c:out value="${product.ptitle}"/>"
 											title="<c:out value="${product.ptitle}"/>의 사진"></th>
 										<th class="col-lg-1">
@@ -51,7 +46,7 @@
 											<P>출판사:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${product.publisher}</P>
 											<P>출판일:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${product.PUBDATE}</P>
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${product.pubdate}</P>
 											<P>
 												가격:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -68,7 +63,7 @@
 													id="minus">-</button>
 												<br>&nbsp&nbsp&nbsp
 												<span><button class="btn btn-primary">바로구매</button>
-											<button class="btn btn-primary" id="cart${product.productid}">장바구니</button></span>												
+											<button class="btn btn-primary" id="cart${product.productId}">장바구니</button></span>												
 											</div>
 											<P><fs>&nbsp&nbsp&nbsp&nbsp																																																							
 												<span class="allprice"></span></fs>
@@ -117,9 +112,9 @@
 									
 										                }); */
 												  
-													$("#cart${product.productid}").click(function(){
+													$("#cart${product.productId}").click(function(){
 														
-														var productid = '${product.productid}';
+														var productid = '${product.productId}';
 														var productstock = $(".stock").val();
 														
 														var data = {
@@ -169,7 +164,7 @@
 										<th></th>
 										<th></th>
 										<th><h4>기본정보</h4></th>
-										<th><span><c:out value="${product.bkPage}"/> 쪽    <c:out value="${product.bkSize}"/>mm	<c:out value="${product.bkweight}"/>	ISBN : 9791196688318</span><br><br>																					
+										<th><span><c:out value="${product.bkpage}"/> 쪽    <c:out value="${product.bksize}"/>mm	<c:out value="${product.bkweight}"/>	ISBN : 9791196688318</span><br><br>																					
 											<h5>주제 분류</h5>										
 											국내도서 > 에세이 > 명사에세이 > 기타<br>
 											국내도서 > 에세이 > 사진/그림 에세이<br>
@@ -181,14 +176,14 @@
 										<th></th>
 										<th></th>
 										<th><h4>책 소개</h4></th>
-										<th><c:out value="${product.bkDesc}" /></th>
+										<th><c:out value="${product.bkdesc}" /></th>
 									</tr>
 									<tr>
 										<th></th>
 										<th></th>
 										<th><h4>목차</h4></th>
 										<th><pre>
-<c:out value="${product.bkIndex}" /> 
+<c:out value="${product.bkindex}" /> 
 <!-- <details>
     <summary>펼치기</summary>
 </details> -->
@@ -208,14 +203,6 @@
 				</div>
 				<!-- /.row -->
 
-			</div>
-			<!-- /.col-lg-9 -->
-
-		</div>
-		<!-- /.row -->
-
-	</div>
-	<!-- /.container -->
 
 
 	<%@ include file="/WEB-INF/views/includes/footer.jsp"%>
