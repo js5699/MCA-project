@@ -68,7 +68,7 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="/shop/productDetail?pid=${product.productid}"><img
-									class="card-img-top" src='<c:out value="${product.pimg}"/>'
+									class="card-img-top" src='/adminProduct/display?fileName=${product.pimg}&cid=${product.cid}'
 									alt="<c:out value="${product.ptitle}"/>"
 									title="<c:out value="${product.ptitle}"/>"></a>
 								<div class="card-body">
